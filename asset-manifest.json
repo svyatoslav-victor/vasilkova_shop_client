@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/vasilkova_shop_client/static/css/main.073c9b0a.css",
+    "main.js": "/vasilkova_shop_client/static/js/main.a2972138.js",
+    "static/js/787.f91daa34.chunk.js": "/vasilkova_shop_client/static/js/787.f91daa34.chunk.js",
+    "static/media/logo.svg": "/vasilkova_shop_client/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/vasilkova_shop_client/index.html",
+    "main.073c9b0a.css.map": "/vasilkova_shop_client/static/css/main.073c9b0a.css.map",
+    "main.a2972138.js.map": "/vasilkova_shop_client/static/js/main.a2972138.js.map",
+    "787.f91daa34.chunk.js.map": "/vasilkova_shop_client/static/js/787.f91daa34.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.a2972138.js"
+  ]
+}
