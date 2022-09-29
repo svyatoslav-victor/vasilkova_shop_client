@@ -1,0 +1,46 @@
+.search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3em;
+  border-bottom: 1px solid black;
+
+  &__heading {
+    margin: 0;
+  }
+
+  &__sort {
+    display: flex;
+    align-items: center;
+    column-gap: 1em;
+
+    &--button {
+      outline: 1px solid black;
+      padding: 0.5em;
+      cursor: pointer;
+
+      &:hover {
+        background-color: lightgray;
+        outline: 1px solid yellow;
+      }
+
+      &:active {
+        background-color: grey;
+        outline: 1px solid blue;
+      }
+    }
+  }
+}
+
+.goodsList__search {
+  padding: 1em 0;
+}
+
+.goodsList__null {
+  display: flex;
+  justify-content: center;
+
+  &_heading {
+    padding: 1em 0;
+  }
+}

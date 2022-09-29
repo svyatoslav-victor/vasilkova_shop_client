@@ -1,0 +1,125 @@
+.checkout {
+  &__content {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 3em;
+
+    &_customerInfo {
+      &_legend {
+        font-weight: 700;
+      }
+
+      &_fieldset {
+        display: grid;
+        row-gap: 0.5em;
+
+        &_label {
+          display: grid;
+          grid-template-columns: 0.3fr 1.2fr;
+          justify-content: space-between;
+          align-items: center;
+          grid-auto-flow: column;
+          padding: 0.5em 0;
+          font-weight: 500;
+
+          &--input {
+            padding: 0.3em;
+            border: none;
+            border-bottom: 1px dotted black;
+
+            &:focus-visible {
+              outline: none;
+              border-bottom: 1px solid black;
+            }
+          }
+        }
+
+        &_confirm {
+          display: grid;
+          row-gap: 0.5em;
+
+          &--message {
+            font-weight: 700;
+            font-size: 0.7em;
+            justify-self: center;
+          }
+
+          &--button {
+            padding: 0.5em;
+            font-size: 1em;
+            font-weight: 700;
+            background-color: yellow;
+            cursor: pointer;
+
+            &:active {
+              background-color: blue;
+            }
+          }
+        }
+      }
+    }
+
+    &_items {
+      max-height: 50vh;
+      overflow: overlay;
+      display: grid;
+      row-gap: 1em;
+
+      &_item {
+        display: grid;
+        grid-auto-flow: column;
+        padding: 0.5em 2em 0.5em 0;
+        border-bottom: 1px solid black;
+
+        &--image {
+          width: 5em;
+          height: 5em;
+        }
+
+        &_details {
+          display: grid;
+          row-gap: 1em;
+
+          &--name {
+            font-weight: bold;
+            border-bottom: 1px dotted black;
+          }
+
+          &_attr {
+            display: grid;
+            grid-auto-flow: column;
+            justify-content: space-between;
+
+            &--color {
+              width: 1.5em;
+              height: 1.5em;
+            }
+
+            &--price {
+              font-weight: 500;
+            }
+          }
+
+          &_description {
+            font-size: 0.8em;
+          }
+
+          &_specs {
+            font-size: 0.9em;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+
+    &_total {
+      display: grid;
+      grid-auto-flow: column;
+      justify-content: space-between;
+      padding: 0.5em 2em 0.5em 0;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+  }
+}

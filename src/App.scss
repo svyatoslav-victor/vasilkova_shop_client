@@ -1,0 +1,116 @@
+body {
+  font-family: Montserrat, Arial, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+  a, a:visited {
+    color: black;
+    text-decoration: none;
+  }
+
+  li {
+    list-style-type: none;
+  }
+  
+  label {
+    display: block;
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  button, input, textarea, input::placeholder {
+    font-family: Montserrat, Arial, sans-serif;
+  }
+}
+
+.app {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(320px, 1400px);
+  justify-content: center;
+  overflow: overlay;
+
+  &__overlay-hidden {
+    visibility: hidden;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    opacity: 0;
+    overflow: hidden;
+    background-color: rgba(43, 42, 42, 0.486);
+  }
+  
+  &__overlay-visible {
+    visibility: visible;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    opacity: 0.99;
+    overflow: hidden;
+    background-color: rgba(43, 42, 42, 0.486);
+  }
+
+  &__content {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-rows: auto 1fr auto;
+    padding: 0 3em;
+
+    &_footer {
+      height: 5em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1em 0;
+    }
+  }
+
+  .scrollToTop {
+    position: fixed;
+    z-index: 100;
+    top: 85vh;
+    right: 10vh;
+
+    &__button {
+      width: 1.5em;
+      height: 1.5em;
+      font-size: 2em;
+      text-align: center;
+      border: none;
+      border-radius: 20%;
+      color: rgba(0, 0, 0, 0.678);
+      background-color: rgba(128, 128, 128, 0.438);
+      cursor: pointer;
+      opacity: 0.1;
+      transition: opacity 1s ease-in-out,
+        color 0.5s ease-in-out,
+        background-color 1s ease-in-out;
+
+      &:hover {
+        background-color: rgba(128, 128, 128, 0.645);
+        color: black;
+        transition: opacity 0.5s ease-in-out,
+          color 0.5s ease-in-out,
+          background-color 0.5s ease-in-out;
+      }
+
+      &:active {
+        background-color: yellow;
+        color: black;
+        transition: opacity 0.5s ease-in-out,
+          color 0.5s ease-in-out,
+          background-color 0.5s ease-in-out;
+      }
+    }
+  }
+}
