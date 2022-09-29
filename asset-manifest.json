@@ -1,16 +1,36 @@
 {
   "files": {
-    "main.css": "/vasilkova_shop_client/static/css/main.073c9b0a.css",
-    "main.js": "/vasilkova_shop_client/static/js/main.a2972138.js",
+    "main.css": "/vasilkova_shop_client/static/css/main.8cbc9fca.css",
+    "main.js": "/vasilkova_shop_client/static/js/main.3e3b6cbc.js",
     "static/js/787.f91daa34.chunk.js": "/vasilkova_shop_client/static/js/787.f91daa34.chunk.js",
-    "static/media/logo.svg": "/vasilkova_shop_client/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "static/media/respiratory_protection.png": "/vasilkova_shop_client/static/media/respiratory_protection.881ece66db88b9663260.png",
+    "static/media/jackets.png": "/vasilkova_shop_client/static/media/jackets.6598f204208be6fb0e84.png",
+    "static/media/hearing_protection.png": "/vasilkova_shop_client/static/media/hearing_protection.bbd0f742ba9ffe688ec0.png",
+    "static/media/sandals.png": "/vasilkova_shop_client/static/media/sandals.10ec75b860548b4a4992.png",
+    "static/media/high_boots.png": "/vasilkova_shop_client/static/media/high_boots.b1fdf3153f06daebd4f9.png",
+    "static/media/pants.png": "/vasilkova_shop_client/static/media/pants.ddc8a762d64c60acca04.png",
+    "static/media/coveralls.png": "/vasilkova_shop_client/static/media/coveralls.530bb0069843137b7318.png",
+    "static/media/boots.png": "/vasilkova_shop_client/static/media/boots.301e29be9e7aa313c800.png",
+    "static/media/hand_protection.png": "/vasilkova_shop_client/static/media/hand_protection.bb3cb91d70a9a7e2f9fb.png",
+    "static/media/visual_protection.png": "/vasilkova_shop_client/static/media/visual_protection.380ae3a891866c5ce755.png",
+    "static/media/high_altitude.png": "/vasilkova_shop_client/static/media/high_altitude.d4b5ded07fc2714af432.png",
+    "static/media/overalls.png": "/vasilkova_shop_client/static/media/overalls.223d86718897a2246e5d.png",
+    "static/media/head_protection.png": "/vasilkova_shop_client/static/media/head_protection.d29362d92efa39e49411.png",
+    "static/media/high_visibility.png": "/vasilkova_shop_client/static/media/high_visibility.33130c099c1c3d87ad8d.png",
+    "static/media/low_shoes.png": "/vasilkova_shop_client/static/media/low_shoes.6ce0a4082f0aa10cbbce.png",
+    "static/media/engineer-worker-svgrepo-com.svg": "/vasilkova_shop_client/static/media/engineer-worker-svgrepo-com.d7c82c19512163723a9104d3a1e5f1e3.svg",
+    "static/media/smartphone-svgrepo-com.svg": "/vasilkova_shop_client/static/media/smartphone-svgrepo-com.5f9c25aa778066eef28da9c183aff687.svg",
+    "static/media/cart-full-svgrepo-com.svg": "/vasilkova_shop_client/static/media/cart-full-svgrepo-com.d46ae7f892f847d20cca88f4c74c3e39.svg",
+    "static/media/cart-svgrepo-com.svg": "/vasilkova_shop_client/static/media/cart-svgrepo-com.880a0e7f8364df3d51a9b8faa04f15b9.svg",
+    "static/media/filter-svgrepo-com.svg": "/vasilkova_shop_client/static/media/filter-svgrepo-com.9d4950532299ac5d2e036efd2d856d87.svg",
     "index.html": "/vasilkova_shop_client/index.html",
-    "main.073c9b0a.css.map": "/vasilkova_shop_client/static/css/main.073c9b0a.css.map",
-    "main.a2972138.js.map": "/vasilkova_shop_client/static/js/main.a2972138.js.map",
+    "static/media/magnifying-glass-svgrepo-com.svg": "/vasilkova_shop_client/static/media/magnifying-glass-svgrepo-com.5b57cf7320df244bcfb45a279107101a.svg",
+    "main.8cbc9fca.css.map": "/vasilkova_shop_client/static/css/main.8cbc9fca.css.map",
+    "main.3e3b6cbc.js.map": "/vasilkova_shop_client/static/js/main.3e3b6cbc.js.map",
     "787.f91daa34.chunk.js.map": "/vasilkova_shop_client/static/js/787.f91daa34.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.073c9b0a.css",
-    "static/js/main.a2972138.js"
+    "static/css/main.8cbc9fca.css",
+    "static/js/main.3e3b6cbc.js"
   ]
 }
