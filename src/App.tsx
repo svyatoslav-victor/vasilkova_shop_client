@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, useSearchParams, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useSearchParams, useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { getAllProducts } from './products';
 import { productGroups } from './productInfo';
@@ -307,6 +307,11 @@ export const App: React.FC = () => {
         />
 
         <Routes>
+          <Route
+            path='/'
+            element={<Home />}
+          />
+
           <Route
             path='/vasilkova_shop_client'
             element={<Home />}

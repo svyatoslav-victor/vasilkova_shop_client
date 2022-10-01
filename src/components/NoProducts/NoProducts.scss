@@ -1,14 +1,9 @@
-.thankYou {
+.noProducts {
   display: grid;
   row-gap: 2em;
   justify-items: center;
   align-content: flex-start;
   padding: 2em 0;
-
-  &__heading, &__message {
-    margin: 0;
-    padding: 0;
-  }
 
   &__message {
     font-size: 1.2em;
