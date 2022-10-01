@@ -17,10 +17,12 @@ export const Goods: React.FC<Props> = ({
     goodsList,
     productGroups,
     setProductTypes,
-    setProduct
+    setProduct,
   }) => {
   const { categoryName, type } = useParams();
-  const [goods, setGoods] = useState<ProductInfo[]>([])
+  const [goods, setGoods] = useState<ProductInfo[]>(
+    goodsList.filter((good: ProductInfo) => good.productType.toLowerCase() === type)
+  )
 
   useEffect(() => {
     setProductTypes(productGroups.find((productGroup: ProductGroup) => (
