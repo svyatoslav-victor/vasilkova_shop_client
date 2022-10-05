@@ -1,9 +1,9 @@
 import { E164Number } from "libphonenumber-js/types";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "react-phone-number-input/input";
 
-import { CartItem, CustomerDetails } from "../../types";
+import { CartItem, Order } from "../../types";
 
 import './Checkout.scss';
 
@@ -16,24 +16,71 @@ export const Checkout: React.FC<Props> = ({ cart, clearCart }) => {
   const [phone, setPhone] = useState<E164Number>();
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const [customer, setCustomer] = useState<CustomerDetails>({
-    name: '',
-    phone: '',
-    email: ''
-  })
+  const [orders, setOrders] = useState<Order[]>([]);
+
+  const getAllOrders = () => {
+    return fetch('http://localhost:5000/api/getAllOrders')
+      .then(result => {
+        if (!result.ok) {
+          throw new Error(`${result.status} - ${result.statusText}`)
+        }
+  
+        return result.json();
+      })
+  };
+
+  const fetchOrders = async () => {
+    const orderList = await getAllOrders();
+    setOrders(orderList);
+  };
+
+  useEffect(() => {
+    fetchOrders()
+  }, [cart])
 
   const navigate = useNavigate();
 
   const handleCheckout = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    setCustomer((prevState: CustomerDetails) => ({
-      ...prevState,
-      name: name,
-      phone: phone!.toString(),
-      email: email
-    }));
+    const data = {
+      orderId: orders.length === 0 ? 1 : orders[orders.length - 1].orderId + 1,
+      productsDetails: cart.map((item: CartItem) => (
+        item && {
+          productId: item.productId,
+          name: item.name,
+          color: item.color,
+          price: item.price,
+          quantity: item.quantity,
+          specs: item.specs,
+          image: item.images![0]
+        }
+      )),
+      subtotal: cart.map((item: CartItem) => (
+        item.quantity * item.price
+      )).reduce((total, amount) => total + amount, 0),
+      customerInfo: {
+        name,
+        phone: phone!.toString(),
+        email
+      },
+      status: 'processing'
+    }
 
+    fetch('http://localhost:5000/api/createOrder', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(response => response.json())
+      .then(json => console.log(json))
+      .catch(error => {
+        console.log(error.message);
+      })
+    
     setName('')
     setPhone('')
     setEmail('')

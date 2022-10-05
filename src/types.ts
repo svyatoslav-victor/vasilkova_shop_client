@@ -33,6 +33,24 @@ export type CustomerDetails = {
   email?: string
 }
 
+export type ProductsDetails = {
+  productId: string,
+  name: string,
+  price: number,
+  color: string,
+  quantity: number,
+  specs: string,
+  image: string
+}
+
+export type Order = {
+  orderId: number,
+  productsDetails: ProductsDetails[],
+  subtotal: number,
+  customerInfo: CustomerDetails,
+  status: string
+}
+
 export type ProductType = {
   name: string,
   image: string
