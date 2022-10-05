@@ -19,7 +19,7 @@ export const Checkout: React.FC<Props> = ({ cart, clearCart }) => {
   const [orders, setOrders] = useState<Order[]>([]);
 
   const getAllOrders = () => {
-    return fetch('http://localhost:5000/api/getAllOrders')
+    return fetch('https://vasilkovashopserver.herokuapp.com/api/getAllOrders')
       .then(result => {
         if (!result.ok) {
           throw new Error(`${result.status} - ${result.statusText}`)
@@ -67,7 +67,7 @@ export const Checkout: React.FC<Props> = ({ cart, clearCart }) => {
       status: 'processing'
     }
 
-    fetch('http://localhost:5000/api/createOrder', {
+    fetch('https://vasilkovashopserver.herokuapp.com/api/createOrder', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
