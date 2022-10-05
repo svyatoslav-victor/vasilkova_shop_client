@@ -110,13 +110,16 @@ export const App: React.FC = () => {
       cart.forEach((item: CartItem) => {
         if (cart.find((item: CartItem) => item._id === data._id)) {
           if (item._id === data._id) {
-            Object.assign(item, { quantity: item.quantity + 1 });
+            Object.assign(item,
+              { quantity: item.quantity + data.quantity },
+              { specs: item.specs + ", " + data.specs }
+            );
             setProductCount(prevState => prevState + data.quantity)
           }
           return;
         } else {
           setCart([...cart, data]);
-          setProductCount(prevState => prevState + data.quantity);
+          setProductCount(productCount + data.quantity);
         }
       })
     }

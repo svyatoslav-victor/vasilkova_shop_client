@@ -103,13 +103,13 @@ export const Cart: React.FC<Props> = ({
                           className="cart__contents_item_contents_customerSpecs_quantity_controls"
                         >
                           <button
-                            className="cart__contents_item_contents_customerSpecs_quantity_controls--add"
+                            className="cart__contents_item_contents_customerSpecs_quantity_controls--subtract"
                             onClick={(event) => {
                               event.stopPropagation();
-                              addItem(item._id);
+                              removeItem(item._id);
                             }}
                           >
-                            &#43;
+                            &#8722;
                           </button>
 
                           <p
@@ -119,13 +119,13 @@ export const Cart: React.FC<Props> = ({
                           </p>
 
                           <button
-                            className="cart__contents_item_contents_customerSpecs_quantity_controls--subtract"
+                            className="cart__contents_item_contents_customerSpecs_quantity_controls--add"
                             onClick={(event) => {
                               event.stopPropagation();
-                              removeItem(item._id);
+                              addItem(item._id);
                             }}
                           >
-                            &#8722;
+                            &#43;
                           </button>
                         </div>
                       </div>
