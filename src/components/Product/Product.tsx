@@ -69,7 +69,7 @@ export const Product: React.FC<Props> = ({
 
   return (
     <div className="main">
-      <p className="links">
+      {type && categoryName && (<p className="links">
         <Link
           className="links__navLink"
           to={'/vasilkova_shop_client'}
@@ -79,18 +79,18 @@ export const Product: React.FC<Props> = ({
         &nbsp; &#62; &nbsp;
         <Link
           className="links__navLink"
-          to={`/vasilkova_shop_client/${categoryName!.toLowerCase()}`}
+          to={`/vasilkova_shop_client/${categoryName.toLowerCase()}`}
         >
           {categoryName}
         </Link>
         &nbsp; &#62; &nbsp;
         <Link
           className="links__navLink"
-          to={`/vasilkova_shop_client/${categoryName!.toLowerCase()}/${type}`}
+          to={`/vasilkova_shop_client/${categoryName.toLowerCase()}/${type}`}
         >
-          {type}
+          {type.split('_').join(' ')}
         </Link>
-      </p>
+      </p>)}
 
       <div
         className="product"

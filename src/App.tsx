@@ -174,6 +174,17 @@ export const App: React.FC = () => {
     }
   }
 
+  const findProductType = () => {
+    return productGroups.find((productGroup: ProductGroup) => (
+      productGroup.name === location.pathname.split('/')[location.pathname.split('/').length - 1]))
+  }
+
+  const setGoods = () => {
+    return products.filter((product: ProductInfo) => product.productType
+      .split(' ').join('_').toLowerCase()
+        .match(location.pathname.split('/')[location.pathname.split('/').length - 1]))
+  }
+
   useEffect(() => {
     const fetchProducts = async () => {
       const productList = await getAllProducts();
@@ -243,7 +254,7 @@ export const App: React.FC = () => {
 
       setPreviewSearch(previewedProducts);
   }, [dynamicQuery]);
-  
+
   return (
     <div
       className='app'
@@ -355,20 +366,22 @@ export const App: React.FC = () => {
           <Route
             path={`/vasilkova_shop_client/:categoryName`}
             element={<Category
-                productTypes={productTypes}
-                setProductTypes={setProductTypes}
-                productGroups={productGroups}
-              />}
+              productTypes={
+                findProductType() ? findProductType()!.types : productTypes
+              }
+              setProductTypes={setProductTypes}
+              productGroups={productGroups}
+            />}
           />
 
           <Route
-            path={`/vasilkova_shop_client/:categoryName/:type`}
-            element={<Goods
-                goodsList={products}
-                setProductTypes={setProductTypes}
-                productGroups={productGroups}
-                setProduct={setProductName}
-              />}
+            path={`/vasilkova_shop_client/:categoryName/:type`} // the following code was written to NOT USE localStorage for variables which reset upon page reload
+            element={products.length > 0
+              ? <Goods
+                  goodsList={setGoods()}
+                  setProduct={setProductName}
+                />
+              : <Loader />}
           />
 
           <Route

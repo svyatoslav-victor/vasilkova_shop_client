@@ -44,7 +44,7 @@ export const productGroups: ProductGroup[] = [
         image: tshirts
       },
       {
-        name: 'high visibility clothing',
+        name: 'high_visibility_clothing',
         image: highVis
       },
     ]
@@ -53,7 +53,7 @@ export const productGroups: ProductGroup[] = [
     name: 'shoes',
     types: [
       {
-        name: 'low shoes',
+        name: 'low_shoes',
         image: lowShoes
       },
       {
@@ -61,7 +61,7 @@ export const productGroups: ProductGroup[] = [
         image: boots
       },
       {
-        name: 'high boots',
+        name: 'high_boots',
         image: highBoots
       },
       {
@@ -74,27 +74,27 @@ export const productGroups: ProductGroup[] = [
     name: 'ppe',
     types: [
       {
-        name: 'head and face protection',
+        name: 'head_and_face_protection',
         image: headProtection
       },
       {
-        name: 'respiratory protection',
+        name: 'respiratory_protection',
         image: respiratoryProtection
       },
       {
-        name: 'visual protection',
+        name: 'visual_protection',
         image: visualProtection
       },
       {
-        name: 'hearing protection',
+        name: 'hearing_protection',
         image: hearingProtection
       },
       {
-        name: 'hand protection',
+        name: 'hand_protection',
         image: handProtection
       },
       {
-        name: 'high-altitude work equipment',
+        name: 'high-altitude_work_equipment',
         image: highAltitude
       },
     ]
@@ -104,7 +104,7 @@ export const productGroups: ProductGroup[] = [
     types: []
   }, 
   {
-    name: 'custom clothing',
+    name: 'custom_clothing',
     types: []
   }
 ];

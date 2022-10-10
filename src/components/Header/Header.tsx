@@ -561,7 +561,7 @@ export const Header: React.FC<Props> = ({
                 className="header__nav_categories--navLink"
                 to={`/vasilkova_shop_client/${category.name.toLowerCase()}`}
               >
-                {category.name.toUpperCase()}
+                {category.name.split('_').join(' ').toUpperCase()}
               </NavLink>
             </li>
           ))}
@@ -609,7 +609,7 @@ export const Header: React.FC<Props> = ({
                     className="header__nav_types--navLink"
                     to={`/vasilkova_shop_client/${categoryName.toLowerCase()}/${type.name.toLowerCase()}`}
                   >
-                    {type.name.toUpperCase()}
+                    {type.name.split('_').join(' ').toUpperCase()}
                   </NavLink>
                 </li>
               ))

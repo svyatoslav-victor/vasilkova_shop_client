@@ -1,8 +1,7 @@
 import React, { Dispatch, SetStateAction, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { NoSection } from "../NoSection/NoSection";
 import { ProductGroup, ProductType } from "../../types";
-
-import workInProgess from '../../shop_icons/construction-worker-svgrepo-com.svg';
 
 import './Category.scss';
 
@@ -14,11 +13,12 @@ type Props = {
 
 export const Category: React.FC<Props> = ({ productTypes, productGroups, setProductTypes }) => {
   const { categoryName } = useParams();
+
   useEffect(() => {
     setProductTypes(productGroups.find((productGroup: ProductGroup) => (
       productGroup.name === categoryName))!.types)
   }, [categoryName])
-  
+
   return (
     <div className="main">
       <p className="links">
@@ -33,7 +33,7 @@ export const Category: React.FC<Props> = ({ productTypes, productGroups, setProd
           className="links__navLink"
           to={`/vasilkova_shop_client/${categoryName!.toLowerCase()}`}
         >
-          {categoryName}
+          {categoryName!.split('_').join(' ')}
         </Link>
       </p>
 
@@ -53,24 +53,14 @@ export const Category: React.FC<Props> = ({ productTypes, productGroups, setProd
                     alt="/"
                   />
                   <p className="productTypes__item_wrapper--type">
-                    {type.name.toUpperCase()}
+                    {type.name.split('_').join(' ').toUpperCase()}
                   </p>
                 </div>
               </Link>
             ))}
           </div>
         )
-        : (
-          <div className="emptySection">
-            <p className="emptySection__message">
-              Section under development...
-            </p>
-            <img
-              className="emptySection__image"
-              src={workInProgess}
-            />
-          </div>
-        )
+        : <NoSection />
       }
     </div>
   )
