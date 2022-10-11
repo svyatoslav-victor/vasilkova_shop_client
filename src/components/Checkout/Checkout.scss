@@ -103,10 +103,12 @@
             &_options {
               display: grid;
               grid-auto-flow: column;
+              justify-items: center;
               grid-template-columns: 1fr 1fr;
-              column-gap: 2em;
 
               &--option {
+                display: grid;
+                align-content: center;
                 padding: 0.5em;
                 text-align: center;
                 font-size: 0.8em;
