@@ -30,7 +30,9 @@ export type CartItem = {
 export type CustomerDetails = {
   name: string,
   phone: string,
-  email?: string
+  email?: string,
+  company?: string,
+  deliveryAddress: string
 }
 
 export type ProductsDetails = {
@@ -45,6 +47,7 @@ export type ProductsDetails = {
 
 export type Order = {
   orderId: number,
+  orderDate: number,
   productsDetails: ProductsDetails[],
   subtotal: number,
   customerInfo: CustomerDetails,

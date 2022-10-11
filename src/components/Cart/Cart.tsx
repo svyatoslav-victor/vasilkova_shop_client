@@ -67,7 +67,10 @@ export const Cart: React.FC<Props> = ({
 
                       <button
                         className="cart__contents_item_contents_namespace--remove"
-                      >X</button>  
+                        onClick={() => removeProduct(item._id, item)}
+                      >
+                        X
+                      </button>  
                     </div>
 
                     <div className="cart__contents_item_contents_details">
@@ -78,11 +81,23 @@ export const Cart: React.FC<Props> = ({
                         }}
                       />
 
-                      <p
+                      <div
                         className="cart__contents_item_contents_details--price"
                       >
-                        &#8372; {(item.price).toFixed(2)}
-                      </p>
+                        <p
+                          className="cart__contents_item_contents_details--price--one"
+                        >
+                          Item: &#8372; {(item.price).toFixed(2)}
+                        </p>
+
+                        <div className="cart__contents_item_contents_details--price--separator" />
+
+                        <p
+                          className="cart__contents_item_contents_details--price--all"
+                        >
+                          Total: &#8372; {(item.price * item.quantity).toFixed(2)}
+                        </p>
+                      </div>
                     </div>
 
                     <p

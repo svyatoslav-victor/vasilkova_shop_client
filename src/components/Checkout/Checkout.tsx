@@ -17,6 +17,13 @@ export const Checkout: React.FC<Props> = ({ cart, clearCart }) => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [orders, setOrders] = useState<Order[]>([]);
+  const [company, setCompany] = useState<string>('');
+  const [deliveryAddress, setDeliveryAddress] = useState<string>('');
+  const [postLocation, setPostLocation] = useState<string>('');
+  const [postBranch, setPostBranch] = useState<string>('');
+  const [confirmAddress, setConfirmAddress] = useState<boolean>(false);
+  const [isWarehouseClicked, setIsWarehouseClicked] = useState<boolean>(false);
+  const [isPostClicked, setIsPostClicked] = useState<boolean>(false);
 
   const getAllOrders = () => {
     return fetch('https://vasilkovashopserver.herokuapp.com/api/getAllOrders')
@@ -40,11 +47,19 @@ export const Checkout: React.FC<Props> = ({ cart, clearCart }) => {
 
   const navigate = useNavigate();
 
+  const handleAddressConfirmation = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    setConfirmAddress(true);
+    setDeliveryAddress(`${postLocation} - branch # ${postBranch}`)
+  }
+
   const handleCheckout = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     const data = {
       orderId: orders.length === 0 ? 1 : orders[orders.length - 1].orderId + 1,
+      orderDate: new Date().toLocaleDateString(),
       productsDetails: cart.map((item: CartItem) => (
         item && {
           productId: item.productId,
@@ -62,7 +77,9 @@ export const Checkout: React.FC<Props> = ({ cart, clearCart }) => {
       customerInfo: {
         name,
         phone: phone!.toString(),
-        email
+        email,
+        company,
+        deliveryAddress: deliveryAddress
       },
       status: 'processing'
     }
@@ -164,6 +181,118 @@ export const Checkout: React.FC<Props> = ({ cart, clearCart }) => {
                     />
                   </label>
 
+                  <label
+                    className="checkout__content_customerInfo_fieldset_label"
+                  >
+                    Company
+                    <input
+                      className="checkout__content_customerInfo_fieldset_label--input"
+                      type="company"
+                      name="company"
+                      value={company}
+                      placeholder="enter company"
+                      onChange={(event) => setCompany(event.target.value)}
+                    />
+                  </label>
+
+                  <div
+                    className="checkout__content_customerInfo_fieldset_delivery"
+                  >
+                    <div
+                      className="checkout__content_customerInfo_fieldset_delivery_info"
+                      style={{
+                        display: isWarehouseClicked || isPostClicked ? 'grid' : 'none'
+                      }}
+                    >
+                      <div
+                        className="checkout__content_customerInfo_fieldset_delivery_info_warehouse"
+                        style={{
+                          display: isWarehouseClicked ? 'grid' : 'none'
+                        }}
+                      >
+                        Pickup Location: Odessa, Primorskaya str., 18
+                      </div>
+
+                      <div
+                        className="checkout__content_customerInfo_fieldset_delivery_info_post"
+                        style={{
+                          display: isPostClicked ? 'grid' : 'none'
+                        }}
+                      >
+                        <label
+                          className="checkout__content_customerInfo_fieldset_delivery_info_post_label"
+                        >
+                          Location
+                          <input
+                            className="checkout__content_customerInfo_fieldset_delivery_info_post_label--input"
+                            type="postLocation"
+                            name="postLocation"
+                            value={postLocation}
+                            placeholder="enter city"
+                            onChange={(event) => setPostLocation(event.target.value)}
+                          />
+                        </label>
+
+                        <label
+                          className="checkout__content_customerInfo_fieldset_delivery_info_post_label"
+                        >
+                          Branch #
+                          <input
+                            className="checkout__content_customerInfo_fieldset_delivery_info_post_label--input"
+                            type="postBranch"
+                            name="postBranch"
+                            value={postBranch}
+                            placeholder="enter NP branch #"
+                            onChange={(event) => setPostBranch(event.target.value)}
+                          />
+                        </label>
+
+                        <button
+                          className="checkout__content_customerInfo_fieldset_delivery_info_post_confirmAddress"
+                          onClick={handleAddressConfirmation}
+                        >
+                          Confirm Delivery Address
+                        </button>
+                      </div>
+                    </div>
+
+                    <div
+                      className="checkout__content_customerInfo_fieldset_delivery_details"
+                      style={{
+                        display: !isWarehouseClicked && !isPostClicked ? 'grid' : 'none'
+                      }}
+                    >
+                      <p
+                        className="checkout__content_customerInfo_fieldset_delivery_details_heading"
+                      >
+                        Please pick a delivery option
+                      </p>
+
+                      <div
+                        className="checkout__content_customerInfo_fieldset_delivery_details_options"
+                      >
+                        <div
+                          className="checkout__content_customerInfo_fieldset_delivery_details_options--option"
+                          onClick={() => {
+                            setDeliveryAddress('Odessa, Primorskaya str., 18')
+                            setIsWarehouseClicked(true)
+                          }}
+                        >
+                          Pickup at Supplier's Warehouse
+                        </div>
+
+                        <div
+                          className="checkout__content_customerInfo_fieldset_delivery_details_options--option"
+                          onClick={() => {
+                            setIsPostClicked(true)
+                          }}
+                        >
+                          Delivery by Nova Poshta
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <div
                     className="checkout__content_customerInfo_fieldset_confirm"
                   >
@@ -174,7 +303,7 @@ export const Checkout: React.FC<Props> = ({ cart, clearCart }) => {
                     </p>
                     <button
                       className="checkout__content_customerInfo_fieldset_confirm--button"
-                      disabled={!name || !phone}
+                      disabled={isPostClicked ? !name || !phone || !deliveryAddress || !confirmAddress : !name || !phone || !deliveryAddress}
                       onClick={handleCheckout}
                     >
                       Check Out

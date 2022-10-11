@@ -105,7 +105,21 @@ export const MiniCart: React.FC<Props> = ({
                 &#8722;
               </button>
             </div>
-            <p className="item_price">&#8372; {(item.price * item.quantity).toFixed(2)}</p>
+            <div
+              className="item_price"
+            >
+              <p
+                className="item_price--one"
+              >
+                Item: &#8372; {item.price.toFixed(2)}
+              </p>
+
+              <p
+                className="item_price--all"
+              >
+                Total: &#8372; {(item.price * item.quantity).toFixed(2)}
+              </p>
+            </div>
           </div>
         ))}
       </div>

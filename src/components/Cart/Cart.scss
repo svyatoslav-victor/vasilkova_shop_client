@@ -45,6 +45,7 @@
       display: grid;
       grid-auto-flow: column;
       border-top: 1px dotted black;
+      column-gap: 0.5em;
       padding: 1em 0;
 
       &_image {
@@ -89,6 +90,7 @@
           display: grid;
           grid-auto-flow: column;
           justify-content: space-between;
+          align-items: center;
 
           &--color {
             width: 2em;
@@ -96,8 +98,21 @@
           }
 
           &--price {
-            font-size: 1.2em;
-            font-weight: 500;
+            display: grid;
+            grid-auto-flow: column;
+            align-items: center;
+            column-gap: 1em;
+
+            &--separator {
+              height: 100%;
+              width: 0.1em;
+              background-color: black;
+            }
+
+            &--all {
+              font-size: 1.1em;
+              font-weight: 500;
+            }
           }
         }
 

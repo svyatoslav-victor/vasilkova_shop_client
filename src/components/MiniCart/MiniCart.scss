@@ -35,7 +35,7 @@
   &__products--item {
     display: grid;
     grid-auto-flow: column;
-    grid-template-columns: 0.1fr 0.2fr 1fr 0.5fr 0.2fr 0.3fr;
+    grid-template-columns: 0.1fr 0.2fr 0.9fr 0.5fr 0.2fr 0.4fr;
     border-bottom: 1px solid black;
     padding-bottom: 0.5em;
     column-gap: 1em;
@@ -100,6 +100,16 @@
         &:active {
           outline: 3px double blue;
         }
+      }
+    }
+
+    .item_price {
+      display: grid;
+      row-gap: 3.1em;
+      font-size: 0.9em;
+
+      &--all {
+        font-weight: 600;
       }
     }
   }
