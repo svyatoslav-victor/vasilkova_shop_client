@@ -9,10 +9,17 @@ import './Checkout.scss';
 
 type Props = {
   cart: CartItem[],
-  clearCart: () => void
+  clearCart: () => void,
+  hasPreorderGoods: boolean,
+  hasAllPreorderGoods: boolean
 }
 
-export const Checkout: React.FC<Props> = ({ cart, clearCart }) => {
+export const Checkout: React.FC<Props> = ({
+  cart,
+  clearCart,
+  hasPreorderGoods,
+  hasAllPreorderGoods
+}) => {
   const [phone, setPhone] = useState<E164Number>();
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -59,7 +66,7 @@ export const Checkout: React.FC<Props> = ({ cart, clearCart }) => {
 
     const data = {
       orderId: orders.length === 0 ? 1 : orders[orders.length - 1].orderId + 1,
-      orderDate: new Date().toLocaleDateString(),
+      orderDate: `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`,
       productsDetails: cart.map((item: CartItem) => (
         item && {
           productId: item.productId,
@@ -347,11 +354,33 @@ export const Checkout: React.FC<Props> = ({ cart, clearCart }) => {
                       >
                       </div>
 
-                      <p
-                        className="checkout__content_items_item_details_attr--price"
-                      >
-                        &#8372;&nbsp;{(item.price).toFixed(2)}
-                      </p>
+                      {item.price > 0
+                        ? (<>
+                            <div
+                              className="checkout__content_items_item_details_attr--price"
+                            >
+                              <p
+                                className="checkout__content_items_item_details_attr--price--one"
+                              >
+                                Item: &#8372; {(item.price).toFixed(2)}
+                              </p>
+
+                              <div className="checkout__content_items_item_details_attr--price--separator" />
+
+                              <p
+                                className="checkout__content_items_item_details_attr--price--all"
+                              >
+                                Total: &#8372; {(item.price * item.quantity).toFixed(2)}
+                              </p>
+                            </div>
+                          </>)
+                        : (<p
+                              className="checkout__content_items_item_details_attr--price_pre-order"
+                            >
+                              The final price will be confirmed by
+                              the supplier upon order placement
+                          </p>)
+                      }
                     </div>
 
                     <p
@@ -378,12 +407,34 @@ export const Checkout: React.FC<Props> = ({ cart, clearCart }) => {
               ))}
 
               <div className="checkout__content_total">
-                <span>Total: &nbsp;</span>
-                <span>&#8372;&nbsp;
-                  {cart.map((item: CartItem) => (
-                    item.quantity * item.price
-                  )).reduce((total, amount) => total + amount, 0).toFixed(2)}
-                </span>
+              {hasAllPreorderGoods
+                  ? (<>
+                      <span>Total:&nbsp;</span>
+                      <span>
+                        subject to final confirmation by supplier
+                      </span>
+                    </>)
+                  : (hasPreorderGoods
+                    ? (<>
+                        <span>Total:&nbsp;(subject to final confirmation by supplier)</span>
+                        <span>&#8372;&nbsp;
+                          {cart.map((item: CartItem) => (
+                            item.quantity * item.price
+                          )).reduce((total, amount) => total + amount, 0).toFixed(2)}
+                        </span>
+                      </>)
+                    : (
+                      <>
+                        <span>Total:&nbsp;</span>
+                        <span>&#8372;&nbsp;
+                          {cart.map((item: CartItem) => (
+                            item.quantity * item.price
+                          )).reduce((total, amount) => total + amount, 0).toFixed(2)}
+                        </span>
+                      </>
+                    )
+                  )
+                }
               </div>
             </div>
           </div>

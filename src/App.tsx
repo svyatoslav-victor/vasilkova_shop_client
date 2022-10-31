@@ -41,6 +41,8 @@ export const App: React.FC = () => {
 
   const [cart, setCart] = useState<CartItem[]>(JSON.parse(localStorage.cartContents || "[]"));
   const [productCount, setProductCount] = useState<number>(+localStorage.totalCount || 0);
+  const hasPreorderGoods = cart.some((item: CartItem) => item.price === 0);
+  const hasAllPreorderGoods = cart.every((item: CartItem) => item.price === 0);
 
   const [query, setQuery] = useState<string>('');
   const [dynamicQuery, setDynamicQuery] = useState<string>('');
@@ -298,6 +300,8 @@ export const App: React.FC = () => {
         removeItem={removeItem}
         removeProduct={removeProduct}
         clearCart={clearCart}
+        hasPreorderGoods={hasPreorderGoods}
+        hasAllPreorderGoods={hasAllPreorderGoods}
       />
 
       <div className='app__content'>
@@ -341,6 +345,8 @@ export const App: React.FC = () => {
             element={<Checkout
               cart={cart}
               clearCart={clearCart}
+              hasPreorderGoods={hasPreorderGoods}
+              hasAllPreorderGoods={hasAllPreorderGoods}
             />}
           />
 
@@ -352,6 +358,8 @@ export const App: React.FC = () => {
               addItem={addItem}
               removeItem={removeItem}
               removeProduct={removeProduct}
+              hasPreorderGoods={hasPreorderGoods}
+              hasAllPreorderGoods={hasAllPreorderGoods}
             />}
           />
 

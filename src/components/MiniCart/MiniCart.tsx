@@ -12,7 +12,9 @@ type Props = {
   addItem: (id: string) => void,
   removeItem: (id: string) => void,
   removeProduct: (id: string, item: CartItem) => void,
-  clearCart: () => void
+  clearCart: () => void,
+  hasPreorderGoods: boolean,
+  hasAllPreorderGoods: boolean
 }
 
 export const MiniCart: React.FC<Props> = ({
@@ -23,7 +25,9 @@ export const MiniCart: React.FC<Props> = ({
   addItem,
   removeItem,
   removeProduct,
-  clearCart
+  clearCart,
+  hasPreorderGoods,
+  hasAllPreorderGoods
 }) => {
   return (
     <div
@@ -108,30 +112,67 @@ export const MiniCart: React.FC<Props> = ({
             <div
               className="item_price"
             >
-              <p
-                className="item_price--one"
-              >
-                Item: &#8372; {item.price.toFixed(2)}
-              </p>
-
-              <p
-                className="item_price--all"
-              >
-                Total: &#8372; {(item.price * item.quantity).toFixed(2)}
-              </p>
+              {item.price > 0
+                ? (<>
+                    <p
+                      className="item_price--one"
+                    >
+                      Item: &#8372; {item.price.toFixed(2)}
+                    </p>
+      
+                    <p
+                      className="item_price--all"
+                    >
+                      Total: &#8372; {(item.price * item.quantity).toFixed(2)}
+                    </p>
+                  </>)
+                : (<p
+                    className="item_price--pre-order"
+                    >
+                      The final price will be confirmed by <br />
+                      the supplier upon order placement
+                  </p>)
+              }
             </div>
           </div>
         ))}
       </div>
 
-      <div className="minicart__total">
-        <span>Total:&nbsp;</span>
-        <span>&#8372;&nbsp;
-          {cart.map((item: CartItem) => (
-            item.quantity * item.price
-          )).reduce((total, amount) => total + amount, 0).toFixed(2)}
-        </span>
-      </div>
+      {<div
+        className="minicart__total"
+        style={{
+          opacity: productCount === 0 ? '0' : '1'
+        }}
+      >
+        {hasAllPreorderGoods
+          ? (<>
+              <span>Total:&nbsp;</span>
+              <span>
+                subject to final confirmation by supplier
+              </span>
+            </>)
+          : (hasPreorderGoods
+            ? (<>
+                <span>Total:&nbsp;(subject to final confirmation by supplier)</span>
+                <span>&#8372;&nbsp;
+                  {cart.map((item: CartItem) => (
+                    item.quantity * item.price
+                  )).reduce((total, amount) => total + amount, 0).toFixed(2)}
+                </span>
+              </>)
+            : (
+              <>
+                <span>Total:&nbsp;</span>
+                <span>&#8372;&nbsp;
+                  {cart.map((item: CartItem) => (
+                    item.quantity * item.price
+                  )).reduce((total, amount) => total + amount, 0).toFixed(2)}
+                </span>
+              </>
+            )
+          )
+        }
+      </div>}
 
       <div
         className="minicart__buttons"

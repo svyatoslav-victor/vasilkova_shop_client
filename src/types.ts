@@ -20,6 +20,8 @@ export type CartItem = {
   name: string,
   brand: string,
   price: number,
+  inStock?: boolean,
+  onSale?: boolean,
   color: string,
   description: string,
   images?: FileList | null,
@@ -42,7 +44,7 @@ export type ProductsDetails = {
   color: string,
   quantity: number,
   specs: string,
-  image: string
+  image: File | null
 }
 
 export type Order = {
@@ -51,7 +53,7 @@ export type Order = {
   productsDetails: ProductsDetails[],
   subtotal: number,
   customerInfo: CustomerDetails,
-  status: string
+  status: string,
 }
 
 export type ProductType = {

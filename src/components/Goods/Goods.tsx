@@ -64,7 +64,7 @@ export const Goods: React.FC<Props> = ({
                       <h5
                         className="goodsList__item--out-of-stock"
                       >
-                        OUT OF STOCK
+                        AVAILABLE FOR PRE-ORDER
                       </h5>
                     )}
 
@@ -83,11 +83,21 @@ export const Goods: React.FC<Props> = ({
                     >
                       {product.name}
                     </p>
-                    <p
-                      className="goodsList__item_price"
-                    >
-                      &#8372; {product.price.toFixed(2)}
-                    </p>
+                    {product.inStock
+                      ? (<p
+                          className="goodsList__item_price"
+                        >
+                          &#8372; {product.price.toFixed(2)}
+                        </p>)
+                      : (
+                        <p
+                          className="goodsList__item_price--pre-order"
+                        >
+                          The final price will be confirmed by <br />
+                          the supplier upon order placement
+                        </p>
+                      )
+                    }
                   </div>
                 </Link>
               )

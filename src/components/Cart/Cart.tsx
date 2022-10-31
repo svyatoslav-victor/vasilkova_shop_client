@@ -10,6 +10,8 @@ type Props = {
   addItem: (id: string) => void,
   removeItem: (id: string) => void,
   removeProduct: (id: string, item: CartItem) => void,
+  hasPreorderGoods: boolean,
+  hasAllPreorderGoods: boolean
 }
 
 export const Cart: React.FC<Props> = ({
@@ -17,7 +19,9 @@ export const Cart: React.FC<Props> = ({
   clearCart,
   addItem,
   removeItem,
-  removeProduct
+  removeProduct,
+  hasPreorderGoods,
+  hasAllPreorderGoods
 }) => {
   return (
     <div className="cart">
@@ -81,23 +85,33 @@ export const Cart: React.FC<Props> = ({
                         }}
                       />
 
-                      <div
-                        className="cart__contents_item_contents_details--price"
-                      >
-                        <p
-                          className="cart__contents_item_contents_details--price--one"
-                        >
-                          Item: &#8372; {(item.price).toFixed(2)}
-                        </p>
+                      {item.price > 0
+                        ? (<>
+                            <div
+                              className="cart__contents_item_contents_details--price"
+                            >
+                              <p
+                                className="cart__contents_item_contents_details--price--one"
+                              >
+                                Item: &#8372; {(item.price).toFixed(2)}
+                              </p>
 
-                        <div className="cart__contents_item_contents_details--price--separator" />
+                              <div className="cart__contents_item_contents_details--price--separator" />
 
-                        <p
-                          className="cart__contents_item_contents_details--price--all"
-                        >
-                          Total: &#8372; {(item.price * item.quantity).toFixed(2)}
-                        </p>
-                      </div>
+                              <p
+                                className="cart__contents_item_contents_details--price--all"
+                              >
+                                Total: &#8372; {(item.price * item.quantity).toFixed(2)}
+                              </p>
+                            </div>
+                        </>)
+                        : (<p
+                            className="cart__contents_item_contents_details--price_pre-order"
+                            >
+                              The final price will be confirmed by
+                              the supplier upon order placement
+                          </p>)
+                      }
                     </div>
 
                     <p
@@ -166,12 +180,34 @@ export const Cart: React.FC<Props> = ({
               ))}
 
               <div className="cart__contents_total">
-                <span>Total:&nbsp;</span>
-                <span>&#8372;&nbsp;
-                  {cart.map((item: CartItem) => (
-                    item.quantity * item.price
-                  )).reduce((total, amount) => total + amount, 0).toFixed(2)}
-                </span>
+                {hasAllPreorderGoods
+                  ? (<>
+                      <span>Total:&nbsp;</span>
+                      <span>
+                        subject to final confirmation by supplier
+                      </span>
+                    </>)
+                  : (hasPreorderGoods
+                    ? (<>
+                        <span>Total:&nbsp;(subject to final confirmation by supplier)</span>
+                        <span>&#8372;&nbsp;
+                          {cart.map((item: CartItem) => (
+                            item.quantity * item.price
+                          )).reduce((total, amount) => total + amount, 0).toFixed(2)}
+                        </span>
+                      </>)
+                    : (
+                      <>
+                        <span>Total:&nbsp;</span>
+                        <span>&#8372;&nbsp;
+                          {cart.map((item: CartItem) => (
+                            item.quantity * item.price
+                          )).reduce((total, amount) => total + amount, 0).toFixed(2)}
+                        </span>
+                      </>
+                    )
+                  )
+                }
               </div>
 
               <Link

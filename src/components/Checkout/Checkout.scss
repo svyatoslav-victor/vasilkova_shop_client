@@ -190,7 +190,25 @@
             }
 
             &--price {
-              font-weight: 500;
+              display: grid;
+              grid-auto-flow: column;
+              align-items: center;
+              column-gap: 1em;
+
+              &--separator {
+                height: 100%;
+                width: 0.1em;
+                background-color: black;
+              }
+
+              &--all {
+                font-size: 1.1em;
+                font-weight: 500;
+              }
+
+              &_pre-order {
+                font-weight: 600;
+              }
             }
           }
 
