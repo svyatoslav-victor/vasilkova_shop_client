@@ -135,7 +135,7 @@ export const Checkout: React.FC<Props> = ({
         console.log(error.message);
       })
 
-    fetch('http://localhost:5000/api/sendEmail', {
+    fetch('https://vasilkovashopserver.herokuapp.com/api/sendEmail', {
       method: "POST",
       headers: {
         'Accept': 'application/json',
