@@ -49,7 +49,7 @@ export type ProductsDetails = {
 
 export type Order = {
   orderId: number,
-  orderDate: number,
+  orderDate: string,
   productsDetails: ProductsDetails[],
   subtotal: number,
   customerInfo: CustomerDetails,

@@ -2,6 +2,7 @@ import { E164Number } from "libphonenumber-js/types";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "react-phone-number-input/input";
+import { emailTemplate } from "../../mailTemplates";
 
 import { CartItem, Order } from "../../types";
 
@@ -64,7 +65,7 @@ export const Checkout: React.FC<Props> = ({
   const handleCheckout = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    const data = {
+    const data: Order = {
       orderId: orders.length === 0 ? 1 : orders[orders.length - 1].orderId + 1,
       orderDate: `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`,
       productsDetails: cart.map((item: CartItem) => (
@@ -91,6 +92,35 @@ export const Checkout: React.FC<Props> = ({
       status: 'processing'
     }
 
+    const mailBody = emailTemplate(data);
+
+    // let orderProducts: string = '';
+    // let field: string;
+
+    // for (field in data.productsDetails) {
+    //   orderProducts += `
+    //     <li>Product ID: ${data.productsDetails[field].productId}</li>
+    //     <li>Name: ${data.productsDetails[field].name}</li>
+    //     <li>Color:<div style="height: 50px; width: 50px; background-color: ${data.productsDetails[field].color}"></div></li>
+    //     <li>Price: ${data.productsDetails[field].price}</li>
+    //     <li>Quantity: ${data.productsDetails[field].quantity}</li>
+    //     <li>Specs: ${data.productsDetails[field].specs}</li>
+    //   `
+    // }
+
+    // const customerMail = {
+    //   name: data.customerInfo.name,
+    //   email: data.customerInfo.email,
+    //   subject: `Spetsuha Odessa: Order # ${data.orderId}`,
+    //   html: `<h2>Hello, ${data.customerInfo.name}!</h2>
+    //       <h3>Your order is ${data.orderId}.</h3>
+    //       <h4>Order details:</h4>
+    //       <ul>${orderProducts}</ul>
+    //       <h5>Your Subtotal is: ${data.subtotal}</h5>
+    //       <p>If you have any questions, please contact us!</p>
+    //     `
+    // }
+
     fetch('https://vasilkovashopserver.herokuapp.com/api/createOrder', {
       method: 'POST',
       headers: {
@@ -104,6 +134,25 @@ export const Checkout: React.FC<Props> = ({
       .catch(error => {
         console.log(error.message);
       })
+
+    fetch('http://localhost:5000/api/sendEmail', {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(mailBody)
+    })
+      .then(res => res.json())
+      .then(async (res) => {
+        const resData = await res;
+        if (resData.status === 'success') {
+          console.log('Success!');
+        } else if (resData.status === 'fail') {
+          console.log('Failed to send message!');
+        }
+      })
+      .catch(err => err)
     
     setName('')
     setPhone('')
