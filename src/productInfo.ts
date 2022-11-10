@@ -22,89 +22,110 @@ import highAltitude from './shop_icons/product_types/high_altitude.png';
 export const productGroups: ProductGroup[] = [
   {
     name: 'clothing',
+    nameUA: 'одяг',
     types: [
       {
         name: 'jackets',
+        nameUA: 'куртки',
         image: jackets
       },
       {
         name: 'pants',
+        nameUA: 'штани',
         image: pants
       },
       {
         name: 'coveralls',
+        nameUA: 'комбінезони',
         image: coveralls
       },
       {
         name: 'overalls',
+        nameUA: 'напівкомбінезони',
         image: overalls
       },
       {
         name: 't-shirts',
+        nameUA: 'футболки',
         image: tshirts
       },
       {
         name: 'high_visibility_clothing',
+        nameUA: 'сигнальний одяг',
         image: highVis
       },
     ]
   },
   {
     name: 'shoes',
+    nameUA: 'взуття',
     types: [
       {
         name: 'low_shoes',
+        nameUA: 'напівчеревики',
         image: lowShoes
       },
       {
         name: 'boots',
+        nameUA: 'черевики',
         image: boots
       },
       {
         name: 'high_boots',
+        nameUA: 'чоботи',
         image: highBoots
       },
       {
         name: 'sandals',
+        nameUA: 'сандалі',
         image: sandals
       }
     ]
   },
   {
     name: 'ppe',
+    nameUA: 'засоби індивідуального захисту',
     types: [
       {
         name: 'head_and_face_protection',
+        nameUA: 'захист голови та обличчя',
         image: headProtection
       },
       {
         name: 'respiratory_protection',
+        nameUA: 'захист органів дихання',
         image: respiratoryProtection
       },
       {
         name: 'visual_protection',
+        nameUA: 'захист органів зору',
         image: visualProtection
       },
       {
         name: 'hearing_protection',
+        nameUA: 'захист органів слуху',
         image: hearingProtection
       },
       {
         name: 'hand_protection',
+        nameUA: 'захист рук',
         image: handProtection
       },
       {
         name: 'high-altitude_work_equipment',
+        nameUA: 'обладнання для висотних робіт',
         image: highAltitude
       },
     ]
   }, 
   {
     name: 'sale',
+    nameUA: 'розпродаж',
     types: []
   }, 
   {
     name: 'custom_clothing',
+    nameUA: 'пошив на замовлення',
     types: []
   }
 ];
@@ -121,66 +142,82 @@ export const productBrands: Brand[] = [
 export const productColors: Color[] = [
   {
     hex: '#000000',
-    value: 'Black'
+    value: 'Black',
+    valueUA: 'Чорний'
   },
   {
     hex: '#ffffff',
-    value: 'White'
+    value: 'White',
+    valueUA: 'Білий'
   },
   {
     hex: '#bf0909',
-    value: 'Red'
+    value: 'Red',
+    valueUA: 'Червоний'
   },
   {
     hex: '#0000e5',
-    value: 'Blue'
+    value: 'Blue',
+    valueUA: 'Синій'
   },
   {
     hex: '#00006a',
-    value: 'Dark Blue'
+    value: 'Dark Blue',
+    valueUA: 'Темно-синій'
   },
   {
     hex: '#573313',
-    value: 'Brown'
+    value: 'Brown',
+    valueUA: 'Коричневий'
   },
   {
     hex: '#dbdbb3',
-    value: 'Beige'
+    value: 'Beige',
+    valueUA: 'Бежевий'
   },
   {
     hex: '#faecbe',
-    value: 'Sand'
+    value: 'Sand',
+    valueUA: 'Пісочний'
   },
   {
     hex: '#808080',
-    value: 'Gray'
+    value: 'Gray',
+    valueUA: 'Сірий'
   },
   {
     hex: '#575757',
-    value: 'Dark Gray'
+    value: 'Dark Gray',
+    valueUA: 'Темно-сірий'
   },
   {
     hex: '#bdbdbd',
-    value: 'Light Gray'
+    value: 'Light Gray',
+    valueUA: 'Світло-сірий'
   },
   {
     hex: '#1e6f1e',
-    value: 'Green'
+    value: 'Green',
+    valueUA: 'Зелений'
   },
   {
     hex: '#1c571c',
-    value: 'Dark Green'
+    value: 'Dark Green',
+    valueUA: 'Темно-зелений'
   },
   {
     hex: '#253b11',
-    value: 'Khaki'
+    value: 'Khaki',
+    valueUA: 'Хакі'
   },
   {
     hex: '#7bff00',
-    value: 'Neon Green'
+    value: 'Neon Green',
+    valueUA: 'Яскраво-зелений'
   },
   {
     hex: '#ff4600',
-    value: 'Neon Orange'
+    value: 'Neon Orange',
+    valueUA: 'Помаранчевий'
   }
 ]

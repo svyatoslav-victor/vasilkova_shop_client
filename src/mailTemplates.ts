@@ -43,8 +43,8 @@ export const emailTemplate = (data: Order) => {
         <br>
         <h4>Spetsuha Odessa</h4>
         <p>Odessa, 18 Primorskaya str</p>
-        <p>+38 093 363 85 93</p>
-        <p>+38 050 493 29 03</p>
+        <a href="tel:+380933638593">+38 093 363 85 93</a>
+        <a href="tel:+380504932903">+38 050 493 29 03</a>
         <p>spetsuha.odessa@gmail.com</p>
         <p>https://svyatoslav-victor.github.io/vasilkova_shop_client/</p>
       `

@@ -36,8 +36,11 @@ export const App: React.FC = () => {
   const [productTypes, setProductTypes] = useState<ProductType[]>([]);
   const [areTypesVisible, setAreTypesVisible] = useState<boolean>(false);
   const [categoryName, setCategoryName] = useState<string>('');
+  const [isMobile, setIsMobile] = useState<number>(window.innerWidth);
 
   const [showMiniCart, setShowMiniCart] = useState<boolean>(false);
+  const [showFilters, setShowFilters] = useState<boolean>(false);
+  const [showMenu, setShowMenu] = useState<boolean>(false);
 
   const [cart, setCart] = useState<CartItem[]>(JSON.parse(localStorage.cartContents || "[]"));
   const [productCount, setProductCount] = useState<number>(+localStorage.totalCount || 0);
@@ -54,6 +57,12 @@ export const App: React.FC = () => {
 
   const [showImageView, setShowImageView] = useState<boolean>(false);
   const appRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setIsMobile(window.innerWidth)
+    }, false);
+  }, [isMobile])
 
   useEffect(() => {
     localStorage.setItem('cartContents', JSON.stringify(cart));
@@ -88,6 +97,38 @@ export const App: React.FC = () => {
     }
   }
 
+  const toggleFilters = () => {
+    if (!showFilters) {
+      if (appRef.current !== null) {
+        appRef.current.style.overflow = 'hidden'
+      }
+      setShowFilters(true)
+    } else {
+      if (appRef.current !== null) {
+        appRef.current.style.overflow = 'overlay'
+      }
+      setShowFilters(false)
+      setCategoryName('')
+      setAreTypesVisible(false)
+    }
+  }
+
+  const toggleMenu = () => {
+    if (!showMenu) {
+      if (appRef.current !== null) {
+        appRef.current.style.overflow = 'hidden'
+      }
+      setShowMenu(true)
+    } else {
+      if (appRef.current !== null) {
+        appRef.current.style.overflow = 'overlay'
+      }
+      setShowMenu(false)
+      setCategoryName('')
+      setAreTypesVisible(false)
+    }
+  }
+
   const closeModals = () => {
     if (showMiniCart) {
       if (appRef.current !== null) {
@@ -101,6 +142,24 @@ export const App: React.FC = () => {
         appRef.current.style.overflow = 'overlay'
       }
       setShowImageView(false)
+    }
+
+    if (showFilters) {
+      if (appRef.current !== null) {
+        appRef.current.style.overflow = 'overlay'
+      }
+      setShowFilters(false)
+      setCategoryName('')
+      setAreTypesVisible(false)
+    }
+
+    if (showMenu) {
+      if (appRef.current !== null) {
+        appRef.current.style.overflow = 'overlay'
+      }
+      setShowMenu(false)
+      setCategoryName('')
+      setAreTypesVisible(false)
     }
   }
 
@@ -321,7 +380,13 @@ export const App: React.FC = () => {
           dynamicQuery={dynamicQuery}
           setDynamicQuery={setDynamicQuery}
           productCount={productCount}
+          displayFilters={showFilters}
+          setShowFilters={setShowFilters}
+          displayMenu={showMenu}
+          toggleFilters={toggleFilters}
+          toggleMenu={toggleMenu}
           toggleMiniCart={toggleMiniCart}
+          isMobile={isMobile}
         />
 
         <Routes>

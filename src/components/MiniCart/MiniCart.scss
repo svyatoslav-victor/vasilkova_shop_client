@@ -144,3 +144,12 @@
     }
   }
 }
+
+@media screen and (max-width: 1024px) {
+  .minicart {
+    width: 85vw;
+    grid-template-columns: 100%;
+    font-size: 0.8em;
+    // padding: 1em;
+  }
+}

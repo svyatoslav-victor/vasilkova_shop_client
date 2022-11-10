@@ -64,7 +64,7 @@ body {
     display: grid;
     grid-auto-flow: row;
     grid-template-rows: auto 1fr auto;
-    padding: 0 3em;
+    // padding: 0 3em;
 
     &_footer {
       height: 5em;
@@ -112,5 +112,17 @@ body {
           background-color 0.5s ease-in-out;
       }
     }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .app {
+    .scrollToTop {
+      right: 5vw;
+    }
+  }
+  
+  &__content {
+    padding: 0;
   }
 }

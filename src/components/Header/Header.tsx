@@ -9,6 +9,11 @@ import cartIconFull from '../../shop_icons/cart-full-svgrepo-com.svg';
 import searchIcon from '../../shop_icons/magnifying-glass-svgrepo-com.svg';
 import phone from '../../shop_icons/smartphone-svgrepo-com.svg';
 import filter from '../../shop_icons/filter-svgrepo-com.svg';
+import menuClosed from '../../shop_icons/menu-closed-svgrepo-com.svg';
+import menuOpen from '../../shop_icons/menu-open-svgrepo-com.svg';
+import location from '../../shop_icons/location.svg';
+import email from '../../shop_icons/email.svg';
+import web from '../../shop_icons/web-svgrepo-com.svg';
 
 import './Header.scss'
 
@@ -28,7 +33,13 @@ type Props = {
   setDynamicQuery: Dispatch<SetStateAction<string>>,
   goToSearch: () => void,
   productCount: number,
-  toggleMiniCart: () => void
+  displayFilters: boolean,
+  displayMenu: boolean,
+  setShowFilters: Dispatch<SetStateAction<boolean>>,
+  toggleFilters: () => void,
+  toggleMenu: () => void,
+  toggleMiniCart: () => void,
+  isMobile: number
 }
 
 type Filter = {
@@ -94,13 +105,25 @@ export const Header: React.FC<Props> = ({
   setDynamicQuery,
   goToSearch,
   productCount,
-  toggleMiniCart
+  displayFilters,
+  displayMenu,
+  setShowFilters,
+  toggleFilters,
+  toggleMenu,
+  toggleMiniCart,
+  isMobile
 }) => {
-  const [displayFilters, setDisplayFilters] = useState<boolean>(false);
   const [hasLoaded, setHasLoaded] = useState<boolean>(false);
   const [filters, setFilters] = useState<Filter>(initialFilters);
+  const [currentCategory, setCurrentCategory] = useState<string>('');
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!areTypesVisible) {
+      setCategoryName('')
+    }
+  }, [areTypesVisible])
 
   const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
@@ -213,7 +236,7 @@ export const Header: React.FC<Props> = ({
     navigate({
       pathname: '/vasilkova_shop_client/search_results',
     });
-    setDisplayFilters(false);
+    setShowFilters(false);
   }
 
   const filterProducts = () => {
@@ -239,16 +262,407 @@ export const Header: React.FC<Props> = ({
 
   return (
     <div className='header'>
-      <div className='header__main'>
-        <div
-          className='header__main_logo'
-        >
-          <Link
-            to={'/vasilkova_shop_client'}
-            onClick={()=> setQuery('')}
+      <div
+        className='header__mobile'
+        style={{
+          left: displayMenu ? "0" : "-80vw",
+          opacity: displayMenu ? "1" : "0"
+        }}
+        onClick={(event) => {
+          event.stopPropagation()
+          displayFilters && toggleFilters()
+        }}
+      >
+        <div className='header__mobile_nav'>
+          <div
+            className='header__mobile_nav_heading'
           >
-            <img src={logo} alt="/" />
-          </Link>
+            <div
+              className='header__mobile_nav_heading_logo'
+            >
+              <Link
+                to={'/vasilkova_shop_client'}
+                onClick={()=> {
+                  setQuery('')
+                  toggleMenu()
+                }}
+              >
+                <img src={logo} alt="/" />
+              </Link>
+            </div>
+
+            <div className='header__mobile_nav_heading_menu'
+              onClick={toggleMenu}
+            >
+              <img
+                className='header__mobile_nav_heading_menu--icon'
+                src={menuOpen}
+                alt="/"
+                style={{
+                  width: '1.5em',
+                }}
+              />
+            </div>
+          </div>
+
+          <div className='header__mobile_nav_filters'
+            onClick={toggleFilters}
+          >
+            <img
+              className='header__mobile_nav_filters--icon'
+              src={filter}
+              alt="/"
+            />
+
+            <div
+              className='header__mobile_nav_filters_list'
+              style={{
+                visibility: displayFilters ? 'visible' : 'collapse'
+              }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className='mobile__filters_container'>
+                <div className="mobile__filters_container_group">
+                  <p
+                    className='mobile__filters_container_group_name'
+                  >
+                    Price
+                  </p>
+
+                  <div
+                    className="mobile__filters_container_group_items"
+                  >
+                    <div
+                      className="mobile__filters_container_group_items--item"
+                      data-sortorder='lowToHigh'
+                      style={{
+                        backgroundColor: filters.tags.price.lowToHigh ? 'gray' : 'white',
+                        outline: filters.tags.price.lowToHigh ? '3px double yellow' : '1px solid blue'
+                      }}
+                      onClick={handleSort}
+                    >
+                      <p
+                        className='mobile__filters_container_group_items--item_name'
+                        data-sortorder='lowToHigh'
+                      >
+                        Low &#8921; High
+                      </p>
+                    </div>
+
+                    <div
+                      className="mobile__filters_container_group_items--item"
+                      data-sortorder='highToLow'
+                      style={{
+                        backgroundColor: filters.tags.price.highToLow ? 'gray' : 'white',
+                        outline: filters.tags.price.highToLow ? '3px double yellow' : '1px solid blue'
+                      }}
+                      onClick={handleSort}
+                    >
+                      <p
+                        className='mobile__filters_container_group_items--item_name'
+                        data-sortorder='highToLow'
+                      >
+                        High &#8921; Low
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  className='mobile__filters_container_group'
+                >
+                  <p
+                    className='mobile__filters_container_group_name'
+                  >
+                    Brands
+                  </p>
+                  <div
+                    className='mobile__filters_container_group_items'
+                  >
+                    {productBrands.map((brand: Brand) => (
+                      <div
+                        className='mobile__filters_container_group_items--item'
+                        data-name={brand.value}
+                        key={brand.value}
+                        style={{
+                          outline: filters.tags.brand[brand.value] ? '3px double yellow' : '1px solid blue'
+                        }}
+                        onClick={(event) => {handleFilterChange(event, 'brand')}}
+                      >
+                        <p
+                          className='mobile__filters_container_group_items--item_name'
+                          data-name={brand.value}
+                        >
+                          {brand.value}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className='mobile__filters_container_group'>
+                  <p
+                    className='mobile__filters_container_group_name'
+                  >
+                    Colors
+                  </p>
+                  <div
+                    className='mobile__filters_container_group_items'
+                  >
+                    {productColors.map((color: Color) => (
+                      <div
+                        className='mobile__filters_container_group_items--item'
+                        key={color.hex}
+                        data-name={color.hex}
+                        style={{
+                          background: `${color.hex}`,
+                          outline: filters.tags.color[color.hex] ? '3px double yellow' : '1px solid blue'
+                        }}
+                        onClick={(event) => {handleFilterChange(event, 'color')}}
+                      >
+                        <p
+                          className='mobile__filters_container_group_items--item_name'
+                          data-name={color.hex}
+                          style={{
+                            color: `${color.hex === '#000000' 
+                              || color.hex ===  '#bf0909'
+                              || color.hex === '#0000e5'
+                              || color.hex === '#00006a'
+                              || color.hex === '#573313'
+                              || color.hex === '#575757'
+                              || color.hex === '#bdbdbd'
+                              || color.hex === '#1e6f1e'
+                              || color.hex === '#1c571c'
+                              || color.hex === '#253b11'
+                                ? 'white'
+                                : 'black'
+                            }`
+                          }}
+                        >
+                          {color.valueUA}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div
+                  className='mobile__filters_container_group'
+                >
+                  <p
+                    className='mobile__filters_container_group_name'
+                  >
+                    Winter Items
+                  </p>
+                  <div
+                    className='mobile__filters_container_group_items'
+                  >
+                    <div
+                      className='mobile__filters_container_group_items--item'
+                      data-name='winter'
+                      style={{
+                        outline: filters.tags.keywords.winter ? '3px double yellow' : '1px solid blue'
+                      }}
+                      onClick={(event) => {handleFilterChange(event, 'keywords')}}
+                    >
+                      <p
+                        className='mobile__filters_container_group_items--item_name'
+                        data-name='winter'
+                      >
+                        Winter
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className='mobile__filters_buttons'>
+                <button
+                  className='mobile__filters_buttons_button'
+                  onClick={() => {
+                    toggleMenu()
+                    goToFilter()
+                  }}
+                >
+                  Filter ({filteredProducts.length})
+                </button>
+
+                <button
+                  className='mobile__filters_buttons_button'
+                  onClick={resetFilters}
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <h3
+            className='header__mobile_nav_catalogue'
+          >
+            CATALOGUE
+          </h3>
+
+          <ul
+            className='header__mobile_nav_categories'
+          >
+            {productGroups.map(category => (
+              <li
+                className='header__mobile_nav_categories_item'
+                key={category.name}
+                onClick={() => setCategoryName(category.name)}
+              >
+                <div
+                  className="header__mobile_nav_categories_item_controls"
+                >
+                  <NavLink
+                    className="header__mobile_nav_categories_item_controls--link"
+                    to={`/vasilkova_shop_client/${category.name.toLowerCase()}`}
+                    style={{
+                      fontWeight: areTypesVisible && categoryName === category.name ? "bold" : "normal"
+                    }}
+                    onClick={toggleMenu}
+                  >
+                    {category.nameUA.split('_').join(' ').toUpperCase()}
+                  </NavLink>
+
+                  {category.types.length > 0 &&
+                    (
+                      <div
+                        className='header__mobile_nav_categories_item_controls--toggleTypes'
+                        onClick={() => {
+                          setAreTypesVisible(categoryName === category.name ? false : true)
+                        }}
+                      >
+                        {areTypesVisible && categoryName === category.name
+                          ? <span
+                              className='showTypes'
+                            >
+                              &#8793;
+                            </span>
+                          : <span
+                              className='hideTypes'
+                            >
+                              &#8794;
+                            </span>
+                        }
+                      </div>
+                    )
+                  }
+                </div>
+
+                {category.types.length > 0 && (
+                  <ul
+                    className='header__mobile_nav_categories_item_types'
+                    style={{
+                      display: areTypesVisible && categoryName === category.name ? 'block' : 'none'
+                    }}
+                  >
+                    {productGroups.map(types => (
+                      types.name === categoryName && (
+                        types!.types!.map(type => (
+                          <li
+                            className='header__mobile_nav_categories_item_types_type'
+                            key={type.name}
+                            onClick={() => {
+                              setCurrentCategory('')
+                              toggleMenu()
+                            }}
+                          >
+                            <NavLink
+                              className="header__mobile_nav_categories_item_types_type--link"
+                              to={`/vasilkova_shop_client/${categoryName.toLowerCase()}/${type.name.toLowerCase()}`}
+                              onClick={toggleMenu}
+                            >
+                              {type.nameUA.split('_').join(' ').toUpperCase()}
+                            </NavLink>
+                          </li>
+                        ))
+                      )
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+
+          <div
+            className='header__mobile_nav_contact'
+          >
+            <h3
+              className='header__mobile_nav_contact_heading'
+            >
+              Contact Us
+            </h3>
+
+            <div className='header__mobile_nav_contact_wrapper'>
+              <img
+                className='header__mobile_nav_contact_wrapper--image'
+                src={location}
+                alt="/"
+              />
+              <p>Odessa, 18 Primorskaya str</p>
+            </div>
+
+            <div className='header__mobile_nav_contact_wrapper'>
+              <img
+                className='header__mobile_nav_contact_wrapper--image'
+                src={phone}
+                alt="/"
+              />
+              <a href="tel:+380504932903">+38 050 493 29 03</a>
+            </div>
+
+            <div className='header__mobile_nav_contact_wrapper'>
+              <img
+                className='header__mobile_nav_contact_wrapper--image'
+                src={email}
+                alt="/"
+              />
+              <a href="mailto:spetsuha.odessa@gmail.com">spetsuha.odessa@gmail.com</a>
+            </div>
+
+            <div className='header__mobile_nav_contact_wrapper'>
+              <img
+                className='header__mobile_nav_contact_wrapper--image'
+                src={web}
+                alt="/"
+              />
+              <a href="https://svyatoslav-victor.github.io/vasilkova_shop_client/">Spetsuha Odessa</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className='header__main'>
+        <div className='header__main_nav'>
+          <div
+            className='header__main_nav_logo'
+          >
+            <Link
+              to={'/vasilkova_shop_client'}
+              onClick={()=> setQuery('')}
+            >
+              <img src={logo} alt="/" />
+            </Link>
+          </div>
+
+          {isMobile < 1024 && 
+            (
+              <div className='header__main_nav_menu'
+                onClick={toggleMenu}
+              >
+                <img
+                  className='header__main_nav_menu--icon'
+                  src={menuClosed}
+                  alt="/"
+                  style={{
+                  width: '1.5em'
+                  }}
+                />
+              </div>
+            )
+          }
         </div>
 
         <div
@@ -320,36 +734,70 @@ export const Header: React.FC<Props> = ({
           </div>
         </div>
 
-        <div
-          className='header__main_phones'
+        {isMobile > 1024
+          ? (
+              <div className='header__main_phones'>
+                <div className='header__main_phones_numbers'>
+                  <a
+                    href="tel:+380504932903"
+                    className='header__main_phones_numbers--number'
+                  >
+                    +38 050 493 29 03
+                  </a>
+                </div>
+
+                <div
+                  className='header__main_phones_icon'
+                  style={{
+                    backgroundImage: `url(${phone})`
+                  }}
+                >
+                </div>
+              </div>
+            )
+          : (
+              <div
+                className='header__main_phone'
+                style={{
+                  backgroundImage: `url(${phone})`,
+                }}
+              >
+                <a
+                  href="tel:+380504932903"
+                  className='header__main_phones_numbers--number'
+                  style={{
+                    display: "block",
+                    width: "1.5em",
+                    height: "1.5em"
+                  }}
+                />
+              </div>
+            )
+        }
+
+        {isMobile < 1024 && <div
+          className='header__nav_miniCart'
         >
-          <div className='header__main_phones_numbers'>
-            <a
-              href="tel:+380933638593"
-              className='header__main_phones_numbers--number'
-            >
-              +38 093 363 85 93
-            </a>
-
-            <a
-              href="tel:+380504932903"
-              className='header__main_phones_numbers--number'
-            >
-              +38 050 493 29 03
-            </a>
-          </div>
-
-          <div
-            className='header__main_phones_icon'
-            style={{
-              backgroundImage: `url(${phone})`
-            }}
+          <span
+            className='header__nav_miniCart--count'
           >
+            {productCount}
+          </span>
+          
+          <div
+            className='header__nav_miniCart_cart'
+            onClick={toggleMiniCart}
+          >
+            <img
+              className='header__nav_miniCart_cart--icon'
+              src={productCount === 0 ? cartIcon : cartIconFull}
+              alt="/"
+            />
           </div>
-        </div>
+        </div>}
       </div>
 
-      <div
+      {isMobile > 1024 && <div
         className='header__nav'
         onMouseLeave={() => {
           setCategoryName('')
@@ -361,19 +809,22 @@ export const Header: React.FC<Props> = ({
         >
           <div
             className='header__nav_categories_filter'
-            onMouseEnter={() => setDisplayFilters(true)}
-            onMouseLeave={() => setDisplayFilters(false)}
+            onMouseEnter={() => setShowFilters(true)}
+            onMouseLeave={() => setShowFilters(false)}
+            onClick={(event) => event.stopPropagation()}
           >
             <img
               className='header__nav_categories_filter--image'
               src={filter}
               alt="/"
             />
+
             <div
               className='header__nav_categories_filter--filterList'
               style={{
                 visibility: displayFilters ? 'visible' : 'collapse'
               }}
+              onClick={(event) => event.stopPropagation()}
             >
               <div className='filters__container'>
                 <div className="filters__container_group">
@@ -493,7 +944,7 @@ export const Header: React.FC<Props> = ({
                             }`
                           }}
                         >
-                          {color.value}
+                          {color.valueUA}
                         </p>
                       </div>
                     ))}
@@ -554,14 +1005,14 @@ export const Header: React.FC<Props> = ({
               onClick={() => setCategoryName(category.name)}
               onMouseEnter={() => {
                 setCategoryName(category.name)
-                setAreTypesVisible(true)
+                category.types.length > 0 && setAreTypesVisible(true)
               }}
             >
               <NavLink
                 className="header__nav_categories--navLink"
                 to={`/vasilkova_shop_client/${category.name.toLowerCase()}`}
               >
-                {category.name.split('_').join(' ').toUpperCase()}
+                {category.nameUA.split('_').join(' ').toUpperCase()}
               </NavLink>
             </li>
           ))}
@@ -609,14 +1060,14 @@ export const Header: React.FC<Props> = ({
                     className="header__nav_types--navLink"
                     to={`/vasilkova_shop_client/${categoryName.toLowerCase()}/${type.name.toLowerCase()}`}
                   >
-                    {type.name.split('_').join(' ').toUpperCase()}
+                    {type.nameUA.split('_').join(' ').toUpperCase()}
                   </NavLink>
                 </li>
               ))
             )
           ))}
         </ul>
-      </div>
+      </div>}
     </div>
   )
 }

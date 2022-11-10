@@ -1,3 +1,5 @@
+@import '../../variables';
+
 .header {
   display: grid;
   grid-auto-flow: row;
@@ -8,15 +10,221 @@
   background-color: white;
   padding: 1em 0;
   border-bottom: 5px double black;
+  padding: 1em 2em;
+
+  &__mobile {
+    position: fixed;
+    top: 0;
+    left: -80vw;
+    height: 100vh;
+    min-width: 50vw;
+    background-color: yellow;
+    z-index: 100;
+    opacity: 0;
+    overflow: overlay;
+    transition: all 0.5s ease-in-out;
+
+    &_nav {
+      display: grid;
+      grid-auto-flow: row;
+      justify-content: center;
+      padding: 1em;
+      row-gap: 1em;
+
+      &_heading {
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: space-between;
+        align-items: center;
+
+        &_logo {
+          width: 3em;
+          height: 3em
+        }
+      }
+
+      &_filters {
+        position: relative;
+        justify-self: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 2em;
+        width: 100%;
+
+        &--icon {
+          height: 100%;
+        }
+
+        &_list {
+          margin: 0;
+          position: absolute;
+          top: 2.5em;
+          left: 0;
+          width: 95%;
+          display: grid;
+          row-gap: 1em;
+          grid-auto-flow: row;
+          z-index: 15;
+          background-color: white;
+          padding: 0.5em;
+          box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.425);
+
+          .mobile__filters_container {
+            display: grid;
+            grid-auto-flow: row;
+            row-gap: 0.5em;
+
+            &_group {
+              display: grid;
+              row-gap: 0.5em;
+
+              &_name {
+                font-weight: bold;
+              }
+
+              &_items {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: left;
+                row-gap: 1em;
+                column-gap: 1em;
+
+                &--item {
+                  display: flex;
+                  padding: 5px;
+                  justify-content: center;
+                  align-items: center;
+                  cursor: pointer;
+                  scale: 1;
+
+                  &:active {
+                    scale: 1.1;
+                  }
+
+                  &_name {
+                    font-size: 0.9em;
+                    font-weight: 100;
+                  }
+                }
+              }
+            }
+          }
+
+          .mobile__filters_buttons {
+            display: grid;
+            grid-auto-flow: column;
+            justify-content: flex-start;
+            column-gap: 1em;
+            padding: 0.5em;
+
+            &_button {
+              padding: 1em;
+              font-weight: bold;
+              background-color: white;
+              border: none;
+              outline: 1px solid blue;
+              cursor: pointer;
+              scale: 1;
+
+              &:hover {
+                scale: 1.1;
+              }
+
+              &:active {
+                outline: 3px double yellow;
+              }
+            }
+          }
+        }
+      }
+
+      &_catalogue {
+        justify-self: center;
+        margin: 0;
+        padding: 0;
+      }
+
+      &_categories {
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-auto-flow: row;
+
+        &_item {
+          padding: 0.5em 0;
+          border-bottom: 1px dotted black;
+
+          &_controls {
+            display: grid;
+            grid-auto-flow: column;
+            column-gap: 1em;
+            justify-content: space-between;
+            align-items: center;
+
+            .showTypes, .hideTypes {
+              font-size: 1.5em;
+
+              &:active {
+                font-weight: bold;
+              }
+            }
+          }
+
+          &_types {
+            margin: 0;
+            padding: 0 1em;
+
+            &_type {
+              padding: 0.2em 0;
+
+              &:active {
+                font-weight: bold;
+              }
+            }
+          }
+        }
+      }
+
+      &_contact {
+        display: grid;
+        row-gap: 1em;
+
+        &_heading {
+          padding: 1em 0;
+          border-bottom: 1px solid black;
+        }
+
+        &_wrapper {
+          display: grid;
+          grid-auto-flow: column;
+          grid-template-columns: 0.25fr 1fr;
+          align-items: center;
+
+          &--image {
+            width: 2em;
+            height: 2em;
+          }
+        }
+      }
+    }
+  }
 
   &__main {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    &_logo {
-      width: 3em;
-      height: 3em;
+    &_nav {
+      display: grid;
+      grid-auto-flow: column;
+      column-gap: 3em;
+      align-items: center;
+
+      &_logo {
+        width: 3em;
+        height: 3em;
+      }
     }
 
     &_search {
@@ -338,6 +546,20 @@
       .active {
         position: relative;
         color: darkblue;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .header {
+    font-size: $font-mobile;
+    background-color: $background-mobile;
+    &__main {
+      &_phones {
+        &_numbers {
+          display: none;
+        }
       }
     }
   }

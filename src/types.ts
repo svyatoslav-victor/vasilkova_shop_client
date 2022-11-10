@@ -58,11 +58,13 @@ export type Order = {
 
 export type ProductType = {
   name: string,
+  nameUA: string,
   image: string
 }
 
 export type ProductGroup = {
   name: string,
+  nameUA: string,
   types: ProductType[]
 };
 
@@ -72,5 +74,6 @@ export type Brand = {
 
 export type Color = {
   hex: string,
-  value: string
+  value: string,
+  valueUA: string
 }
