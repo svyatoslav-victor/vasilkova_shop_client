@@ -1,3 +1,5 @@
+@import './variables';
+
 body {
   font-family: Montserrat, Arial, sans-serif;
   box-sizing: border-box;
@@ -60,11 +62,17 @@ body {
     background-color: rgba(43, 42, 42, 0.486);
   }
 
+  .main {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    row-gap: 2em;
+    padding: 0 2em;
+  }
+
   &__content {
     display: grid;
     grid-auto-flow: row;
     grid-template-rows: auto 1fr auto;
-    // padding: 0 3em;
 
     &_footer {
       height: 5em;
@@ -120,9 +128,13 @@ body {
     .scrollToTop {
       right: 5vw;
     }
-  }
-  
-  &__content {
-    padding: 0;
+
+    .main {
+      padding: 0 1em;
+
+      .links {
+        font-size: $font-mobile;
+      }
+    }
   }
 }

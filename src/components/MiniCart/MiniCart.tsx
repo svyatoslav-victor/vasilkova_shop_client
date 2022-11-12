@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { CartItem } from "../../types";
+import classNames from "classnames";
 
 import './MiniCart.scss';
 
@@ -14,7 +15,8 @@ type Props = {
   removeProduct: (id: string, item: CartItem) => void,
   clearCart: () => void,
   hasPreorderGoods: boolean,
-  hasAllPreorderGoods: boolean
+  hasAllPreorderGoods: boolean,
+  isMobile: number
 }
 
 export const MiniCart: React.FC<Props> = ({
@@ -27,7 +29,8 @@ export const MiniCart: React.FC<Props> = ({
   removeProduct,
   clearCart,
   hasPreorderGoods,
-  hasAllPreorderGoods
+  hasAllPreorderGoods,
+  isMobile
 }) => {
   return (
     <div
@@ -86,13 +89,15 @@ export const MiniCart: React.FC<Props> = ({
             <p className="item_specs">{item.specs}</p>
             <div className="item_quantity">
               <button
-                className="item_quantity--add"
+                className={classNames(
+                  isMobile < 1024 ? "item_quantity--subtract" : "item_quantity--add"
+                )}
                 onClick={(event) => {
                   event.stopPropagation();
-                  addItem(item._id);
+                  isMobile < 1024 ? removeItem(item._id) : addItem(item._id);
                 }}
               >
-                &#43;
+                {isMobile < 1024 ? <span>&#8722;</span> : <span>&#43;</span>}
               </button>
               <p
                 className="item_quantity--total"
@@ -100,13 +105,15 @@ export const MiniCart: React.FC<Props> = ({
                 {item.quantity}
               </p>
               <button
-                className="item_quantity--subtract"
+                className={classNames(
+                  isMobile < 1024 ? "item_quantity--add" : "item_quantity--subtract"
+                )}
                 onClick={(event) => {
                   event.stopPropagation();
-                  removeItem(item._id);
+                  isMobile < 1024 ? addItem(item._id) : removeItem(item._id);
                 }}
               >
-                &#8722;
+                {isMobile < 1024 ? <span>&#43;</span> : <span>&#8722;</span>}
               </button>
             </div>
             <div

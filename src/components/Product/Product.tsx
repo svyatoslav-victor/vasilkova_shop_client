@@ -11,14 +11,18 @@ type Props = {
   goodsList: ProductInfo[],
   fillCart: (data: CartItem) => void,
   showImageView: boolean,
-  toggleImageView: () => void
+  toggleImageView: () => void,
+  closeModals: () => void,
+  isMobile: number
 }
 
 export const Product: React.FC<Props> = ({
   goodsList,
   fillCart,
   showImageView,
-  toggleImageView
+  toggleImageView,
+  closeModals,
+  isMobile
  }) => {
   const { categoryName, type, productId } = useParams();
 
@@ -224,6 +228,8 @@ export const Product: React.FC<Props> = ({
           product && <ImageView
             images={product.images}
             selectedImage={selectedImage}
+            closeModals={closeModals}
+            isMobile={isMobile}
           />
         )}
       </div>

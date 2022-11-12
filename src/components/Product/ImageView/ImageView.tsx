@@ -4,14 +4,28 @@ import './ImageView.scss';
 
 type Props = {
   images: FileList,
-  selectedImage: number
+  selectedImage: number,
+  closeModals: () => void,
+  isMobile: number
 }
 
-export const ImageView: React.FC<Props> = ({ images, selectedImage }) => {
+export const ImageView: React.FC<Props> = ({
+  images,
+  selectedImage,
+  closeModals,
+  isMobile
+}) => {
   const [index, setIndex] = useState<number>(selectedImage);
 
   return (
     <div className="images__view">
+      <button
+        className={isMobile < 1024 ? "images__view--button close--mobile" : "images__view--button close"}
+        onClick={closeModals}
+      >
+        X
+      </button>
+
       <button
         className="images__view--button back"
         style={{

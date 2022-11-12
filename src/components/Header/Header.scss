@@ -15,9 +15,9 @@
   &__mobile {
     position: fixed;
     top: 0;
-    left: -80vw;
+    left: -100vw;
     height: 100vh;
-    min-width: 50vw;
+    width: 0;
     background-color: yellow;
     z-index: 100;
     opacity: 0;
@@ -27,8 +27,7 @@
     &_nav {
       display: grid;
       grid-auto-flow: row;
-      justify-content: center;
-      padding: 1em;
+      padding: 1em 2em;
       row-gap: 1em;
 
       &_heading {
@@ -158,9 +157,17 @@
           &_controls {
             display: grid;
             grid-auto-flow: column;
-            column-gap: 1em;
+            column-gap: 1.5em;
             justify-content: space-between;
             align-items: center;
+
+            &--link {
+              font-weight: normal;
+
+              &:active {
+                font-weight: bold !important;
+              }
+            }
 
             .showTypes, .hideTypes {
               font-size: 1.5em;
@@ -173,7 +180,7 @@
 
           &_types {
             margin: 0;
-            padding: 0 1em;
+            padding: 0 0.5em;
 
             &_type {
               padding: 0.2em 0;
@@ -218,7 +225,7 @@
     &_nav {
       display: grid;
       grid-auto-flow: column;
-      column-gap: 3em;
+      column-gap: 1.5em;
       align-items: center;
 
       &_logo {
@@ -560,6 +567,16 @@
         &_numbers {
           display: none;
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    &__mobile {
+      &_nav {
+        padding: 1em;
       }
     }
   }

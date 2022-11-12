@@ -115,7 +115,6 @@ export const Header: React.FC<Props> = ({
 }) => {
   const [hasLoaded, setHasLoaded] = useState<boolean>(false);
   const [filters, setFilters] = useState<Filter>(initialFilters);
-  const [currentCategory, setCurrentCategory] = useState<string>('');
 
   const navigate = useNavigate();
 
@@ -265,7 +264,8 @@ export const Header: React.FC<Props> = ({
       <div
         className='header__mobile'
         style={{
-          left: displayMenu ? "0" : "-80vw",
+          width: isMobile < 1024 && isMobile > 760 ? "50vw" : "90vw",
+          left: displayMenu ? "0" : "-100vw",
           opacity: displayMenu ? "1" : "0"
         }}
         onClick={(event) => {
@@ -565,7 +565,6 @@ export const Header: React.FC<Props> = ({
                             className='header__mobile_nav_categories_item_types_type'
                             key={type.name}
                             onClick={() => {
-                              setCurrentCategory('')
                               toggleMenu()
                             }}
                           >

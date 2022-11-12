@@ -23,7 +23,36 @@
     background-color: transparent;
     border: none;
     font-size: 2em;
+    color: white;
     cursor: pointer;
+  }
+
+  .close {
+    position: absolute;
+    top: -2em;
+    right: 0;
+
+    &:hover {
+      background: rgba(211, 211, 211, 0.3);
+    }
+
+    &:active {
+      background: rgba(128, 128, 128, 0.3);
+    }
+  }
+
+  .close--mobile {
+    position: absolute;
+    width: 100%;
+    top: 100%;
+
+    &:hover {
+      background: rgba(211, 211, 211, 0.3);
+    }
+
+    &:active {
+      background: rgba(128, 128, 128, 0.3);
+    }
   }
 
   .back {
@@ -44,5 +73,11 @@
     &:active {
       background: linear-gradient(to left, rgba(128, 128, 128, 0.3), transparent) ;
     }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .images__view {
+    width: 100vw;
   }
 }

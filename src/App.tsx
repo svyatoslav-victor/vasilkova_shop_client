@@ -65,6 +65,10 @@ export const App: React.FC = () => {
   }, [isMobile])
 
   useEffect(() => {
+    window.scrollTo({ top: 0 })
+  }, [location.pathname]);
+
+  useEffect(() => {
     localStorage.setItem('cartContents', JSON.stringify(cart));
     localStorage.setItem('totalCount', productCount.toString());
   }, [cart, productCount])
@@ -361,6 +365,7 @@ export const App: React.FC = () => {
         clearCart={clearCart}
         hasPreorderGoods={hasPreorderGoods}
         hasAllPreorderGoods={hasAllPreorderGoods}
+        isMobile={isMobile}
       />
 
       <div className='app__content'>
@@ -464,6 +469,8 @@ export const App: React.FC = () => {
               fillCart={fillCart}
               showImageView={showImageView}
               toggleImageView={toggleImageView}
+              closeModals={closeModals}
+              isMobile={isMobile}
             />}
           />
         </Routes>
