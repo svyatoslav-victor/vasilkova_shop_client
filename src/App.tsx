@@ -59,14 +59,16 @@ export const App: React.FC = () => {
   const appRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    if (appRef.current !== null) {
+      appRef.current.scrollTo(0, 0)
+    }
+  }, [location.pathname])
+
+  useEffect(() => {
     window.addEventListener("resize", () => {
       setIsMobile(window.innerWidth)
     }, false);
   }, [isMobile])
-
-  useEffect(() => {
-    window.scrollTo({ top: 0 })
-  }, [location.pathname]);
 
   useEffect(() => {
     localStorage.setItem('cartContents', JSON.stringify(cart));
@@ -327,6 +329,7 @@ export const App: React.FC = () => {
       onClick={closeModals}
       onScroll={handleScroll}
     >
+
       <div
         className={classNames({
           'app__overlay-visible': showMiniCart || showImageView,

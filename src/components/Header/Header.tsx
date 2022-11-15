@@ -1,7 +1,8 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { ProductGroup, ProductInfo, Color, Brand } from '../../types';
+import { ProductGroup, ProductInfo, Color, Brand, ProductType } from '../../types';
 import { productColors, productBrands } from '../../productInfo';
+import classNames from 'classnames';
 
 import logo from '../../shop_icons/engineer-worker-svgrepo-com.svg'
 import cartIcon from '../../shop_icons/cart-svgrepo-com.svg';
@@ -64,6 +65,24 @@ const initialFilters = {
       'Nitras': false,
       'Uvex': false
     },
+    productType: {
+      'jackets': false,
+      'pants': false,
+      'coveralls': false,
+      'overalls': false,
+      't-shirts': false,
+      'high_visibility_clothing': false,
+      'low_shoes': false,
+      'boots': false,
+      'high_boots': false,
+      'sandals': false,
+      'head_and_face_protection': false,
+      'respiratory_protection': false,
+      'visual_protection': false,
+      'hearing_protection': false,
+      'hand_protection': false,
+      'high-altitude_work_equipment': false
+    },
     color: {
       '#000000': false,
       '#ffffff': false,
@@ -87,6 +106,15 @@ const initialFilters = {
       'winter': false
     }
   }
+}
+
+const initialOptions = {
+  brands: false,
+  clothing: false,
+  shoes: false,
+  ppe: false,
+  colors: false,
+  winter: false
 }
 
 export const Header: React.FC<Props> = ({
@@ -115,6 +143,7 @@ export const Header: React.FC<Props> = ({
 }) => {
   const [hasLoaded, setHasLoaded] = useState<boolean>(false);
   const [filters, setFilters] = useState<Filter>(initialFilters);
+  const [displayFilterOptions, setDisplayFilterOptions] = useState<Record<string, boolean>>(initialOptions);
 
   const navigate = useNavigate();
 
@@ -122,7 +151,15 @@ export const Header: React.FC<Props> = ({
     if (!areTypesVisible) {
       setCategoryName('')
     }
-  }, [areTypesVisible])
+  }, [areTypesVisible]);
+
+  const toggleFilterOptions = (event: React.MouseEvent<HTMLElement>) => {
+    let target = event.target as HTMLElement
+    setDisplayFilterOptions(prevState => ({
+      ...prevState,
+      [target.id]: !prevState[target.id]
+    }))
+  }
 
   const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
@@ -186,15 +223,22 @@ export const Header: React.FC<Props> = ({
   const filterSelectedTags = () => {
     const selectedKeys: SelectedKeys = {
       brand: [],
+      productType: [],
       color: [],
       keywords: []
     };
 
-    const { brand, color, keywords } = filters.tags;
+    const { brand, productType, color, keywords } = filters.tags;
 
     for (let brandItem in brand) {
       if (brand[brandItem]) {
-        selectedKeys.brand.push(brandItem)
+        selectedKeys.brand.push(brandItem.toLowerCase())
+      }
+    }
+
+    for (let productTypeItem in productType) {
+      if (productType[productTypeItem]) {
+        selectedKeys.productType.push(productTypeItem.split('_').join(' '))
       }
     }
 
@@ -226,7 +270,7 @@ export const Header: React.FC<Props> = ({
           return product.keywords.some((item: string) => filters[key].includes(item))
         }
         // check this line with other filters 
-        return filters[key].includes(product[key as keyof typeof product].toString())
+        return filters[key].includes(product[key as keyof typeof product].toString().toLowerCase())
       })
     })
   }
@@ -335,15 +379,14 @@ export const Header: React.FC<Props> = ({
                     <div
                       className="mobile__filters_container_group_items--item"
                       data-sortorder='lowToHigh'
-                      style={{
-                        backgroundColor: filters.tags.price.lowToHigh ? 'gray' : 'white',
-                        outline: filters.tags.price.lowToHigh ? '3px double yellow' : '1px solid blue'
-                      }}
                       onClick={handleSort}
                     >
                       <p
                         className='mobile__filters_container_group_items--item_name'
                         data-sortorder='lowToHigh'
+                        style={{
+                          fontWeight: filters.tags.price.lowToHigh ? '500' : '200',
+                        }}
                       >
                         Low &#8921; High
                       </p>
@@ -352,15 +395,14 @@ export const Header: React.FC<Props> = ({
                     <div
                       className="mobile__filters_container_group_items--item"
                       data-sortorder='highToLow'
-                      style={{
-                        backgroundColor: filters.tags.price.highToLow ? 'gray' : 'white',
-                        outline: filters.tags.price.highToLow ? '3px double yellow' : '1px solid blue'
-                      }}
                       onClick={handleSort}
                     >
                       <p
                         className='mobile__filters_container_group_items--item_name'
                         data-sortorder='highToLow'
+                        style={{
+                          fontWeight: filters.tags.price.highToLow ? '500' : '200',
+                        }}
                       >
                         High &#8921; Low
                       </p>
@@ -372,26 +414,35 @@ export const Header: React.FC<Props> = ({
                   className='mobile__filters_container_group'
                 >
                   <p
+                    id='brands'
                     className='mobile__filters_container_group_name'
+                    onClick={toggleFilterOptions}
                   >
-                    Brands
+                    Brands &nbsp;{displayFilterOptions.brands
+                      ? <span>&#8793;</span>
+                      : <span>&#8794;</span>
+                    }
                   </p>
+
                   <div
                     className='mobile__filters_container_group_items'
+                    style={{
+                      display: displayFilterOptions.brands ? 'grid' : 'none'
+                    }}
                   >
                     {productBrands.map((brand: Brand) => (
                       <div
                         className='mobile__filters_container_group_items--item'
                         data-name={brand.value}
                         key={brand.value}
-                        style={{
-                          outline: filters.tags.brand[brand.value] ? '3px double yellow' : '1px solid blue'
-                        }}
                         onClick={(event) => {handleFilterChange(event, 'brand')}}
                       >
                         <p
                           className='mobile__filters_container_group_items--item_name'
                           data-name={brand.value}
+                          style={{
+                            fontWeight: filters.tags.brand[brand.value] ? '500' : '200'
+                          }}
                         >
                           {brand.value}
                         </p>
@@ -400,43 +451,83 @@ export const Header: React.FC<Props> = ({
                   </div>
                 </div>
 
+                {productGroups.map((group: ProductGroup) => (
+                  group.types.length > 0 && (
+                    <div
+                      className='mobile__filters_container_group'
+                      key={group.name}
+                    >
+                      <p
+                        id={group.name}
+                        className='mobile__filters_container_group_name'
+                        onClick={toggleFilterOptions}
+                      >
+                        {group.name.charAt(0).toUpperCase() + group.name.slice(1)} &nbsp;
+                        {displayFilterOptions[group.name] ? <span>&#8793;</span> : <span>&#8794;</span>}
+                      </p>
+                      <div
+                        className='mobile__filters_container_group_items'
+                        style={{
+                          display: displayFilterOptions[group.name] ? 'grid' : 'none'
+                        }}
+                      >
+                        {group.types.map((productType: ProductType) => (
+                          <div
+                            className='mobile__filters_container_group_items--item'
+                            data-name={productType.name}
+                            key={productType.name}
+                            onClick={(event) => {handleFilterChange(event, 'productType')}}
+                          >
+                            <p
+                              className='mobile__filters_container_group_items--item_name'
+                              data-name={productType.name}
+                              style={{
+                                fontWeight: filters.tags.productType[productType.name] ? '500' : '200'
+                              }}
+                            >
+                              {productType.nameUA.charAt(0).toUpperCase() + productType.nameUA.slice(1)}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )
+                ))}
+
                 <div className='mobile__filters_container_group'>
                   <p
+                    id='colors'
                     className='mobile__filters_container_group_name'
+                    onClick={toggleFilterOptions}
                   >
-                    Colors
+                    Colors &nbsp;{displayFilterOptions.colors ? <span>&#8793;</span> : <span>&#8794;</span>}
                   </p>
+
                   <div
                     className='mobile__filters_container_group_items'
+                    style={{
+                      display: displayFilterOptions.colors ? 'grid' : 'none'
+                    }}
                   >
                     {productColors.map((color: Color) => (
                       <div
                         className='mobile__filters_container_group_items--item'
                         key={color.hex}
                         data-name={color.hex}
-                        style={{
-                          background: `${color.hex}`,
-                          outline: filters.tags.color[color.hex] ? '3px double yellow' : '1px solid blue'
-                        }}
                         onClick={(event) => {handleFilterChange(event, 'color')}}
                       >
+                        <div
+                          className='mobile__filters_container_group_items--item_color'
+                          style={{
+                            background: `${color.hex}`,
+                          }}
+                        />
+
                         <p
                           className='mobile__filters_container_group_items--item_name'
                           data-name={color.hex}
                           style={{
-                            color: `${color.hex === '#000000' 
-                              || color.hex ===  '#bf0909'
-                              || color.hex === '#0000e5'
-                              || color.hex === '#00006a'
-                              || color.hex === '#573313'
-                              || color.hex === '#575757'
-                              || color.hex === '#bdbdbd'
-                              || color.hex === '#1e6f1e'
-                              || color.hex === '#1c571c'
-                              || color.hex === '#253b11'
-                                ? 'white'
-                                : 'black'
-                            }`
+                            fontWeight: filters.tags.color[color.hex] ? '500' : '200'
                           }}
                         >
                           {color.valueUA}
@@ -450,19 +541,22 @@ export const Header: React.FC<Props> = ({
                   className='mobile__filters_container_group'
                 >
                   <p
+                    id='winter'
                     className='mobile__filters_container_group_name'
+                    onClick={toggleFilterOptions}
                   >
-                    Winter Items
+                    Winter Items &nbsp;{displayFilterOptions.winter ? <span>&#8793;</span> : <span>&#8794;</span>}
                   </p>
+
                   <div
                     className='mobile__filters_container_group_items'
+                    style={{
+                      display: displayFilterOptions.winter ? 'grid' : 'none'
+                    }}
                   >
                     <div
                       className='mobile__filters_container_group_items--item'
                       data-name='winter'
-                      style={{
-                        outline: filters.tags.keywords.winter ? '3px double yellow' : '1px solid blue'
-                      }}
                       onClick={(event) => {handleFilterChange(event, 'keywords')}}
                     >
                       <p
@@ -649,7 +743,10 @@ export const Header: React.FC<Props> = ({
           {isMobile < 1024 && 
             (
               <div className='header__main_nav_menu'
-                onClick={toggleMenu}
+                onClick={() => {
+                  toggleMenu();
+                  navigator.vibrate(200) // vibration option for mobile devices
+                }}
               >
                 <img
                   className='header__main_nav_menu--icon'
@@ -691,7 +788,7 @@ export const Header: React.FC<Props> = ({
           </button>
 
           <div
-            className='header__main_search--preview'
+            className={isMobile > 1024? 'header__main_search--preview' : 'header__main_search_mobile--preview'}
           >
             {dynamicQuery.length === 0
               ? null
@@ -808,9 +905,7 @@ export const Header: React.FC<Props> = ({
         >
           <div
             className='header__nav_categories_filter'
-            onMouseEnter={() => setShowFilters(true)}
-            onMouseLeave={() => setShowFilters(false)}
-            onClick={(event) => event.stopPropagation()}
+            onClick={toggleFilters}
           >
             <img
               className='header__nav_categories_filter--image'
@@ -839,15 +934,14 @@ export const Header: React.FC<Props> = ({
                     <div
                       className="filters__container_group_items--item"
                       data-sortorder='lowToHigh'
-                      style={{
-                        backgroundColor: filters.tags.price.lowToHigh ? 'gray' : 'white',
-                        outline: filters.tags.price.lowToHigh ? '3px double yellow' : '1px solid blue'
-                      }}
                       onClick={handleSort}
                     >
                       <p
                         className='filters__container_group_items--item_name'
                         data-sortorder='lowToHigh'
+                        style={{
+                          fontWeight: filters.tags.price.lowToHigh ? '500' : '200',
+                        }}
                       >
                         Low &#8921; High
                       </p>
@@ -856,15 +950,14 @@ export const Header: React.FC<Props> = ({
                     <div
                       className="filters__container_group_items--item"
                       data-sortorder='highToLow'
-                      style={{
-                        backgroundColor: filters.tags.price.highToLow ? 'gray' : 'white',
-                        outline: filters.tags.price.highToLow ? '3px double yellow' : '1px solid blue'
-                      }}
                       onClick={handleSort}
                     >
                       <p
                         className='filters__container_group_items--item_name'
                         data-sortorder='highToLow'
+                        style={{
+                          fontWeight: filters.tags.price.highToLow ? '500' : '200',
+                        }}
                       >
                         High &#8921; Low
                       </p>
@@ -876,26 +969,35 @@ export const Header: React.FC<Props> = ({
                   className='filters__container_group'
                 >
                   <p
+                    id='brands'
                     className='filters__container_group_name'
+                    onClick={toggleFilterOptions}
                   >
-                    Brands
+                    Brands &nbsp;{displayFilterOptions.brands
+                      ? <span>&#8793;</span>
+                      : <span>&#8794;</span>
+                    }
                   </p>
+
                   <div
                     className='filters__container_group_items'
+                    style={{
+                      display: displayFilterOptions.brands ? 'grid' : 'none'
+                    }}
                   >
                     {productBrands.map((brand: Brand) => (
                       <div
                         className='filters__container_group_items--item'
                         data-name={brand.value}
                         key={brand.value}
-                        style={{
-                          outline: filters.tags.brand[brand.value] ? '3px double yellow' : '1px solid blue'
-                        }}
                         onClick={(event) => {handleFilterChange(event, 'brand')}}
                       >
                         <p
                           className='filters__container_group_items--item_name'
                           data-name={brand.value}
+                          style={{
+                            fontWeight: filters.tags.brand[brand.value] ? '500' : '200'
+                          }}
                         >
                           {brand.value}
                         </p>
@@ -904,43 +1006,84 @@ export const Header: React.FC<Props> = ({
                   </div>
                 </div>
 
+                {productGroups.map((group: ProductGroup) => (
+                  group.types.length > 0 && (
+                    <div
+                      className='filters__container_group'
+                      key={group.name}
+                    >
+                      <p
+                        id={group.name}
+                        className='filters__container_group_name'
+                        onClick={toggleFilterOptions}
+                      >
+                        {group.name.charAt(0).toUpperCase() + group.name.slice(1)} &nbsp;
+                        {displayFilterOptions[group.name] ? <span>&#8793;</span> : <span>&#8794;</span>}
+                      </p>
+
+                      <div
+                        className='filters__container_group_items'
+                        style={{
+                          display: displayFilterOptions[group.name] ? 'grid' : 'none'
+                        }}
+                      >
+                        {group.types.map((productType: ProductType) => (
+                          <div
+                            className='filters__container_group_items--item'
+                            data-name={productType.name}
+                            key={productType.name}
+                            onClick={(event) => {handleFilterChange(event, 'productType')}}
+                          >
+                            <p
+                              className='filters__container_group_items--item_name'
+                              data-name={productType.name}
+                              style={{
+                                fontWeight: filters.tags.productType[productType.name] ? '500' : '200'
+                              }}
+                            >
+                              {productType.nameUA.charAt(0).toUpperCase() + productType.nameUA.slice(1)}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )
+                ))}
+
                 <div className='filters__container_group'>
                   <p
+                    id='colors'
                     className='filters__container_group_name'
+                    onClick={toggleFilterOptions}
                   >
-                    Colors
+                    Colors &nbsp;{displayFilterOptions.colors ? <span>&#8793;</span> : <span>&#8794;</span>}
                   </p>
+
                   <div
                     className='filters__container_group_items'
+                    style={{
+                      display: displayFilterOptions.colors ? 'grid' : 'none'
+                    }}
                   >
                     {productColors.map((color: Color) => (
                       <div
                         className='filters__container_group_items--item'
                         key={color.hex}
                         data-name={color.hex}
-                        style={{
-                          background: `${color.hex}`,
-                          outline: filters.tags.color[color.hex] ? '3px double yellow' : '1px solid blue'
-                        }}
                         onClick={(event) => {handleFilterChange(event, 'color')}}
                       >
+                        <div
+                          className='filters__container_group_items--item_color'
+                          style={{
+                            background: `${color.hex}`,
+                          }}
+                        />
+
                         <p
                           className='filters__container_group_items--item_name'
                           data-name={color.hex}
                           style={{
-                            color: `${color.hex === '#000000' 
-                              || color.hex ===  '#bf0909'
-                              || color.hex === '#0000e5'
-                              || color.hex === '#00006a'
-                              || color.hex === '#573313'
-                              || color.hex === '#575757'
-                              || color.hex === '#bdbdbd'
-                              || color.hex === '#1e6f1e'
-                              || color.hex === '#1c571c'
-                              || color.hex === '#253b11'
-                                ? 'white'
-                                : 'black'
-                            }`
+                            fontWeight: filters.tags.color[color.hex] ? '500' : '200'
                           }}
                         >
                           {color.valueUA}
@@ -954,24 +1097,30 @@ export const Header: React.FC<Props> = ({
                   className='filters__container_group'
                 >
                   <p
+                    id='winter'
                     className='filters__container_group_name'
+                    onClick={toggleFilterOptions}
                   >
-                    Winter Items
+                    Winter Items &nbsp;{displayFilterOptions.winter ? <span>&#8793;</span> : <span>&#8794;</span>}
                   </p>
+
                   <div
                     className='filters__container_group_items'
+                    style={{
+                      display: displayFilterOptions.winter ? 'grid' : 'none'
+                    }}
                   >
                     <div
                       className='filters__container_group_items--item'
                       data-name='winter'
-                      style={{
-                        outline: filters.tags.keywords.winter ? '3px double yellow' : '1px solid blue'
-                      }}
                       onClick={(event) => {handleFilterChange(event, 'keywords')}}
                     >
                       <p
                         className='filters__container_group_items--item_name'
                         data-name='winter'
+                        style={{
+                          fontWeight: filters.tags.keywords.winter ? '500' : '200'
+                        }}
                       >
                         Winter
                       </p>

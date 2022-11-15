@@ -90,14 +90,14 @@ export const MiniCart: React.FC<Props> = ({
             <div className="item_quantity">
               <button
                 className={classNames(
-                  isMobile < 1024 ? "item_quantity--subtract" : "item_quantity--add"
+                  isMobile < 600 ? "item_quantity--subtract" : "item_quantity--add"
                 )}
                 onClick={(event) => {
                   event.stopPropagation();
-                  isMobile < 1024 ? removeItem(item._id) : addItem(item._id);
+                  isMobile < 600 ? removeItem(item._id) : addItem(item._id);
                 }}
               >
-                {isMobile < 1024 ? <span>&#8722;</span> : <span>&#43;</span>}
+                {isMobile < 600 ? <span>&#8722;</span> : <span>&#43;</span>}
               </button>
               <p
                 className="item_quantity--total"
@@ -106,14 +106,14 @@ export const MiniCart: React.FC<Props> = ({
               </p>
               <button
                 className={classNames(
-                  isMobile < 1024 ? "item_quantity--add" : "item_quantity--subtract"
+                  isMobile < 600 ? "item_quantity--add" : "item_quantity--subtract"
                 )}
                 onClick={(event) => {
                   event.stopPropagation();
-                  isMobile < 1024 ? addItem(item._id) : removeItem(item._id);
+                  isMobile < 600 ? addItem(item._id) : removeItem(item._id);
                 }}
               >
-                {isMobile < 1024 ? <span>&#43;</span> : <span>&#8722;</span>}
+                {isMobile < 600 ? <span>&#43;</span> : <span>&#8722;</span>}
               </button>
             </div>
             <div
