@@ -84,7 +84,13 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1024px) {
+  .goodsList {
+    justify-content: space-around;
+  }
+}
+
+@media screen and (max-width: 600px) {
   .goodsList {
     justify-content: center;
   }

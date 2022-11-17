@@ -420,7 +420,8 @@ export const App: React.FC = () => {
               clearCart={clearCart}
               hasPreorderGoods={hasPreorderGoods}
               hasAllPreorderGoods={hasAllPreorderGoods}
-            />}
+              isMobile={isMobile}
+              />}
           />
 
           <Route

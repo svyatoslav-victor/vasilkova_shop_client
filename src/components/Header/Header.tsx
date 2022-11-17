@@ -745,7 +745,6 @@ export const Header: React.FC<Props> = ({
               <div className='header__main_nav_menu'
                 onClick={() => {
                   toggleMenu();
-                  navigator.vibrate(200) // vibration option for mobile devices
                 }}
               >
                 <img
@@ -830,7 +829,7 @@ export const Header: React.FC<Props> = ({
           </div>
         </div>
 
-        {isMobile > 1024
+        {isMobile > 600
           ? (
               <div className='header__main_phones'>
                 <div className='header__main_phones_numbers'>

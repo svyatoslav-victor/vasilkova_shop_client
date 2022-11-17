@@ -633,14 +633,6 @@
 @media screen and (max-width: 1023px) {
   .header {
     font-size: $font-mobile;
-    background-color: $background-mobile;
-    &__main {
-      &_phones {
-        &_numbers {
-          display: none;
-        }
-      }
-    }
   }
 }
 

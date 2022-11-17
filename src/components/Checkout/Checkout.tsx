@@ -12,14 +12,16 @@ type Props = {
   cart: CartItem[],
   clearCart: () => void,
   hasPreorderGoods: boolean,
-  hasAllPreorderGoods: boolean
+  hasAllPreorderGoods: boolean,
+  isMobile: number
 }
 
 export const Checkout: React.FC<Props> = ({
   cart,
   clearCart,
   hasPreorderGoods,
-  hasAllPreorderGoods
+  hasAllPreorderGoods,
+  isMobile
 }) => {
   const [phone, setPhone] = useState<E164Number>();
   const [name, setName] = useState<string>('');
@@ -232,7 +234,7 @@ export const Checkout: React.FC<Props> = ({
                       type="email"
                       name="email"
                       value={email}
-                      placeholder="enter e-mail"
+                      placeholder="enter e-mail to receive order confirmation"
                       onChange={(event) => setEmail(event.target.value)}
                     />
                   </label>
@@ -434,6 +436,9 @@ export const Checkout: React.FC<Props> = ({
 
                     <p
                       className="checkout__content_items_item_details_description"
+                      style={{
+                        display: isMobile > 600 ? 'block' : 'none'
+                      }}
                     >
                       {item.description}
                     </p>

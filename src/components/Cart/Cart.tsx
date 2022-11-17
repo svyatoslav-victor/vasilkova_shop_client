@@ -26,7 +26,7 @@ export const Cart: React.FC<Props> = ({
   return (
     <div className="cart">
       <div className="cart__heading">
-        <h1>Cart</h1>
+        <h1>CART</h1>
         <button
           className="cart__heading_button"
           style={{

@@ -1,3 +1,5 @@
+@import '../../variables';
+
 .links {
   position: relative;
   padding: 0.5em 0;
@@ -26,6 +28,7 @@
     color: black;
     text-decoration: none;
     box-shadow: none;
+    text-align: center;
     transition: color 0.5s ease-in-out,
       box-shadow 0.5s ease-in-out;
 
@@ -45,7 +48,7 @@
       display: grid;
       grid-auto-flow: row;
       justify-items: center;
-      padding: 1em 0;
+      align-items: center;
 
       &--image {
         width: 80%;
@@ -56,5 +59,24 @@
         padding: 0.5em 0 1em;
       }
     }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .productTypes {
+    font-size: $font-mobile;
+    grid-template-columns: repeat(auto-fill, 220px);
+    grid-template-rows: repeat(auto-fill, 220px);
+    justify-content: space-evenly;
+    row-gap: 1em;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .productTypes {
+    font-size: 0.6em;
+    grid-template-columns: repeat(auto-fill, 150px);
+    grid-template-rows: repeat(auto-fill, 160px);
+    row-gap: 1em;
   }
 }

@@ -188,7 +188,7 @@ export const Product: React.FC<Props> = ({
                       type="number"
                       min={0}
                       name="quantity"
-                      value={quantity}
+                      value={quantity || ''}
                       onChange={(event) => {setQuantity(+event.target.value)}}
                     />
                   </div>

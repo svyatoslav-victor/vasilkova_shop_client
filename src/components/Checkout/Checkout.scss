@@ -1,4 +1,9 @@
+@import '../../variables';
+
 .checkout {
+  padding: 0.5em 1em;
+  text-align: justify;
+
   &__content {
     display: grid;
     grid-auto-flow: column;
@@ -231,6 +236,67 @@
       padding: 0.5em 2em 0.5em 0;
       font-size: 1.2em;
       font-weight: bold;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .checkout {
+    font-size: $font-mobile;
+  
+    &__content {
+      display: grid;
+      grid-auto-flow: row;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 1em;
+  
+      &_items {  
+        &_item {
+          grid-auto-flow: row;
+          row-gap: 0.5em;
+          padding: 0;
+  
+          &_details {
+            padding: 0.5em 0;
+  
+            &--name {
+              height: 2em;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .checkout {
+    padding: 0.5em 1em;
+    text-align: justify;
+  
+    &__content {
+      display: grid;
+      grid-auto-flow: row;
+      grid-template-columns: 1fr;
+      row-gap: 2em;
+  
+      &_customerInfo {
+        &_legend {
+          font-weight: 700;
+        }
+  
+        &_fieldset {
+          display: grid;
+          row-gap: 0.2em;
+        }
+      }
+  
+      &_items {
+        max-height: 50vh;
+        overflow: overlay;
+        display: grid;
+        row-gap: 1em;
+      }
     }
   }
 }

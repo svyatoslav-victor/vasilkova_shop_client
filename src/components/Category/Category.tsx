@@ -53,7 +53,7 @@ export const Category: React.FC<Props> = ({ productTypes, productGroups, setProd
                     alt="/"
                   />
                   <p className="productTypes__item_wrapper--type">
-                    {type.name.split('_').join(' ').toUpperCase()}
+                    {type.nameUA.split('_').join(' ').toUpperCase()}
                   </p>
                 </div>
               </Link>
