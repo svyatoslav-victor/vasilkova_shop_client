@@ -60,7 +60,8 @@ export const App: React.FC = () => {
 
   useEffect(() => {
     if (appRef.current !== null) {
-      appRef.current.scrollTo(0, 0)
+      appRef.current.scrollTo(0, 0);
+      appRef.current.style.overflow = 'overlay';
     }
   }, [location.pathname])
 

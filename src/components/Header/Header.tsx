@@ -892,329 +892,369 @@ export const Header: React.FC<Props> = ({
         </div>}
       </div>
 
-      {isMobile > 1024 && <div
-        className='header__nav'
-        onMouseLeave={() => {
-          setCategoryName('')
-          setAreTypesVisible(false)
-        }}
-      >
-        <ul
-          className='header__nav_categories'
-        >
-          <div
-            className='header__nav_categories_filter'
-            onClick={toggleFilters}
-          >
-            <img
-              className='header__nav_categories_filter--image'
-              src={filter}
-              alt="/"
-            />
+      {isMobile > 1024 && <div className='header__space' />}
 
-            <div
-              className='header__nav_categories_filter--filterList'
-              style={{
-                visibility: displayFilters ? 'visible' : 'collapse'
-              }}
-              onClick={(event) => event.stopPropagation()}
-            >
-              <div className='filters__container'>
-                <div className="filters__container_group">
-                  <p
-                    className='filters__container_group_name'
-                  >
-                    Price
-                  </p>
-
-                  <div
-                    className="filters__container_group_items"
-                  >
-                    <div
-                      className="filters__container_group_items--item"
-                      data-sortorder='lowToHigh'
-                      onClick={handleSort}
-                    >
-                      <p
-                        className='filters__container_group_items--item_name'
-                        data-sortorder='lowToHigh'
-                        style={{
-                          fontWeight: filters.tags.price.lowToHigh ? '500' : '200',
-                        }}
-                      >
-                        Low &#8921; High
-                      </p>
-                    </div>
-
-                    <div
-                      className="filters__container_group_items--item"
-                      data-sortorder='highToLow'
-                      onClick={handleSort}
-                    >
-                      <p
-                        className='filters__container_group_items--item_name'
-                        data-sortorder='highToLow'
-                        style={{
-                          fontWeight: filters.tags.price.highToLow ? '500' : '200',
-                        }}
-                      >
-                        High &#8921; Low
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  className='filters__container_group'
-                >
-                  <p
-                    id='brands'
-                    className='filters__container_group_name'
-                    onClick={toggleFilterOptions}
-                  >
-                    Brands &nbsp;{displayFilterOptions.brands
-                      ? <span>&#8793;</span>
-                      : <span>&#8794;</span>
-                    }
-                  </p>
-
-                  <div
-                    className='filters__container_group_items'
-                    style={{
-                      display: displayFilterOptions.brands ? 'grid' : 'none'
-                    }}
-                  >
-                    {productBrands.map((brand: Brand) => (
-                      <div
-                        className='filters__container_group_items--item'
-                        data-name={brand.value}
-                        key={brand.value}
-                        onClick={(event) => {handleFilterChange(event, 'brand')}}
-                      >
-                        <p
-                          className='filters__container_group_items--item_name'
-                          data-name={brand.value}
-                          style={{
-                            fontWeight: filters.tags.brand[brand.value] ? '500' : '200'
-                          }}
-                        >
-                          {brand.value}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {productGroups.map((group: ProductGroup) => (
-                  group.types.length > 0 && (
-                    <div
-                      className='filters__container_group'
-                      key={group.name}
-                    >
-                      <p
-                        id={group.name}
-                        className='filters__container_group_name'
-                        onClick={toggleFilterOptions}
-                      >
-                        {group.name.charAt(0).toUpperCase() + group.name.slice(1)} &nbsp;
-                        {displayFilterOptions[group.name] ? <span>&#8793;</span> : <span>&#8794;</span>}
-                      </p>
-
-                      <div
-                        className='filters__container_group_items'
-                        style={{
-                          display: displayFilterOptions[group.name] ? 'grid' : 'none'
-                        }}
-                      >
-                        {group.types.map((productType: ProductType) => (
-                          <div
-                            className='filters__container_group_items--item'
-                            data-name={productType.name}
-                            key={productType.name}
-                            onClick={(event) => {handleFilterChange(event, 'productType')}}
-                          >
-                            <p
-                              className='filters__container_group_items--item_name'
-                              data-name={productType.name}
-                              style={{
-                                fontWeight: filters.tags.productType[productType.name] ? '500' : '200'
-                              }}
-                            >
-                              {productType.nameUA.charAt(0).toUpperCase() + productType.nameUA.slice(1)}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )
-                ))}
-
-                <div className='filters__container_group'>
-                  <p
-                    id='colors'
-                    className='filters__container_group_name'
-                    onClick={toggleFilterOptions}
-                  >
-                    Colors &nbsp;{displayFilterOptions.colors ? <span>&#8793;</span> : <span>&#8794;</span>}
-                  </p>
-
-                  <div
-                    className='filters__container_group_items'
-                    style={{
-                      display: displayFilterOptions.colors ? 'grid' : 'none'
-                    }}
-                  >
-                    {productColors.map((color: Color) => (
-                      <div
-                        className='filters__container_group_items--item'
-                        key={color.hex}
-                        data-name={color.hex}
-                        onClick={(event) => {handleFilterChange(event, 'color')}}
-                      >
-                        <div
-                          className='filters__container_group_items--item_color'
-                          style={{
-                            background: `${color.hex}`,
-                          }}
-                        />
-
-                        <p
-                          className='filters__container_group_items--item_name'
-                          data-name={color.hex}
-                          style={{
-                            fontWeight: filters.tags.color[color.hex] ? '500' : '200'
-                          }}
-                        >
-                          {color.valueUA}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div
-                  className='filters__container_group'
-                >
-                  <p
-                    id='winter'
-                    className='filters__container_group_name'
-                    onClick={toggleFilterOptions}
-                  >
-                    Winter Items &nbsp;{displayFilterOptions.winter ? <span>&#8793;</span> : <span>&#8794;</span>}
-                  </p>
-
-                  <div
-                    className='filters__container_group_items'
-                    style={{
-                      display: displayFilterOptions.winter ? 'grid' : 'none'
-                    }}
-                  >
-                    <div
-                      className='filters__container_group_items--item'
-                      data-name='winter'
-                      onClick={(event) => {handleFilterChange(event, 'keywords')}}
-                    >
-                      <p
-                        className='filters__container_group_items--item_name'
-                        data-name='winter'
-                        style={{
-                          fontWeight: filters.tags.keywords.winter ? '500' : '200'
-                        }}
-                      >
-                        Winter
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className='filters__buttons'>
-                <button
-                  className='filters__buttons_button'
-                  onClick={goToFilter}
-                >
-                  Filter ({filteredProducts.length})
-                </button>
-
-                <button
-                  className='filters__buttons_button'
-                  onClick={resetFilters}
-                >
-                  Reset
-                </button>
-              </div>
-            </div>
-          </div>
-          {productGroups.map(category => (
-            <li
-              className='header__nav_categories--item'
-              key={category.name}
-              onClick={() => setCategoryName(category.name)}
-              onMouseEnter={() => {
-                setCategoryName(category.name)
-                category.types.length > 0 && setAreTypesVisible(true)
-              }}
-            >
-              <NavLink
-                className="header__nav_categories--navLink"
-                to={`/vasilkova_shop_client/${category.name.toLowerCase()}`}
-              >
-                {category.nameUA.split('_').join(' ').toUpperCase()}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-
+      {isMobile > 1024 && (
         <div
-          className='header__nav_miniCart'
-        >
-          <span
-            className='header__nav_miniCart--count'
-          >
-            {productCount}
-          </span>
-          
-          <div
-            className='header__nav_miniCart_cart'
-            onClick={toggleMiniCart}
-          >
-            <img
-              className='header__nav_miniCart_cart--icon'
-              src={productCount === 0 ? cartIcon : cartIconFull}
-              alt="/"
-            />
-          </div>
-        </div>
-
-        <ul
-          className='header__nav_types'
-          style={{
-            visibility: areTypesVisible ? 'visible' : 'collapse'
-          }}
+          className='header__nav'
           onMouseLeave={() => {
             setCategoryName('')
             setAreTypesVisible(false)
           }}
         >
-          {productGroups.map(types => (
-            types.name === categoryName && (
-              types!.types!.map(type => (
-                <li
-                  key={type.name}
-                  onClick={() => setCategoryName('')}
-                >
-                  <NavLink
-                    className="header__nav_types--navLink"
-                    to={`/vasilkova_shop_client/${categoryName.toLowerCase()}/${type.name.toLowerCase()}`}
+          <ul
+            className='header__nav_categories'
+          >
+            <div
+              className='header__nav_categories_filter'
+              onClick={toggleFilters}
+            >
+              <img
+                className='header__nav_categories_filter--image'
+                src={filter}
+                alt="/"
+              />
+
+              <div
+                className='header__nav_categories_filter--filterList'
+                style={{
+                  visibility: displayFilters ? 'visible' : 'collapse'
+                }}
+                onClick={(event) => event.stopPropagation()}
+              >
+                <div className='filters__container'>
+                  <div className="filters__container_group">
+                    <p
+                      className='filters__container_group_name'
+                    >
+                      Price
+                    </p>
+
+                    <div
+                      className="filters__container_group_items"
+                    >
+                      <div
+                        className="filters__container_group_items--item"
+                        data-sortorder='lowToHigh'
+                        onClick={handleSort}
+                      >
+                        <p
+                          className='filters__container_group_items--item_name'
+                          data-sortorder='lowToHigh'
+                          style={{
+                            fontWeight: filters.tags.price.lowToHigh ? '500' : '200',
+                          }}
+                        >
+                          Low &#8921; High
+                        </p>
+                      </div>
+
+                      <div
+                        className="filters__container_group_items--item"
+                        data-sortorder='highToLow'
+                        onClick={handleSort}
+                      >
+                        <p
+                          className='filters__container_group_items--item_name'
+                          data-sortorder='highToLow'
+                          style={{
+                            fontWeight: filters.tags.price.highToLow ? '500' : '200',
+                          }}
+                        >
+                          High &#8921; Low
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    className='filters__container_group'
                   >
-                    {type.nameUA.split('_').join(' ').toUpperCase()}
-                  </NavLink>
-                </li>
-              ))
-            )
-          ))}
-        </ul>
-      </div>}
+                    <p
+                      id='brands'
+                      className='filters__container_group_name'
+                      onClick={toggleFilterOptions}
+                    >
+                      Brands &nbsp;{displayFilterOptions.brands
+                        ? <span>&#8793;</span>
+                        : <span>&#8794;</span>
+                      }
+                    </p>
+
+                    <div
+                      className='filters__container_group_items'
+                      style={{
+                        display: displayFilterOptions.brands ? 'grid' : 'none'
+                      }}
+                    >
+                      {productBrands.map((brand: Brand) => (
+                        <div
+                          className='filters__container_group_items--item'
+                          data-name={brand.value}
+                          key={brand.value}
+                          onClick={(event) => {handleFilterChange(event, 'brand')}}
+                        >
+                          <p
+                            className='filters__container_group_items--item_name'
+                            data-name={brand.value}
+                            style={{
+                              fontWeight: filters.tags.brand[brand.value] ? '500' : '200'
+                            }}
+                          >
+                            {brand.value}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {productGroups.map((group: ProductGroup) => (
+                    group.types.length > 0 && (
+                      <div
+                        className='filters__container_group'
+                        key={group.name}
+                      >
+                        <p
+                          id={group.name}
+                          className='filters__container_group_name'
+                          onClick={toggleFilterOptions}
+                        >
+                          {group.name.charAt(0).toUpperCase() + group.name.slice(1)} &nbsp;
+                          {displayFilterOptions[group.name] ? <span>&#8793;</span> : <span>&#8794;</span>}
+                        </p>
+
+                        <div
+                          className='filters__container_group_items'
+                          style={{
+                            display: displayFilterOptions[group.name] ? 'grid' : 'none'
+                          }}
+                        >
+                          {group.types.map((productType: ProductType) => (
+                            <div
+                              className='filters__container_group_items--item'
+                              data-name={productType.name}
+                              key={productType.name}
+                              onClick={(event) => {handleFilterChange(event, 'productType')}}
+                            >
+                              <p
+                                className='filters__container_group_items--item_name'
+                                data-name={productType.name}
+                                style={{
+                                  fontWeight: filters.tags.productType[productType.name] ? '500' : '200'
+                                }}
+                              >
+                                {productType.nameUA.charAt(0).toUpperCase() + productType.nameUA.slice(1)}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )
+                  ))}
+
+                  <div className='filters__container_group'>
+                    <p
+                      id='colors'
+                      className='filters__container_group_name'
+                      onClick={toggleFilterOptions}
+                    >
+                      Colors &nbsp;{displayFilterOptions.colors ? <span>&#8793;</span> : <span>&#8794;</span>}
+                    </p>
+
+                    <div
+                      className='filters__container_group_items'
+                      style={{
+                        display: displayFilterOptions.colors ? 'grid' : 'none'
+                      }}
+                    >
+                      {productColors.map((color: Color) => (
+                        <div
+                          className='filters__container_group_items--item'
+                          key={color.hex}
+                          data-name={color.hex}
+                          onClick={(event) => {handleFilterChange(event, 'color')}}
+                        >
+                          <div
+                            className='filters__container_group_items--item_color'
+                            style={{
+                              background: `${color.hex}`,
+                            }}
+                          />
+
+                          <p
+                            className='filters__container_group_items--item_name'
+                            data-name={color.hex}
+                            style={{
+                              fontWeight: filters.tags.color[color.hex] ? '500' : '200'
+                            }}
+                          >
+                            {color.valueUA}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div
+                    className='filters__container_group'
+                  >
+                    <p
+                      id='winter'
+                      className='filters__container_group_name'
+                      onClick={toggleFilterOptions}
+                    >
+                      Winter Items &nbsp;{displayFilterOptions.winter ? <span>&#8793;</span> : <span>&#8794;</span>}
+                    </p>
+
+                    <div
+                      className='filters__container_group_items'
+                      style={{
+                        display: displayFilterOptions.winter ? 'grid' : 'none'
+                      }}
+                    >
+                      <div
+                        className='filters__container_group_items--item'
+                        data-name='winter'
+                        onClick={(event) => {handleFilterChange(event, 'keywords')}}
+                      >
+                        <p
+                          className='filters__container_group_items--item_name'
+                          data-name='winter'
+                          style={{
+                            fontWeight: filters.tags.keywords.winter ? '500' : '200'
+                          }}
+                        >
+                          Winter
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className='filters__buttons'>
+                  <button
+                    className='filters__buttons_button'
+                    onClick={goToFilter}
+                  >
+                    Filter ({filteredProducts.length})
+                  </button>
+
+                  <button
+                    className='filters__buttons_button'
+                    onClick={resetFilters}
+                  >
+                    Reset
+                  </button>
+                </div>
+              </div>
+            </div>
+            {productGroups.map(category => (
+              <li
+                className='header__nav_categories_item'
+                key={category.name}
+                onClick={() => setCategoryName(category.name)}
+                onMouseEnter={() => {
+                  setCategoryName(category.name)
+                  setAreTypesVisible(true)
+                }}
+              >
+                <NavLink
+                  className="header__nav_categories_item--navLink"
+                  to={`/vasilkova_shop_client/${category.name.toLowerCase()}`}
+                  onClick={() => setAreTypesVisible(false)}
+                >
+                  {category.nameUA.split('_').join(' ').toUpperCase()}
+                </NavLink>
+
+                <span
+                  className='header__nav_categories_item--underline'
+                  style={{
+                    visibility: category.name === categoryName && areTypesVisible ? 'visible' : 'collapse'
+                  }}
+                />
+
+                <ul
+                  className='header__nav_categories_item_types'
+                  style={{
+                    visibility: category.name === categoryName && areTypesVisible ? 'visible' : 'collapse'
+                  }}
+                  onMouseLeave={() => {
+                    setCategoryName('')
+                    setAreTypesVisible(false)
+                  }}
+                >
+                  {category.types.length > 0 && category.types.map((type: ProductType) => (
+                    <li
+                      className='header__nav_categories_item_types_type'
+                      key={type.name}
+                      onClick={() => setCategoryName('')}
+                    >
+                      <Link
+                        className="header__nav_categories_item_types_type--link"
+                        to={`/vasilkova_shop_client/${categoryName.toLowerCase()}/${type.name.toLowerCase()}`}
+                        onClick={() => setAreTypesVisible(false)}
+                      >
+                        {type.nameUA.split('_').join(' ').toUpperCase()}
+                      </Link>
+                  </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+
+          <div
+            className='header__nav_miniCart'
+          >
+            <span
+              className='header__nav_miniCart--count'
+            >
+              {productCount}
+            </span>
+            
+            <div
+              className='header__nav_miniCart_cart'
+              onClick={toggleMiniCart}
+            >
+              <img
+                className='header__nav_miniCart_cart--icon'
+                src={productCount === 0 ? cartIcon : cartIconFull}
+                alt="/"
+              />
+            </div>
+          </div>
+
+          {/* <ul
+            className='header__nav_types'
+            style={{
+              visibility: areTypesVisible ? 'visible' : 'collapse'
+            }}
+            onMouseLeave={() => {
+              setCategoryName('')
+              setAreTypesVisible(false)
+            }}
+          >
+            {productGroups.map((group: ProductGroup) => (
+              group.name === categoryName && (
+                group.types.length > 0 && group.types.map((type: ProductType) => (
+                  <li
+                    className='header__nav_types_item'
+                    key={type.name}
+                    onClick={() => setCategoryName('')}
+                  >
+                    <NavLink
+                      className="header__nav_types_item--navLink"
+                      to={`/vasilkova_shop_client/${categoryName.toLowerCase()}/${type.name.toLowerCase()}`}
+                    >
+                      {type.nameUA.split('_').join(' ').toUpperCase()}
+                    </NavLink>
+                  </li>
+                ))
+              )
+            ))}
+          </ul> */}
+        </div>
+      )}
     </div>
   )
 }
