@@ -162,8 +162,8 @@ export const Header: React.FC<Props> = ({
   }
 
   const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value);
-    setDynamicQuery(event.target.value);
+    setQuery(event.target.value.toLocaleLowerCase());
+    setDynamicQuery(event.target.value.toLocaleLowerCase());
     setHasLoaded(false);
     setTimeout(() => {
       setHasLoaded(true);
