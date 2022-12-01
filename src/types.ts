@@ -77,3 +77,9 @@ export type Color = {
   value: string,
   valueUA: string
 }
+
+export type Paginator = {
+  total: number,
+  perPage: number,
+  page: number
+}

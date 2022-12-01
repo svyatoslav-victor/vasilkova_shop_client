@@ -1,6 +1,8 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { Link } from 'react-router-dom';
 import { CartItem } from "../../types";
+
+import bin from '../../shop_icons/bin-svgrepo-com.svg';
 
 import './Cart.scss';
 
@@ -11,7 +13,13 @@ type Props = {
   removeItem: (id: string) => void,
   removeProduct: (id: string, item: CartItem) => void,
   hasPreorderGoods: boolean,
-  hasAllPreorderGoods: boolean
+  hasAllPreorderGoods: boolean,
+  editSpecs: (id: string, newSpecs: string) => void,
+  resetEditSpecs: () => void,
+  cartItemId: string,
+  setCartItemId: Dispatch<SetStateAction<string>>,
+  newSpecs: string,
+  setNewSpecs: Dispatch<SetStateAction<string>>
 }
 
 export const Cart: React.FC<Props> = ({
@@ -21,28 +29,34 @@ export const Cart: React.FC<Props> = ({
   removeItem,
   removeProduct,
   hasPreorderGoods,
-  hasAllPreorderGoods
+  hasAllPreorderGoods,
+  editSpecs,
+  resetEditSpecs,
+  cartItemId,
+  setCartItemId,
+  newSpecs,
+  setNewSpecs
 }) => {
   return (
     <div className="cart">
       <div className="cart__heading">
-        <h1>CART</h1>
-        <button
+        <h1>КОШИК</h1>
+        <img
           className="cart__heading_button"
+          src={bin}
+          alt="/"
           style={{
             visibility: cart.length === 0 ? 'collapse' : 'visible'
           }}
           onClick={clearCart}
-        >
-          X
-        </button>
+        />
       </div>
 
       {cart.length === 0
         ? (
             <div className="cart__empty">
               <p className="cart__empty_message">
-                YOUR CART IS EMPTY :(
+                Ваш кошик порожній :(
               </p>
             </div>
           )
@@ -93,7 +107,7 @@ export const Cart: React.FC<Props> = ({
                               <p
                                 className="cart__contents_item_contents_details--price--one"
                               >
-                                Item: &#8372; {(item.price).toFixed(2)}
+                                Вартість: &#8372; {(item.price).toFixed(2)}
                               </p>
 
                               <div className="cart__contents_item_contents_details--price--separator" />
@@ -101,15 +115,15 @@ export const Cart: React.FC<Props> = ({
                               <p
                                 className="cart__contents_item_contents_details--price--all"
                               >
-                                Total: &#8372; {(item.price * item.quantity).toFixed(2)}
+                                Всього: &#8372; {(item.price * item.quantity).toFixed(2)}
                               </p>
                             </div>
                         </>)
                         : (<p
                             className="cart__contents_item_contents_details--price_pre-order"
                             >
-                              The final price will be confirmed by
-                              the supplier upon order placement
+                              Кінцева вартість має бути підтверджена 
+                              постачальником після замовлення
                           </p>)
                       }
                     </div>
@@ -125,7 +139,7 @@ export const Cart: React.FC<Props> = ({
                         <p
                           className="cart__contents_item_contents_customerSpecs_quantity_heading"
                         >
-                          Quantity:
+                          Кількість:
                         </p>
 
                         <div
@@ -165,14 +179,58 @@ export const Cart: React.FC<Props> = ({
                         <p
                           className="cart__contents_item_contents_customerSpecs_specs--heading"
                         >
-                          Size & other information:&nbsp;
+                          Розмір та інша інформація:&nbsp;
                         </p>
 
-                        <p
-                          className="cart__contents_item_contents_customerSpecs_specs--info"
-                        >
-                          {item.specs}
-                        </p>
+                        <div className="cart__contents_item_contents_customerSpecs_specs_details">
+                          <p
+                            className="cart__contents_item_contents_customerSpecs_specs_details--info"
+                          >
+                            {item.specs}
+                          </p>
+
+                          <span
+                            id={item._id}
+                            className="cart__contents_item_contents_customerSpecs_specs_details--change"
+                            onClick={(event) => setCartItemId(event.currentTarget.id)}
+                          >
+                            &#9998;
+                          </span>
+
+                          <div
+                            className="cart__contents_item_contents_customerSpecs_specs_details_edit"
+                            style={{
+                              display: cartItemId === item._id ? 'grid' : 'none'
+                            }}
+                          >
+                            <textarea
+                              className="cart__contents_item_contents_customerSpecs_specs_details_edit--text"
+                              cols={40}
+                              rows={3}
+                              value={newSpecs}
+                              onChange={(event) => setNewSpecs(event.target.value)}
+                            />
+
+                            <div className="cart__contents_item_contents_customerSpecs_specs_details_edit_buttons">
+                              <button
+                                className="cart__contents_item_contents_customerSpecs_specs_details_edit_buttons--button"
+                                onClick={() => {
+                                  editSpecs(cartItemId, newSpecs);
+                                  resetEditSpecs();
+                                }}
+                              >
+                                &#10004;
+                              </button>
+
+                              <button
+                                className="item_specs_edit_buttons--button"
+                                onClick={resetEditSpecs}
+                              >
+                                &#10008;
+                              </button>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -182,14 +240,14 @@ export const Cart: React.FC<Props> = ({
               <div className="cart__contents_total">
                 {hasAllPreorderGoods
                   ? (<>
-                      <span>Total:&nbsp;</span>
+                      <span>Сума:&nbsp;</span>
                       <span>
-                        subject to final confirmation by supplier
+                        має бути підтверджена постачальником
                       </span>
                     </>)
                   : (hasPreorderGoods
                     ? (<>
-                        <span>Total:&nbsp;(subject to final confirmation by supplier)</span>
+                        <span>Сума:&nbsp;(має бути підтверджена постачальником)</span>
                         <span>&#8372;&nbsp;
                           {cart.map((item: CartItem) => (
                             item.quantity * item.price
@@ -198,7 +256,7 @@ export const Cart: React.FC<Props> = ({
                       </>)
                     : (
                       <>
-                        <span>Total:&nbsp;</span>
+                        <span>Сума:&nbsp;</span>
                         <span>&#8372;&nbsp;
                           {cart.map((item: CartItem) => (
                             item.quantity * item.price
@@ -215,7 +273,7 @@ export const Cart: React.FC<Props> = ({
                 to={'/vasilkova_shop_client/checkout'}
               >
                 <button className="cart__contents_total_checkout--button">
-                  PROCEED TO CHECKOUT
+                  ОФОРМИТИ ЗАМОВЛЕННЯ
                 </button>
               </Link>
             </div>

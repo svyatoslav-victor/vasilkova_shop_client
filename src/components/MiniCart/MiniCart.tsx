@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { Link } from "react-router-dom";
 import { CartItem } from "../../types";
 import classNames from "classnames";
 
+import bin from '../../shop_icons/bin-svgrepo-com.svg';
 import './MiniCart.scss';
 
 type Props = {
@@ -16,7 +17,13 @@ type Props = {
   clearCart: () => void,
   hasPreorderGoods: boolean,
   hasAllPreorderGoods: boolean,
-  isMobile: number
+  isMobile: number,
+  editSpecs: (id: string, newSpecs: string) => void,
+  resetEditSpecs: () => void,
+  cartItemId: string,
+  setCartItemId: Dispatch<SetStateAction<string>>,
+  newSpecs: string,
+  setNewSpecs: Dispatch<SetStateAction<string>>
 }
 
 export const MiniCart: React.FC<Props> = ({
@@ -30,7 +37,13 @@ export const MiniCart: React.FC<Props> = ({
   clearCart,
   hasPreorderGoods,
   hasAllPreorderGoods,
-  isMobile
+  isMobile,
+  editSpecs,
+  resetEditSpecs,
+  cartItemId,
+  setCartItemId,
+  newSpecs,
+  setNewSpecs
 }) => {
   return (
     <div
@@ -45,18 +58,19 @@ export const MiniCart: React.FC<Props> = ({
       <div
         className="minicart__contents"
       >
-        My Cart:&nbsp;
-        <span
-          className="minicart__contents--itemCount"
-        >
-          {productCount} {productCount === 1 ? 'Item' : 'Items'}
-        </span>
+        Мій кошик:&nbsp;
+        <img
+          className="minicart__contents--clearCart"
+          src={bin}
+          alt="/"
+          onClick={clearCart}
+        />
       </div>
       {productCount === 0 && (
         <h3
           className="minicart--empty"
         >
-          YOUR CART IS EMPTY
+          ВАШ КОШИК ПОРОЖНІЙ
         </h3>
       )}
 
@@ -86,7 +100,57 @@ export const MiniCart: React.FC<Props> = ({
               </div>
             )}
             <p className="item_name">{item.name}</p>
-            <p className="item_specs">{item.specs}</p>
+
+            <div className="item_specs">
+              <p
+                className="item_specs--info"
+              >
+                {item.specs}
+              </p>
+
+              <span
+                id={item._id}
+                className="item_specs--change"
+                onClick={(event) => setCartItemId(event.currentTarget.id)}
+              >
+                &#9998;
+              </span>
+
+              <div
+                className="item_specs_edit"
+                style={{
+                  display: cartItemId === item._id ? 'grid' : 'none'
+                }}
+              >
+                <textarea
+                  className="item_specs_edit--text"
+                  cols={20}
+                  rows={3}
+                  value={newSpecs}
+                  onChange={(event) => setNewSpecs(event.target.value)}
+                />
+
+                <div className="item_specs_edit_buttons">
+                  <button
+                    className="item_specs_edit_buttons--button"
+                    onClick={() => {
+                      editSpecs(cartItemId, newSpecs);
+                      resetEditSpecs();
+                    }}
+                  >
+                    &#10004;
+                  </button>
+
+                  <button
+                    className="item_specs_edit_buttons--button"
+                    onClick={resetEditSpecs}
+                  >
+                    &#10008;
+                  </button>
+                </div>
+              </div>
+            </div>
+
             <div className="item_quantity">
               <button
                 className={classNames(
@@ -124,20 +188,20 @@ export const MiniCart: React.FC<Props> = ({
                     <p
                       className="item_price--one"
                     >
-                      Item: &#8372; {item.price.toFixed(2)}
+                      Вартість: &#8372; {item.price.toFixed(2)}
                     </p>
       
                     <p
                       className="item_price--all"
                     >
-                      Total: &#8372; {(item.price * item.quantity).toFixed(2)}
+                      Всього: &#8372; {(item.price * item.quantity).toFixed(2)}
                     </p>
                   </>)
                 : (<p
                     className="item_price--pre-order"
                     >
-                      The final price will be confirmed by <br />
-                      the supplier upon order placement
+                      Кінцева вартість має бути підтверджена <br />
+                      постачальником після замовлення
                   </p>)
               }
             </div>
@@ -153,14 +217,14 @@ export const MiniCart: React.FC<Props> = ({
       >
         {hasAllPreorderGoods
           ? (<>
-              <span>Total:&nbsp;</span>
+              <span>Сума:&nbsp;</span>
               <span>
-                subject to final confirmation by supplier
+                має бути підтверджена постачальником
               </span>
             </>)
           : (hasPreorderGoods
             ? (<>
-                <span>Total:&nbsp;(subject to final confirmation by supplier)</span>
+                <span>Сума:&nbsp;(має бути підтверджена постачальником)</span>
                 <span>&#8372;&nbsp;
                   {cart.map((item: CartItem) => (
                     item.quantity * item.price
@@ -169,7 +233,7 @@ export const MiniCart: React.FC<Props> = ({
               </>)
             : (
               <>
-                <span>Total:&nbsp;</span>
+                <span>Сума:&nbsp;</span>
                 <span>&#8372;&nbsp;
                   {cart.map((item: CartItem) => (
                     item.quantity * item.price
@@ -194,7 +258,7 @@ export const MiniCart: React.FC<Props> = ({
             className="minicart__buttons_button"
             onClick={toggleMiniCart}
           >
-            VIEW CART
+            ПЕРЕЙТИ ДО КОШИКУ
           </button>
         </Link>
         <Link
@@ -204,7 +268,7 @@ export const MiniCart: React.FC<Props> = ({
             className="minicart__buttons_button"
             onClick={toggleMiniCart}
           >
-            CHECKOUT
+            ОФОРМИТИ ЗАМОВЛЕННЯ
           </button>
         </Link>
       </div>

@@ -96,33 +96,6 @@ export const Checkout: React.FC<Props> = ({
 
     const mailBody = emailTemplate(data);
 
-    // let orderProducts: string = '';
-    // let field: string;
-
-    // for (field in data.productsDetails) {
-    //   orderProducts += `
-    //     <li>Product ID: ${data.productsDetails[field].productId}</li>
-    //     <li>Name: ${data.productsDetails[field].name}</li>
-    //     <li>Color:<div style="height: 50px; width: 50px; background-color: ${data.productsDetails[field].color}"></div></li>
-    //     <li>Price: ${data.productsDetails[field].price}</li>
-    //     <li>Quantity: ${data.productsDetails[field].quantity}</li>
-    //     <li>Specs: ${data.productsDetails[field].specs}</li>
-    //   `
-    // }
-
-    // const customerMail = {
-    //   name: data.customerInfo.name,
-    //   email: data.customerInfo.email,
-    //   subject: `Spetsuha Odessa: Order # ${data.orderId}`,
-    //   html: `<h2>Hello, ${data.customerInfo.name}!</h2>
-    //       <h3>Your order is ${data.orderId}.</h3>
-    //       <h4>Order details:</h4>
-    //       <ul>${orderProducts}</ul>
-    //       <h5>Your Subtotal is: ${data.subtotal}</h5>
-    //       <p>If you have any questions, please contact us!</p>
-    //     `
-    // }
-
     fetch('https://vasilkovashopserver.herokuapp.com/api/createOrder', {
       method: 'POST',
       headers: {
@@ -172,14 +145,14 @@ export const Checkout: React.FC<Props> = ({
       <h1
         className="checkout__heading"
       >
-        CHECKOUT
+        ОФОРМЛЕННЯ ЗАМОВЛЕННЯ
       </h1>
 
       {cart.length === 0
         ? <h3
             className="checkout__empty"
           >
-            Nothing to check out! Please resume shopping ;)
+            Оформляти поки що нічого, кошик порожній ;)
           </h3>
         : (
           <div className="checkout__content">
@@ -191,7 +164,7 @@ export const Checkout: React.FC<Props> = ({
                 <legend
                   className="checkout__content_customerInfo_legend"
                 >
-                  Customer Details
+                  Дані покупця
                 </legend>
 
                 <div
@@ -200,13 +173,13 @@ export const Checkout: React.FC<Props> = ({
                   <label
                     className="checkout__content_customerInfo_fieldset_label"
                   >
-                    Name*
+                    ПІБ*
                     <input
                       className="checkout__content_customerInfo_fieldset_label--input"
                       type="text"
                       name="name"
                       value={name}
-                      placeholder="enter name"
+                      placeholder="вкажіть ПІБ"
                       onChange={(event) => setName(event.target.value)}
                     />
                   </label>
@@ -214,7 +187,7 @@ export const Checkout: React.FC<Props> = ({
                   <label
                     className="checkout__content_customerInfo_fieldset_label"
                   >
-                    Phone*
+                    Телефон*
                     <Input
                       className="checkout__content_customerInfo_fieldset_label--input"
                       defaultCountry="UA"
@@ -234,7 +207,7 @@ export const Checkout: React.FC<Props> = ({
                       type="email"
                       name="email"
                       value={email}
-                      placeholder="enter e-mail to receive order confirmation"
+                      placeholder="для підтверждення замовлення"
                       onChange={(event) => setEmail(event.target.value)}
                     />
                   </label>
@@ -242,13 +215,13 @@ export const Checkout: React.FC<Props> = ({
                   <label
                     className="checkout__content_customerInfo_fieldset_label"
                   >
-                    Company
+                    Компанія
                     <input
                       className="checkout__content_customerInfo_fieldset_label--input"
                       type="company"
                       name="company"
                       value={company}
-                      placeholder="enter company"
+                      placeholder="вкажіть компанію"
                       onChange={(event) => setCompany(event.target.value)}
                     />
                   </label>
@@ -268,7 +241,7 @@ export const Checkout: React.FC<Props> = ({
                           display: isWarehouseClicked ? 'grid' : 'none'
                         }}
                       >
-                        Pickup Location: Odessa, Primorskaya str., 18
+                        Адреса складу: м. Одеса, вул. Приморська, 18
                       </div>
 
                       <div
@@ -280,13 +253,13 @@ export const Checkout: React.FC<Props> = ({
                         <label
                           className="checkout__content_customerInfo_fieldset_delivery_info_post_label"
                         >
-                          Location
+                          Місто*
                           <input
                             className="checkout__content_customerInfo_fieldset_delivery_info_post_label--input"
                             type="postLocation"
                             name="postLocation"
                             value={postLocation}
-                            placeholder="enter city"
+                            placeholder="введіть населенний пункт"
                             onChange={(event) => setPostLocation(event.target.value)}
                           />
                         </label>
@@ -294,13 +267,13 @@ export const Checkout: React.FC<Props> = ({
                         <label
                           className="checkout__content_customerInfo_fieldset_delivery_info_post_label"
                         >
-                          Branch #
+                          Відділення*
                           <input
                             className="checkout__content_customerInfo_fieldset_delivery_info_post_label--input"
                             type="postBranch"
                             name="postBranch"
                             value={postBranch}
-                            placeholder="enter NP branch #"
+                            placeholder="введіть номер відділення"
                             onChange={(event) => setPostBranch(event.target.value)}
                           />
                         </label>
@@ -309,7 +282,7 @@ export const Checkout: React.FC<Props> = ({
                           className="checkout__content_customerInfo_fieldset_delivery_info_post_confirmAddress"
                           onClick={handleAddressConfirmation}
                         >
-                          Confirm Delivery Address
+                          Підтвердити адресу доставки
                         </button>
                       </div>
                     </div>
@@ -323,7 +296,7 @@ export const Checkout: React.FC<Props> = ({
                       <p
                         className="checkout__content_customerInfo_fieldset_delivery_details_heading"
                       >
-                        Please pick a delivery option
+                        Будь-ласка вкажіть спосіб доставки
                       </p>
 
                       <div
@@ -336,7 +309,7 @@ export const Checkout: React.FC<Props> = ({
                             setIsWarehouseClicked(true)
                           }}
                         >
-                          Pickup at Supplier's Warehouse
+                          Самовивіз зі складу постачальника
                         </div>
 
                         <div
@@ -345,7 +318,7 @@ export const Checkout: React.FC<Props> = ({
                             setIsPostClicked(true)
                           }}
                         >
-                          Delivery by Nova Poshta
+                          Доставка Новою Поштою
                         </div>
                       </div>
                     </div>
@@ -357,14 +330,14 @@ export const Checkout: React.FC<Props> = ({
                     <p
                       className="checkout__content_customerInfo_fieldset_confirm--message"
                     >
-                      Please review your order before checking out!
+                      Будь-ласка перевірте замовлення перед підтвердженням!
                     </p>
                     <button
                       className="checkout__content_customerInfo_fieldset_confirm--button"
                       disabled={isPostClicked ? !name || !phone || !deliveryAddress || !confirmAddress : !name || !phone || !deliveryAddress}
                       onClick={handleCheckout}
                     >
-                      Check Out
+                      ОФОРМИТИ
                     </button>
                   </div>
                 </div>
@@ -413,7 +386,7 @@ export const Checkout: React.FC<Props> = ({
                               <p
                                 className="checkout__content_items_item_details_attr--price--one"
                               >
-                                Item: &#8372; {(item.price).toFixed(2)}
+                                Вартість: &#8372; {(item.price).toFixed(2)}
                               </p>
 
                               <div className="checkout__content_items_item_details_attr--price--separator" />
@@ -421,15 +394,15 @@ export const Checkout: React.FC<Props> = ({
                               <p
                                 className="checkout__content_items_item_details_attr--price--all"
                               >
-                                Total: &#8372; {(item.price * item.quantity).toFixed(2)}
+                                Всього: &#8372; {(item.price * item.quantity).toFixed(2)}
                               </p>
                             </div>
                           </>)
                         : (<p
                               className="checkout__content_items_item_details_attr--price_pre-order"
                             >
-                              The final price will be confirmed by
-                              the supplier upon order placement
+                              Кінцева вартість має бути підтверджена 
+                              постачальником після замовлення
                           </p>)
                       }
                     </div>
@@ -447,13 +420,13 @@ export const Checkout: React.FC<Props> = ({
                       <p
                         className="checkout__content_items_item_details_specs--quantity"
                       >
-                        Quantity: {item.quantity}
+                        Кількість: {item.quantity}
                       </p>
 
                       <p
                         className="checkout__content_items_item_details_specs--info"
                       >
-                        Customer Specifications: {item.specs}
+                        Специфікація замовника: {item.specs}
                       </p>
                     </div>
                   </div>
@@ -463,14 +436,14 @@ export const Checkout: React.FC<Props> = ({
               <div className="checkout__content_total">
               {hasAllPreorderGoods
                   ? (<>
-                      <span>Total:&nbsp;</span>
+                      <span>Сума:&nbsp;</span>
                       <span>
-                        subject to final confirmation by supplier
+                        має бути підтверджена постачальником
                       </span>
                     </>)
                   : (hasPreorderGoods
                     ? (<>
-                        <span>Total:&nbsp;(subject to final confirmation by supplier)</span>
+                        <span>Сума:&nbsp;(має бути підтверджена постачальником)</span>
                         <span>&#8372;&nbsp;
                           {cart.map((item: CartItem) => (
                             item.quantity * item.price
@@ -479,7 +452,7 @@ export const Checkout: React.FC<Props> = ({
                       </>)
                     : (
                       <>
-                        <span>Total:&nbsp;</span>
+                        <span>Сума:&nbsp;</span>
                         <span>&#8372;&nbsp;
                           {cart.map((item: CartItem) => (
                             item.quantity * item.price

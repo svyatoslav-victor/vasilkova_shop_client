@@ -1,0 +1,33 @@
+.pagination {
+  position: relative;
+  display: grid;
+  justify-self: center;
+  justify-items: center;
+  align-items: center;
+
+  &__selectPage {
+    width: 100%;
+    display: grid;
+    grid-auto-flow: row;
+    justify-items: center;
+    align-items: center;
+    row-gap: 0.5em;
+    position: absolute;
+    top: 2em;
+    left: 0;
+    padding: 0.5em 0;
+    background-color: white;
+    outline: 1px dotted black;
+
+    &--input {
+      width: 50%;
+    }
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-auto-flow: column;
+  }
+}

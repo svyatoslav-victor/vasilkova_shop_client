@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { ProductGroup, ProductInfo, Color, Brand, ProductType } from '../../types';
+import { ProductGroup, ProductInfo, Color, Brand, ProductType, Paginator } from '../../types';
 import { productColors, productBrands } from '../../productInfo';
 import classNames from 'classnames';
 
@@ -40,7 +40,8 @@ type Props = {
   toggleFilters: () => void,
   toggleMenu: () => void,
   toggleMiniCart: () => void,
-  isMobile: number
+  isMobile: number,
+  paginationParams: Paginator
 }
 
 type Filter = {
@@ -139,11 +140,13 @@ export const Header: React.FC<Props> = ({
   toggleFilters,
   toggleMenu,
   toggleMiniCart,
-  isMobile
+  isMobile,
+  paginationParams
 }) => {
   const [hasLoaded, setHasLoaded] = useState<boolean>(false);
   const [filters, setFilters] = useState<Filter>(initialFilters);
   const [displayFilterOptions, setDisplayFilterOptions] = useState<Record<string, boolean>>(initialOptions);
+  const { page } = paginationParams;
 
   const navigate = useNavigate();
 
@@ -277,7 +280,7 @@ export const Header: React.FC<Props> = ({
 
   const goToFilter = () => {
     navigate({
-      pathname: '/vasilkova_shop_client/search_results',
+      pathname: `/vasilkova_shop_client/search_results/${page}`,
     });
     setShowFilters(false);
   }
@@ -370,7 +373,7 @@ export const Header: React.FC<Props> = ({
                   <p
                     className='mobile__filters_container_group_name'
                   >
-                    Price
+                    Ціна
                   </p>
 
                   <div
@@ -388,7 +391,7 @@ export const Header: React.FC<Props> = ({
                           fontWeight: filters.tags.price.lowToHigh ? '500' : '200',
                         }}
                       >
-                        Low &#8921; High
+                        За зростанням
                       </p>
                     </div>
 
@@ -404,7 +407,7 @@ export const Header: React.FC<Props> = ({
                           fontWeight: filters.tags.price.highToLow ? '500' : '200',
                         }}
                       >
-                        High &#8921; Low
+                        За спаданням
                       </p>
                     </div>
                   </div>
@@ -418,7 +421,7 @@ export const Header: React.FC<Props> = ({
                     className='mobile__filters_container_group_name'
                     onClick={toggleFilterOptions}
                   >
-                    Brands &nbsp;{displayFilterOptions.brands
+                    Бренд &nbsp;{displayFilterOptions.brands
                       ? <span>&#8793;</span>
                       : <span>&#8794;</span>
                     }
@@ -462,7 +465,7 @@ export const Header: React.FC<Props> = ({
                         className='mobile__filters_container_group_name'
                         onClick={toggleFilterOptions}
                       >
-                        {group.name.charAt(0).toUpperCase() + group.name.slice(1)} &nbsp;
+                        {group.nameUA.charAt(0).toUpperCase() + group.nameUA.slice(1)} &nbsp;
                         {displayFilterOptions[group.name] ? <span>&#8793;</span> : <span>&#8794;</span>}
                       </p>
                       <div
@@ -500,7 +503,7 @@ export const Header: React.FC<Props> = ({
                     className='mobile__filters_container_group_name'
                     onClick={toggleFilterOptions}
                   >
-                    Colors &nbsp;{displayFilterOptions.colors ? <span>&#8793;</span> : <span>&#8794;</span>}
+                    Колір &nbsp;{displayFilterOptions.colors ? <span>&#8793;</span> : <span>&#8794;</span>}
                   </p>
 
                   <div
@@ -545,7 +548,7 @@ export const Header: React.FC<Props> = ({
                     className='mobile__filters_container_group_name'
                     onClick={toggleFilterOptions}
                   >
-                    Winter Items &nbsp;{displayFilterOptions.winter ? <span>&#8793;</span> : <span>&#8794;</span>}
+                    Зимовий одяг &nbsp;{displayFilterOptions.winter ? <span>&#8793;</span> : <span>&#8794;</span>}
                   </p>
 
                   <div
@@ -563,7 +566,7 @@ export const Header: React.FC<Props> = ({
                         className='mobile__filters_container_group_items--item_name'
                         data-name='winter'
                       >
-                        Winter
+                        Зима
                       </p>
                     </div>
                   </div>
@@ -578,14 +581,14 @@ export const Header: React.FC<Props> = ({
                     goToFilter()
                   }}
                 >
-                  Filter ({filteredProducts.length})
+                  Фільтр ({filteredProducts.length})
                 </button>
 
                 <button
                   className='mobile__filters_buttons_button'
                   onClick={resetFilters}
                 >
-                  Reset
+                  Скинути
                 </button>
               </div>
             </div>
@@ -594,7 +597,7 @@ export const Header: React.FC<Props> = ({
           <h3
             className='header__mobile_nav_catalogue'
           >
-            CATALOGUE
+            КАТАЛОГ
           </h3>
 
           <ul
@@ -685,7 +688,7 @@ export const Header: React.FC<Props> = ({
             <h3
               className='header__mobile_nav_contact_heading'
             >
-              Contact Us
+              Контакти
             </h3>
 
             <div className='header__mobile_nav_contact_wrapper'>
@@ -694,7 +697,7 @@ export const Header: React.FC<Props> = ({
                 src={location}
                 alt="/"
               />
-              <p>Odessa, 18 Primorskaya str</p>
+              <p>Одеса, вул. Приморська, 18</p>
             </div>
 
             <div className='header__mobile_nav_contact_wrapper'>
@@ -721,7 +724,7 @@ export const Header: React.FC<Props> = ({
                 src={web}
                 alt="/"
               />
-              <a href="https://svyatoslav-victor.github.io/vasilkova_shop_client/">Spetsuha Odessa</a>
+              <a href="https://svyatoslav-victor.github.io/vasilkova_shop_client/">Спецуха Одеса</a>
             </div>
           </div>
         </div>
@@ -734,7 +737,10 @@ export const Header: React.FC<Props> = ({
           >
             <Link
               to={'/vasilkova_shop_client'}
-              onClick={()=> setQuery('')}
+              onClick={()=> {
+                setQuery('')
+                setDynamicQuery('')
+              }}
             >
               <img src={logo} alt="/" />
             </Link>
@@ -767,7 +773,7 @@ export const Header: React.FC<Props> = ({
             className='header__main_search--searchBar'
             type="search"
             value={query}
-            placeholder='Find product'
+            placeholder='Я шукаю...'
             onChange={handleQueryChange}
             onKeyDown={(event) => {
               event.key === 'Enter' && goToSearch();
@@ -823,7 +829,7 @@ export const Header: React.FC<Props> = ({
                       </div>
                     ))
                   )
-                  : <div>{hasLoaded ? 'No match :(' : 'Searching...'}</div>
+                  : <div>{hasLoaded ? 'Співпаданнь не знайдено :(' : 'Шукаємо...'}</div>
               )
             }
           </div>
@@ -927,7 +933,7 @@ export const Header: React.FC<Props> = ({
                     <p
                       className='filters__container_group_name'
                     >
-                      Price
+                      Ціна
                     </p>
 
                     <div
@@ -945,7 +951,7 @@ export const Header: React.FC<Props> = ({
                             fontWeight: filters.tags.price.lowToHigh ? '500' : '200',
                           }}
                         >
-                          Low &#8921; High
+                          За зростанням
                         </p>
                       </div>
 
@@ -961,7 +967,7 @@ export const Header: React.FC<Props> = ({
                             fontWeight: filters.tags.price.highToLow ? '500' : '200',
                           }}
                         >
-                          High &#8921; Low
+                          За спаданням
                         </p>
                       </div>
                     </div>
@@ -975,7 +981,7 @@ export const Header: React.FC<Props> = ({
                       className='filters__container_group_name'
                       onClick={toggleFilterOptions}
                     >
-                      Brands &nbsp;{displayFilterOptions.brands
+                      Бренд &nbsp;{displayFilterOptions.brands
                         ? <span>&#8793;</span>
                         : <span>&#8794;</span>
                       }
@@ -1019,7 +1025,7 @@ export const Header: React.FC<Props> = ({
                           className='filters__container_group_name'
                           onClick={toggleFilterOptions}
                         >
-                          {group.name.charAt(0).toUpperCase() + group.name.slice(1)} &nbsp;
+                          {group.nameUA.charAt(0).toUpperCase() + group.nameUA.slice(1)} &nbsp;
                           {displayFilterOptions[group.name] ? <span>&#8793;</span> : <span>&#8794;</span>}
                         </p>
 
@@ -1058,7 +1064,7 @@ export const Header: React.FC<Props> = ({
                       className='filters__container_group_name'
                       onClick={toggleFilterOptions}
                     >
-                      Colors &nbsp;{displayFilterOptions.colors ? <span>&#8793;</span> : <span>&#8794;</span>}
+                      Колір &nbsp;{displayFilterOptions.colors ? <span>&#8793;</span> : <span>&#8794;</span>}
                     </p>
 
                     <div
@@ -1103,7 +1109,7 @@ export const Header: React.FC<Props> = ({
                       className='filters__container_group_name'
                       onClick={toggleFilterOptions}
                     >
-                      Winter Items &nbsp;{displayFilterOptions.winter ? <span>&#8793;</span> : <span>&#8794;</span>}
+                      Зимовий одяг &nbsp;{displayFilterOptions.winter ? <span>&#8793;</span> : <span>&#8794;</span>}
                     </p>
 
                     <div
@@ -1124,7 +1130,7 @@ export const Header: React.FC<Props> = ({
                             fontWeight: filters.tags.keywords.winter ? '500' : '200'
                           }}
                         >
-                          Winter
+                          Зима
                         </p>
                       </div>
                     </div>
@@ -1136,14 +1142,14 @@ export const Header: React.FC<Props> = ({
                     className='filters__buttons_button'
                     onClick={goToFilter}
                   >
-                    Filter ({filteredProducts.length})
+                    Фільтр ({filteredProducts.length})
                   </button>
 
                   <button
                     className='filters__buttons_button'
                     onClick={resetFilters}
                   >
-                    Reset
+                    Скинути
                   </button>
                 </div>
               </div>
@@ -1223,36 +1229,6 @@ export const Header: React.FC<Props> = ({
               />
             </div>
           </div>
-
-          {/* <ul
-            className='header__nav_types'
-            style={{
-              visibility: areTypesVisible ? 'visible' : 'collapse'
-            }}
-            onMouseLeave={() => {
-              setCategoryName('')
-              setAreTypesVisible(false)
-            }}
-          >
-            {productGroups.map((group: ProductGroup) => (
-              group.name === categoryName && (
-                group.types.length > 0 && group.types.map((type: ProductType) => (
-                  <li
-                    className='header__nav_types_item'
-                    key={type.name}
-                    onClick={() => setCategoryName('')}
-                  >
-                    <NavLink
-                      className="header__nav_types_item--navLink"
-                      to={`/vasilkova_shop_client/${categoryName.toLowerCase()}/${type.name.toLowerCase()}`}
-                    >
-                      {type.nameUA.split('_').join(' ').toUpperCase()}
-                    </NavLink>
-                  </li>
-                ))
-              )
-            ))}
-          </ul> */}
         </div>
       )}
     </div>

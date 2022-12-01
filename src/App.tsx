@@ -1,13 +1,22 @@
 import React from 'react';
-import { Routes, Route, useSearchParams, useNavigate, useLocation } from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  useSearchParams,
+  useNavigate,
+  useLocation
+} from 'react-router-dom';
+
 import { useState, useEffect, useRef } from 'react';
 import { getAllProducts } from './products';
 import { productGroups } from './productInfo';
+
 import {
   ProductInfo,
   ProductGroup,
   ProductType,
-  CartItem
+  CartItem,
+  Paginator
 } from './types';
 
 import { MiniCart } from './components/MiniCart/MiniCart';
@@ -46,6 +55,17 @@ export const App: React.FC = () => {
   const [productCount, setProductCount] = useState<number>(+localStorage.totalCount || 0);
   const hasPreorderGoods = cart.some((item: CartItem) => item.price === 0);
   const hasAllPreorderGoods = cart.every((item: CartItem) => item.price === 0);
+
+  const [cartItemId, setCartItemId] = useState<string>('');
+  const [newSpecs, setNewSpecs] = useState<string>('');
+
+  const [paginationParams, setPaginationParams] = useState<Paginator>({
+    total: products.length,
+    perPage: +localStorage.perPage || 3,
+    page: 1
+  })
+
+  const [selectPage, setSelectPage] = useState<boolean>(false);
 
   const [query, setQuery] = useState<string>('');
   const [dynamicQuery, setDynamicQuery] = useState<string>('');
@@ -168,6 +188,10 @@ export const App: React.FC = () => {
       setCategoryName('')
       setAreTypesVisible(false)
     }
+
+    if (selectPage) {
+      setSelectPage(false)
+    }
   }
 
   const fillCart = (data: CartItem) => {
@@ -191,6 +215,22 @@ export const App: React.FC = () => {
         }
       })
     }
+  }
+
+  const editSpecs = (id: string, newSpecs: string) => {
+    const cartCopy = [...cart].map(
+      (item: CartItem) => (item._id === id
+        ? Object.assign(item, { specs: newSpecs })
+        : item
+      )
+    );
+
+    setCart(cartCopy);
+  }
+
+  const resetEditSpecs = () => {
+    setCartItemId('');
+    setNewSpecs('')
   }
 
   const addItem = (id: string) => {
@@ -284,6 +324,7 @@ export const App: React.FC = () => {
 
   const goToSearch = () => {
     setDynamicQuery('');
+
     if (query !== '') {
       searchParams.set('query', query);
     } else {
@@ -293,7 +334,7 @@ export const App: React.FC = () => {
     setSearchParams(searchParams);
 
     navigate({
-      pathname: '/vasilkova_shop_client/search_results',
+      pathname: `/vasilkova_shop_client/search_results/${paginationParams.page}`,
       search: searchParams.toString()
     }, { replace: true });
   }
@@ -305,10 +346,10 @@ export const App: React.FC = () => {
       } else {
         setDynamicQuery(query);
       }
-    }, 500)
+    }, 300) // changed from 500 to prevent dynamic results list from rendering too fast
 
     return () => clearTimeout(timer)
-  }, [query])
+  }, [query])  
 
   useEffect(() => {
     const previewedProducts = products.filter((product: ProductInfo) => {
@@ -322,6 +363,35 @@ export const App: React.FC = () => {
 
       setPreviewSearch(previewedProducts);
   }, [dynamicQuery]);
+
+  const nextPage = () => {
+    setPaginationParams({
+      ...paginationParams,
+      page: paginationParams.page + 1
+    })
+  };
+
+  const previousPage = () => {
+    setPaginationParams({
+      ...paginationParams,
+      page: paginationParams.page - 1
+    })
+  };
+
+  const onPageChange = (current: number) => {
+    setPaginationParams({
+      ...paginationParams,
+      page: current
+    })
+  };
+
+  const onPerPageChange = (event:React.ChangeEvent<HTMLSelectElement>) => {
+    setPaginationParams({
+      ...paginationParams,
+      perPage: +event.target.value,
+      page: 1
+    })
+  };
 
   return (
     <div
@@ -370,6 +440,12 @@ export const App: React.FC = () => {
         hasPreorderGoods={hasPreorderGoods}
         hasAllPreorderGoods={hasAllPreorderGoods}
         isMobile={isMobile}
+        editSpecs={editSpecs}
+        resetEditSpecs={resetEditSpecs}
+        cartItemId={cartItemId}
+        setCartItemId={setCartItemId}
+        newSpecs={newSpecs}
+        setNewSpecs={setNewSpecs}
       />
 
       <div className='app__content'>
@@ -396,6 +472,7 @@ export const App: React.FC = () => {
           toggleMenu={toggleMenu}
           toggleMiniCart={toggleMiniCart}
           isMobile={isMobile}
+          paginationParams={paginationParams}
         />
 
         <Routes>
@@ -435,14 +512,29 @@ export const App: React.FC = () => {
               removeProduct={removeProduct}
               hasPreorderGoods={hasPreorderGoods}
               hasAllPreorderGoods={hasAllPreorderGoods}
+              editSpecs={editSpecs}
+              resetEditSpecs={resetEditSpecs}
+              cartItemId={cartItemId}
+              setCartItemId={setCartItemId}
+              newSpecs={newSpecs}
+              setNewSpecs={setNewSpecs}
             />}
           />
 
           <Route
-            path='/vasilkova_shop_client/search_results'
+            path='/vasilkova_shop_client/search_results/:currentPage'
             element={loading ? <Loader /> : <Search
               products={filteredProducts}
               setProduct={setProductName}
+              paginationParams={paginationParams}
+              setPaginationParams={setPaginationParams}
+              searchParams={searchParams}
+              nextPage={nextPage}
+              previousPage={previousPage}
+              onPageChange={onPageChange}
+              onPerPageChange={onPerPageChange}
+              selectPage={selectPage}
+              setSelectPage={setSelectPage}
             />}
           />
 

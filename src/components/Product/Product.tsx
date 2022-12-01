@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ProductInfo, CartItem } from "../../types";
+import { productGroups } from "../../productInfo";
+import { ProductGroup, ProductType, ProductInfo, CartItem } from "../../types";
 import classNames from "classnames";
 
 import { ImageView } from "./ImageView/ImageView";
@@ -78,21 +79,27 @@ export const Product: React.FC<Props> = ({
           className="links__navLink"
           to={'/vasilkova_shop_client'}
         >
-          Home
+          Додому
         </Link>
         &nbsp; &#62; &nbsp;
         <Link
           className="links__navLink"
           to={`/vasilkova_shop_client/${categoryName.toLowerCase()}`}
         >
-          {categoryName}
+          {productGroups.find((group: ProductGroup) => (
+            group.name === categoryName ? group.nameUA : ''
+          ))!.nameUA}
         </Link>
         &nbsp; &#62; &nbsp;
         <Link
           className="links__navLink"
           to={`/vasilkova_shop_client/${categoryName.toLowerCase()}/${type}`}
         >
-          {type.split('_').join(' ')}
+          {productGroups.find((group: ProductGroup) => (
+            group.name === categoryName && group.nameUA
+          ))!.types.find((productType: ProductType) => (
+            productType.name === type && productType.nameUA
+          ))!.nameUA}
         </Link>
       </p>)}
 
@@ -109,7 +116,7 @@ export const Product: React.FC<Props> = ({
                 <h5
                   className="product__out-of-stock"
                 >
-                  AVAILABLE FOR PRE-ORDER
+                  ДОСТУПНО ЗА ЗАМОВЛЕННЯМ
                 </h5>
               )}
 
@@ -153,8 +160,8 @@ export const Product: React.FC<Props> = ({
                       </p>)
                     : (
                       <p className="info_block--price_pre-order">
-                        The final price will be confirmed by
-                        the supplier upon order placement
+                        Кінцева вартість має бути підтверджена
+                        постачальником після замовлення
                       </p>
                     )
                   }
@@ -180,7 +187,7 @@ export const Product: React.FC<Props> = ({
                     className="product__card_content_specs_details_block"
                   >
                     <p className="product__card_content_specs_details_block--help">
-                      Please specify desired quantity
+                      Будь ласка, вкажість кількість
                     </p>
 
                     <input
@@ -197,7 +204,7 @@ export const Product: React.FC<Props> = ({
                     className="product__card_content_specs_details_block"
                   >
                     <p className="product__card_content_specs_details_block--help">
-                      Please specify desired size(s) and additional info
+                      Будь ласка вкажіть бажані розміри
                     </p>
 
                     <textarea
@@ -217,7 +224,7 @@ export const Product: React.FC<Props> = ({
                   disabled={!quantity || !specs}
                   onClick={handleAddToCart}
                 >
-                  {product.inStock ? 'ADD TO CART' : 'PRE-ORDER'}
+                  {product.inStock ? 'ДОДАТИ ДО КОШИКУ' : 'ЗАМОВИТИ'}
                 </button>
               </div>
             </div>

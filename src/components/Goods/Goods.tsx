@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ProductInfo } from "../../types";
+import { ProductGroup, ProductType, ProductInfo } from "../../types";
+import { productGroups } from "../../productInfo";
 import classNames from "classnames";
 
 import './Goods.scss'
@@ -13,7 +14,7 @@ type Props = {
 
 export const Goods: React.FC<Props> = ({
     goodsList,
-    setProduct,
+    setProduct
   }) => {
   const { categoryName, type } = useParams();
 
@@ -24,21 +25,27 @@ export const Goods: React.FC<Props> = ({
           className="links__navLink"
           to={'/vasilkova_shop_client'}
         >
-          Home
+          Додому
         </Link>
         &nbsp; &#62; &nbsp;
         <Link
           className="links__navLink"
           to={`/vasilkova_shop_client/${categoryName.toLowerCase()}`}
         >
-          {categoryName}
+          {productGroups.find((group: ProductGroup) => (
+            group.name === categoryName ? group.nameUA : ''
+          ))!.nameUA}
         </Link>
         &nbsp; &#62; &nbsp;
         <Link
           className="links__navLink"
           to={`/vasilkova_shop_client/${categoryName.toLowerCase()}/${type}`}
         >
-          {type.split('_').join(' ')}
+          {productGroups.find((group: ProductGroup) => (
+            group.name === categoryName && group.nameUA
+          ))!.types.find((productType: ProductType) => (
+            productType.name === type && productType.nameUA
+          ))!.nameUA}
         </Link>
       </p>)}
 
@@ -64,7 +71,7 @@ export const Goods: React.FC<Props> = ({
                       <h5
                         className="goodsList__item--out-of-stock"
                       >
-                        AVAILABLE FOR PRE-ORDER
+                        ДОСТУПНО ЗА ЗАМОВЛЕННЯМ
                       </h5>
                     )}
 
@@ -93,8 +100,8 @@ export const Goods: React.FC<Props> = ({
                         <p
                           className="goodsList__item_price--pre-order"
                         >
-                          The final price will be confirmed by <br />
-                          the supplier upon order placement
+                          Кінцева вартість має бути підтверджена <br />
+                          постачальником після замовлення
                         </p>
                       )
                     }

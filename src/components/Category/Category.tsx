@@ -26,14 +26,16 @@ export const Category: React.FC<Props> = ({ productTypes, productGroups, setProd
           className="links__navLink"
           to={'/vasilkova_shop_client'}
         >
-          Home
+          Додому
         </Link>
         &nbsp; &#62; &nbsp;
         <Link
           className="links__navLink"
           to={`/vasilkova_shop_client/${categoryName!.toLowerCase()}`}
         >
-          {categoryName!.split('_').join(' ')}
+          {productGroups.find((group: ProductGroup) => (
+            group.name === categoryName ? group.nameUA : ''
+          ))!.nameUA}
         </Link>
       </p>
 

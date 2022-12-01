@@ -9,6 +9,19 @@
     margin: 0;
   }
 
+  &__pageSelector {
+    &_label {
+      display: grid;
+      grid-auto-flow: column;
+      align-items: center;
+      column-gap: 1em;
+  
+      &_selector {
+        padding: 0.5em 0;
+      }
+    }
+  }
+
   &__sort {
     display: flex;
     align-items: center;
@@ -42,5 +55,20 @@
 
   &_heading {
     padding: 1em 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .search {
+    font-size: 0.6em;
+
+    &__pageSelector_label_selector {
+      font-size: 1em;
+      padding: 0.5em 0;
+    }
+  }
+
+  .goodsList__null {
+    font-size: 0.8em;
   }
 }
