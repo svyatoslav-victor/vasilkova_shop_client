@@ -52,8 +52,10 @@ export const Search: React.FC<Props> = ({
     const newProducts: ProductInfo[] = [];
 
     for (let i = 0; i < products.length; i++) {
-      if (Math.floor(i / perPage) === page - 1) {
-        newProducts.push(products[i])
+      if (currentPage) {
+        if (Math.floor(i / perPage) === +currentPage - 1) {
+          newProducts.push(products[i])
+        }
       }
     }
     
@@ -72,9 +74,10 @@ export const Search: React.FC<Props> = ({
             className="search__heading"
           >
             Результати:&nbsp;
-            {currentPage && ` ${perPage * (page - 1) + 1}
-          - ${page === pagesToDisplay ? total : (page - 1) * perPage + perPage}
-          з ${total}`}
+            {currentPage && ` ${perPage * (+currentPage - 1) + 1}
+              - ${+currentPage === pagesToDisplay ? total : (+currentPage - 1) * perPage + perPage}
+              з ${total}`
+            }
           </h3>
 
           <div className="search__pageSelector">
