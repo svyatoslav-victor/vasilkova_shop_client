@@ -34,8 +34,8 @@ type Props = {
   setDynamicQuery: Dispatch<SetStateAction<string>>,
   goToSearch: () => void,
   productCount: number,
-  displayFilters: boolean,
-  displayMenu: boolean,
+  showFilters: boolean,
+  showMenu: boolean,
   setShowFilters: Dispatch<SetStateAction<boolean>>,
   toggleFilters: () => void,
   toggleMenu: () => void,
@@ -134,8 +134,8 @@ export const Header: React.FC<Props> = ({
   setDynamicQuery,
   goToSearch,
   productCount,
-  displayFilters,
-  displayMenu,
+  showFilters,
+  showMenu,
   setShowFilters,
   toggleFilters,
   toggleMenu,
@@ -307,25 +307,25 @@ export const Header: React.FC<Props> = ({
   }, [filters])
 
   return (
-    <div className='header'>
+    <>
       <div
-        className='header__mobile'
+        className='menu__mobile'
         style={{
-          width: isMobile < 1024 && isMobile > 760 ? "50vw" : "90vw",
-          left: displayMenu ? "0" : "-100vw",
-          opacity: displayMenu ? "1" : "0"
+          width: isMobile <= 1024 && isMobile > 760 ? "50vw" : "90vw",
+          left: showMenu ? "0" : "-100vw",
+          opacity: showMenu ? "1" : "0"
         }}
         onClick={(event) => {
           event.stopPropagation()
-          displayFilters && toggleFilters()
+          showFilters && toggleFilters()
         }}
       >
-        <div className='header__mobile_nav'>
+        <div className='menu__mobile_nav'>
           <div
-            className='header__mobile_nav_heading'
+            className='menu__mobile_nav_heading'
           >
             <div
-              className='header__mobile_nav_heading_logo'
+              className='menu__mobile_nav_heading_logo'
             >
               <Link
                 to={'/vasilkova_shop_client'}
@@ -338,11 +338,11 @@ export const Header: React.FC<Props> = ({
               </Link>
             </div>
 
-            <div className='header__mobile_nav_heading_menu'
+            <div className='menu__mobile_nav_heading_menu'
               onClick={toggleMenu}
             >
               <img
-                className='header__mobile_nav_heading_menu--icon'
+                className='menu__mobile_nav_heading_menu--icon'
                 src={menuOpen}
                 alt="/"
                 style={{
@@ -352,19 +352,19 @@ export const Header: React.FC<Props> = ({
             </div>
           </div>
 
-          <div className='header__mobile_nav_filters'
+          <div className='menu__mobile_nav_filters'
             onClick={toggleFilters}
           >
             <img
-              className='header__mobile_nav_filters--icon'
+              className='menu__mobile_nav_filters--icon'
               src={filter}
               alt="/"
             />
 
             <div
-              className='header__mobile_nav_filters_list'
+              className='menu__mobile_nav_filters_list'
               style={{
-                visibility: displayFilters ? 'visible' : 'collapse'
+                visibility: showFilters ? 'visible' : 'collapse'
               }}
               onClick={(event) => event.stopPropagation()}
             >
@@ -595,25 +595,25 @@ export const Header: React.FC<Props> = ({
           </div>
 
           <h3
-            className='header__mobile_nav_catalogue'
+            className='menu__mobile_nav_catalogue'
           >
             КАТАЛОГ
           </h3>
 
           <ul
-            className='header__mobile_nav_categories'
+            className='menu__mobile_nav_categories'
           >
             {productGroups.map(category => (
               <li
-                className='header__mobile_nav_categories_item'
+                className='menu__mobile_nav_categories_item'
                 key={category.name}
                 onClick={() => setCategoryName(category.name)}
               >
                 <div
-                  className="header__mobile_nav_categories_item_controls"
+                  className="menu__mobile_nav_categories_item_controls"
                 >
                   <NavLink
-                    className="header__mobile_nav_categories_item_controls--link"
+                    className="menu__mobile_nav_categories_item_controls--link"
                     to={`/vasilkova_shop_client/${category.name.toLowerCase()}`}
                     style={{
                       fontWeight: areTypesVisible && categoryName === category.name ? "bold" : "normal"
@@ -626,7 +626,7 @@ export const Header: React.FC<Props> = ({
                   {category.types.length > 0 &&
                     (
                       <div
-                        className='header__mobile_nav_categories_item_controls--toggleTypes'
+                        className='menu__mobile_nav_categories_item_controls--toggleTypes'
                         onClick={() => {
                           setAreTypesVisible(categoryName === category.name ? false : true)
                         }}
@@ -650,7 +650,7 @@ export const Header: React.FC<Props> = ({
 
                 {category.types.length > 0 && (
                   <ul
-                    className='header__mobile_nav_categories_item_types'
+                    className='menu__mobile_nav_categories_item_types'
                     style={{
                       display: areTypesVisible && categoryName === category.name ? 'block' : 'none'
                     }}
@@ -659,14 +659,14 @@ export const Header: React.FC<Props> = ({
                       types.name === categoryName && (
                         types!.types!.map(type => (
                           <li
-                            className='header__mobile_nav_categories_item_types_type'
+                            className='menu__mobile_nav_categories_item_types_type'
                             key={type.name}
                             onClick={() => {
                               toggleMenu()
                             }}
                           >
                             <NavLink
-                              className="header__mobile_nav_categories_item_types_type--link"
+                              className="menu__mobile_nav_categories_item_types_type--link"
                               to={`/vasilkova_shop_client/${categoryName.toLowerCase()}/${type.name.toLowerCase()}`}
                               onClick={toggleMenu}
                             >
@@ -683,44 +683,44 @@ export const Header: React.FC<Props> = ({
           </ul>
 
           <div
-            className='header__mobile_nav_contact'
+            className='menu__mobile_nav_contact'
           >
             <h3
-              className='header__mobile_nav_contact_heading'
+              className='menu__mobile_nav_contact_heading'
             >
               Контакти
             </h3>
 
-            <div className='header__mobile_nav_contact_wrapper'>
+            <div className='menu__mobile_nav_contact_wrapper'>
               <img
-                className='header__mobile_nav_contact_wrapper--image'
+                className='menu__mobile_nav_contact_wrapper--image'
                 src={location}
                 alt="/"
               />
               <p>Одеса, вул. Приморська, 18</p>
             </div>
 
-            <div className='header__mobile_nav_contact_wrapper'>
+            <div className='menu__mobile_nav_contact_wrapper'>
               <img
-                className='header__mobile_nav_contact_wrapper--image'
+                className='menu__mobile_nav_contact_wrapper--image'
                 src={phone}
                 alt="/"
               />
               <a href="tel:+380504932903">+38 050 493 29 03</a>
             </div>
 
-            <div className='header__mobile_nav_contact_wrapper'>
+            <div className='menu__mobile_nav_contact_wrapper'>
               <img
-                className='header__mobile_nav_contact_wrapper--image'
+                className='menu__mobile_nav_contact_wrapper--image'
                 src={email}
                 alt="/"
               />
               <a href="mailto:spetsuha.odessa@gmail.com">spetsuha.odessa@gmail.com</a>
             </div>
 
-            <div className='header__mobile_nav_contact_wrapper'>
+            <div className='menu__mobile_nav_contact_wrapper'>
               <img
-                className='header__mobile_nav_contact_wrapper--image'
+                className='menu__mobile_nav_contact_wrapper--image'
                 src={web}
                 alt="/"
               />
@@ -730,486 +730,154 @@ export const Header: React.FC<Props> = ({
         </div>
       </div>
 
-      <div className='header__main'>
-        <div className='header__main_nav'>
-          <div
-            className='header__main_nav_logo'
-          >
-            <Link
-              to={'/vasilkova_shop_client'}
-              onClick={()=> {
-                setQuery('')
-                setDynamicQuery('')
-              }}
+      <div className='header'>
+        <div className='header__main'>
+          <div className='header__main_nav'>
+            <div
+              className='header__main_nav_logo'
             >
-              <img src={logo} alt="/" />
-            </Link>
-          </div>
-
-          {isMobile < 1024 && 
-            (
-              <div className='header__main_nav_menu'
-                onClick={() => {
-                  toggleMenu();
+              <Link
+                to={'/vasilkova_shop_client'}
+                onClick={()=> {
+                  setQuery('')
+                  setDynamicQuery('')
                 }}
               >
-                <img
-                  className='header__main_nav_menu--icon'
-                  src={menuClosed}
-                  alt="/"
-                  style={{
-                  width: '1.5em'
+                <img src={logo} alt="/" />
+              </Link>
+            </div>
+
+            {isMobile <= 1024 &&
+              (
+                <div className='header__main_nav_menu'
+                  onClick={() => {
+                    toggleMenu();
                   }}
-                />
-              </div>
-            )
-          }
-        </div>
-
-        <div
-          className='header__main_search'
-        >
-          <input
-            className='header__main_search--searchBar'
-            type="search"
-            value={query}
-            placeholder='Я шукаю...'
-            onChange={handleQueryChange}
-            onKeyDown={(event) => {
-              event.key === 'Enter' && goToSearch();
-            }}
-          />
-
-          <button
-            className='header__main_search--searchButton'
-            type='submit'
-            onClick={goToSearch}
-            >
-              <img
-                className='header__main_search--searchButton--icon'
-                src={searchIcon}
-                alt="/"
-              />
-          </button>
-
-          <div
-            className={isMobile > 1024? 'header__main_search--preview' : 'header__main_search_mobile--preview'}
-          >
-            {dynamicQuery.length === 0
-              ? null
-              : (
-                previewSearch.length > 0
-                  ? (
-                    previewSearch.map((item: ProductInfo) => (
-                      <div
-                        key={item.productId}
-                        className='header__main_search--preview_link'
-                        onClick={() => {
-                          navigate({
-                            pathname: `/vasilkova_shop_client/${item.category.toLocaleLowerCase()}/${item.productType.toLocaleLowerCase()}/${item.productId}`,
-                          })
-                          setDynamicQuery('')
-                        }}
-                      >
-                        <div
-                          style={{
-                            width: '3em',
-                            height: '3em'
-                          }}
-                        >
-                          <img
-                            src={`${process.env.REACT_APP_FILE_STORAGE}${item.images![0]}`} alt="/"
-                            style={{
-                              width: '100%',
-                              height: '100%'
-                            }}
-                          />
-                        </div>
-                        <div>{item.name}</div>
-                      </div>
-                    ))
-                  )
-                  : <div>{hasLoaded ? 'Співпаданнь не знайдено :(' : 'Шукаємо...'}</div>
+                >
+                  <img
+                    className='header__main_nav_menu--icon'
+                    src={menuClosed}
+                    alt="/"
+                    style={{
+                    width: '1.5em'
+                    }}
+                  />
+                </div>
               )
             }
           </div>
-        </div>
 
-        {isMobile > 600
-          ? (
-              <div className='header__main_phones'>
-                <div className='header__main_phones_numbers'>
+          <div
+            className='header__main_search'
+          >
+            <input
+              className='header__main_search--searchBar'
+              type="search"
+              value={query}
+              placeholder='Я шукаю...'
+              onChange={handleQueryChange}
+              onKeyDown={(event) => {
+                event.key === 'Enter' && goToSearch();
+              }}
+            />
+
+            <button
+              className='header__main_search--searchButton'
+              type='submit'
+              onClick={goToSearch}
+              >
+                <img
+                  className='header__main_search--searchButton--icon'
+                  src={searchIcon}
+                  alt="/"
+                />
+            </button>
+
+            <div
+              className={isMobile >= 1024? 'header__main_search--preview' : 'header__main_search_mobile--preview'}
+            >
+              {dynamicQuery.length === 0
+                ? null
+                : (
+                  previewSearch.length > 0
+                    ? (
+                      previewSearch.map((item: ProductInfo) => (
+                        <div
+                          key={item.productId}
+                          className='header__main_search--preview_link'
+                          onClick={() => {
+                            navigate({
+                              pathname: `/vasilkova_shop_client/${item.category.toLocaleLowerCase()}/${item.productType.toLocaleLowerCase()}/${item.productId}`,
+                            })
+                            setDynamicQuery('')
+                          }}
+                        >
+                          <div
+                            style={{
+                              width: '3em',
+                              height: '3em'
+                            }}
+                          >
+                            <img
+                              src={`${process.env.REACT_APP_FILE_STORAGE}${item.images![0]}`} alt="/"
+                              style={{
+                                width: '100%',
+                                height: '100%'
+                              }}
+                            />
+                          </div>
+                          <div>{item.name}</div>
+                        </div>
+                      ))
+                    )
+                    : <div>{hasLoaded ? 'Співпаданнь не знайдено :(' : 'Шукаємо...'}</div>
+                )
+              }
+            </div>
+          </div>
+
+          {isMobile > 600
+            ? (
+                <div className='header__main_phones'>
+                  <div className='header__main_phones_numbers'>
+                    <a
+                      href="tel:+380504932903"
+                      className='header__main_phones_numbers--number'
+                    >
+                      +38 050 493 29 03
+                    </a>
+                  </div>
+
+                  <div
+                    className='header__main_phones_icon'
+                    style={{
+                      backgroundImage: `url(${phone})`
+                    }}
+                  >
+                  </div>
+                </div>
+              )
+            : (
+                <div
+                  className='header__main_phone'
+                  style={{
+                    backgroundImage: `url(${phone})`,
+                  }}
+                >
                   <a
                     href="tel:+380504932903"
                     className='header__main_phones_numbers--number'
-                  >
-                    +38 050 493 29 03
-                  </a>
+                    style={{
+                      display: "block",
+                      width: "1.5em",
+                      height: "1.5em"
+                    }}
+                  />
                 </div>
+              )
+          }
 
-                <div
-                  className='header__main_phones_icon'
-                  style={{
-                    backgroundImage: `url(${phone})`
-                  }}
-                >
-                </div>
-              </div>
-            )
-          : (
-              <div
-                className='header__main_phone'
-                style={{
-                  backgroundImage: `url(${phone})`,
-                }}
-              >
-                <a
-                  href="tel:+380504932903"
-                  className='header__main_phones_numbers--number'
-                  style={{
-                    display: "block",
-                    width: "1.5em",
-                    height: "1.5em"
-                  }}
-                />
-              </div>
-            )
-        }
-
-        {isMobile < 1024 && <div
-          className='header__nav_miniCart'
-        >
-          <span
-            className='header__nav_miniCart--count'
-          >
-            {productCount}
-          </span>
-          
-          <div
-            className='header__nav_miniCart_cart'
-            onClick={toggleMiniCart}
-          >
-            <img
-              className='header__nav_miniCart_cart--icon'
-              src={productCount === 0 ? cartIcon : cartIconFull}
-              alt="/"
-            />
-          </div>
-        </div>}
-      </div>
-
-      {isMobile > 1024 && <div className='header__space' />}
-
-      {isMobile > 1024 && (
-        <div
-          className='header__nav'
-          onMouseLeave={() => {
-            setCategoryName('')
-            setAreTypesVisible(false)
-          }}
-        >
-          <ul
-            className='header__nav_categories'
-          >
-            <div
-              className='header__nav_categories_filter'
-              onClick={toggleFilters}
-            >
-              <img
-                className='header__nav_categories_filter--image'
-                src={filter}
-                alt="/"
-              />
-
-              <div
-                className='header__nav_categories_filter--filterList'
-                style={{
-                  visibility: displayFilters ? 'visible' : 'collapse'
-                }}
-                onClick={(event) => event.stopPropagation()}
-              >
-                <div className='filters__container'>
-                  <div className="filters__container_group">
-                    <p
-                      className='filters__container_group_name'
-                    >
-                      Ціна
-                    </p>
-
-                    <div
-                      className="filters__container_group_items"
-                    >
-                      <div
-                        className="filters__container_group_items--item"
-                        data-sortorder='lowToHigh'
-                        onClick={handleSort}
-                      >
-                        <p
-                          className='filters__container_group_items--item_name'
-                          data-sortorder='lowToHigh'
-                          style={{
-                            fontWeight: filters.tags.price.lowToHigh ? '500' : '200',
-                          }}
-                        >
-                          За зростанням
-                        </p>
-                      </div>
-
-                      <div
-                        className="filters__container_group_items--item"
-                        data-sortorder='highToLow'
-                        onClick={handleSort}
-                      >
-                        <p
-                          className='filters__container_group_items--item_name'
-                          data-sortorder='highToLow'
-                          style={{
-                            fontWeight: filters.tags.price.highToLow ? '500' : '200',
-                          }}
-                        >
-                          За спаданням
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    className='filters__container_group'
-                  >
-                    <p
-                      id='brands'
-                      className='filters__container_group_name'
-                      onClick={toggleFilterOptions}
-                    >
-                      Бренд &nbsp;{displayFilterOptions.brands
-                        ? <span>&#8793;</span>
-                        : <span>&#8794;</span>
-                      }
-                    </p>
-
-                    <div
-                      className='filters__container_group_items'
-                      style={{
-                        display: displayFilterOptions.brands ? 'grid' : 'none'
-                      }}
-                    >
-                      {productBrands.map((brand: Brand) => (
-                        <div
-                          className='filters__container_group_items--item'
-                          data-name={brand.value}
-                          key={brand.value}
-                          onClick={(event) => {handleFilterChange(event, 'brand')}}
-                        >
-                          <p
-                            className='filters__container_group_items--item_name'
-                            data-name={brand.value}
-                            style={{
-                              fontWeight: filters.tags.brand[brand.value] ? '500' : '200'
-                            }}
-                          >
-                            {brand.value}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {productGroups.map((group: ProductGroup) => (
-                    group.types.length > 0 && (
-                      <div
-                        className='filters__container_group'
-                        key={group.name}
-                      >
-                        <p
-                          id={group.name}
-                          className='filters__container_group_name'
-                          onClick={toggleFilterOptions}
-                        >
-                          {group.nameUA.charAt(0).toUpperCase() + group.nameUA.slice(1)} &nbsp;
-                          {displayFilterOptions[group.name] ? <span>&#8793;</span> : <span>&#8794;</span>}
-                        </p>
-
-                        <div
-                          className='filters__container_group_items'
-                          style={{
-                            display: displayFilterOptions[group.name] ? 'grid' : 'none'
-                          }}
-                        >
-                          {group.types.map((productType: ProductType) => (
-                            <div
-                              className='filters__container_group_items--item'
-                              data-name={productType.name}
-                              key={productType.name}
-                              onClick={(event) => {handleFilterChange(event, 'productType')}}
-                            >
-                              <p
-                                className='filters__container_group_items--item_name'
-                                data-name={productType.name}
-                                style={{
-                                  fontWeight: filters.tags.productType[productType.name] ? '500' : '200'
-                                }}
-                              >
-                                {productType.nameUA.charAt(0).toUpperCase() + productType.nameUA.slice(1)}
-                              </p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )
-                  ))}
-
-                  <div className='filters__container_group'>
-                    <p
-                      id='colors'
-                      className='filters__container_group_name'
-                      onClick={toggleFilterOptions}
-                    >
-                      Колір &nbsp;{displayFilterOptions.colors ? <span>&#8793;</span> : <span>&#8794;</span>}
-                    </p>
-
-                    <div
-                      className='filters__container_group_items'
-                      style={{
-                        display: displayFilterOptions.colors ? 'grid' : 'none'
-                      }}
-                    >
-                      {productColors.map((color: Color) => (
-                        <div
-                          className='filters__container_group_items--item'
-                          key={color.hex}
-                          data-name={color.hex}
-                          onClick={(event) => {handleFilterChange(event, 'color')}}
-                        >
-                          <div
-                            className='filters__container_group_items--item_color'
-                            style={{
-                              background: `${color.hex}`,
-                            }}
-                          />
-
-                          <p
-                            className='filters__container_group_items--item_name'
-                            data-name={color.hex}
-                            style={{
-                              fontWeight: filters.tags.color[color.hex] ? '500' : '200'
-                            }}
-                          >
-                            {color.valueUA}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div
-                    className='filters__container_group'
-                  >
-                    <p
-                      id='winter'
-                      className='filters__container_group_name'
-                      onClick={toggleFilterOptions}
-                    >
-                      Зимовий одяг &nbsp;{displayFilterOptions.winter ? <span>&#8793;</span> : <span>&#8794;</span>}
-                    </p>
-
-                    <div
-                      className='filters__container_group_items'
-                      style={{
-                        display: displayFilterOptions.winter ? 'grid' : 'none'
-                      }}
-                    >
-                      <div
-                        className='filters__container_group_items--item'
-                        data-name='winter'
-                        onClick={(event) => {handleFilterChange(event, 'keywords')}}
-                      >
-                        <p
-                          className='filters__container_group_items--item_name'
-                          data-name='winter'
-                          style={{
-                            fontWeight: filters.tags.keywords.winter ? '500' : '200'
-                          }}
-                        >
-                          Зима
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className='filters__buttons'>
-                  <button
-                    className='filters__buttons_button'
-                    onClick={goToFilter}
-                  >
-                    Фільтр ({filteredProducts.length})
-                  </button>
-
-                  <button
-                    className='filters__buttons_button'
-                    onClick={resetFilters}
-                  >
-                    Скинути
-                  </button>
-                </div>
-              </div>
-            </div>
-            {productGroups.map(category => (
-              <li
-                className='header__nav_categories_item'
-                key={category.name}
-                onClick={() => setCategoryName(category.name)}
-                onMouseEnter={() => {
-                  setCategoryName(category.name)
-                  setAreTypesVisible(true)
-                }}
-              >
-                <NavLink
-                  className="header__nav_categories_item--navLink"
-                  to={`/vasilkova_shop_client/${category.name.toLowerCase()}`}
-                  onClick={() => setAreTypesVisible(false)}
-                >
-                  {category.nameUA.split('_').join(' ').toUpperCase()}
-                </NavLink>
-
-                <span
-                  className='header__nav_categories_item--underline'
-                  style={{
-                    visibility: category.name === categoryName && areTypesVisible ? 'visible' : 'collapse'
-                  }}
-                />
-
-                <ul
-                  className='header__nav_categories_item_types'
-                  style={{
-                    visibility: category.name === categoryName && areTypesVisible ? 'visible' : 'collapse'
-                  }}
-                  onMouseLeave={() => {
-                    setCategoryName('')
-                    setAreTypesVisible(false)
-                  }}
-                >
-                  {category.types.length > 0 && category.types.map((type: ProductType) => (
-                    <li
-                      className='header__nav_categories_item_types_type'
-                      key={type.name}
-                      onClick={() => setCategoryName('')}
-                    >
-                      <Link
-                        className="header__nav_categories_item_types_type--link"
-                        to={`/vasilkova_shop_client/${categoryName.toLowerCase()}/${type.name.toLowerCase()}`}
-                        onClick={() => setAreTypesVisible(false)}
-                      >
-                        {type.nameUA.split('_').join(' ').toUpperCase()}
-                      </Link>
-                  </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ul>
-
-          <div
+          {isMobile <= 1024 && <div
             className='header__nav_miniCart'
           >
             <span
@@ -1228,9 +896,348 @@ export const Header: React.FC<Props> = ({
                 alt="/"
               />
             </div>
-          </div>
+          </div>}
         </div>
-      )}
-    </div>
+
+        {isMobile >= 1024 && <div className='header__space' />}
+
+        {isMobile >= 1024 && (
+          <div
+            className='header__nav'
+            onMouseLeave={() => {
+              setCategoryName('')
+              setAreTypesVisible(false)
+            }}
+          >
+            <ul
+              className='header__nav_categories'
+            >
+              <div
+                className='header__nav_categories_filter'
+                onClick={toggleFilters}
+              >
+                <img
+                  className='header__nav_categories_filter--image'
+                  src={filter}
+                  alt="/"
+                />
+
+                <div
+                  className='header__nav_categories_filter--filterList'
+                  style={{
+                    transform: showFilters ? 'scaleY(1)' : 'scaleY(0)',
+                    transformOrigin: 'top',
+                    transition: 'transform 0.3s ease-in-out'
+                  }}
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  <div className='filters__container'>
+                    <div className="filters__container_group">
+                      <p
+                        className='filters__container_group_name'
+                      >
+                        Ціна
+                      </p>
+
+                      <div
+                        className="filters__container_group_items"
+                      >
+                        <div
+                          className="filters__container_group_items--item"
+                          data-sortorder='lowToHigh'
+                          onClick={handleSort}
+                        >
+                          <p
+                            className='filters__container_group_items--item_name'
+                            data-sortorder='lowToHigh'
+                            style={{
+                              color: filters.tags.price.lowToHigh ? 'white' : 'black',
+                            }}
+                          >
+                            За зростанням
+                          </p>
+                        </div>
+
+                        <div
+                          className="filters__container_group_items--item"
+                          data-sortorder='highToLow'
+                          onClick={handleSort}
+                        >
+                          <p
+                            className='filters__container_group_items--item_name'
+                            data-sortorder='highToLow'
+                            style={{
+                              color: filters.tags.price.highToLow ? 'white' : 'black',
+                            }}
+                          >
+                            За спаданням
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      className='filters__container_group'
+                    >
+                      <p
+                        id='brands'
+                        className='filters__container_group_name'
+                        onClick={toggleFilterOptions}
+                      >
+                        Бренд &nbsp;{displayFilterOptions.brands
+                          ? <span>&#8793;</span>
+                          : <span>&#8794;</span>
+                        }
+                      </p>
+
+                      <div
+                        className='filters__container_group_items'
+                        style={{
+                          display: displayFilterOptions.brands ? 'grid' : 'none'
+                        }}
+                      >
+                        {productBrands.map((brand: Brand) => (
+                          <div
+                            className='filters__container_group_items--item'
+                            data-name={brand.value}
+                            key={brand.value}
+                            onClick={(event) => {handleFilterChange(event, 'brand')}}
+                          >
+                            <p
+                              className='filters__container_group_items--item_name'
+                              data-name={brand.value}
+                              style={{
+                                color: filters.tags.brand[brand.value] ? 'white' : 'black'
+                              }}
+                            >
+                              {brand.value}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {productGroups.map((group: ProductGroup) => (
+                      group.types.length > 0 && (
+                        <div
+                          className='filters__container_group'
+                          key={group.name}
+                        >
+                          <p
+                            id={group.name}
+                            className='filters__container_group_name'
+                            onClick={toggleFilterOptions}
+                          >
+                            {group.nameUA.charAt(0).toUpperCase() + group.nameUA.slice(1)} &nbsp;
+                            {displayFilterOptions[group.name] ? <span>&#8793;</span> : <span>&#8794;</span>}
+                          </p>
+
+                          <div
+                            className='filters__container_group_items'
+                            style={{
+                              display: displayFilterOptions[group.name] ? 'grid' : 'none'
+                            }}
+                          >
+                            {group.types.map((productType: ProductType) => (
+                              <div
+                                className='filters__container_group_items--item'
+                                data-name={productType.name}
+                                key={productType.name}
+                                onClick={(event) => {handleFilterChange(event, 'productType')}}
+                              >
+                                <p
+                                  className='filters__container_group_items--item_name'
+                                  data-name={productType.name}
+                                  style={{
+                                    color: filters.tags.productType[productType.name] ? 'white' : 'black'
+                                  }}
+                                >
+                                  {productType.nameUA.charAt(0).toUpperCase() + productType.nameUA.slice(1)}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )
+                    ))}
+
+                    <div className='filters__container_group'>
+                      <p
+                        id='colors'
+                        className='filters__container_group_name'
+                        onClick={toggleFilterOptions}
+                      >
+                        Колір &nbsp;{displayFilterOptions.colors ? <span>&#8793;</span> : <span>&#8794;</span>}
+                      </p>
+
+                      <div
+                        className='filters__container_group_items'
+                        style={{
+                          display: displayFilterOptions.colors ? 'grid' : 'none'
+                        }}
+                      >
+                        {productColors.map((color: Color) => (
+                          <div
+                            className='filters__container_group_items--item'
+                            key={color.hex}
+                            data-name={color.hex}
+                            onClick={(event) => {handleFilterChange(event, 'color')}}
+                          >
+                            <div
+                              className='filters__container_group_items--item_color'
+                              style={{
+                                background: `${color.hex}`,
+                              }}
+                            />
+
+                            <p
+                              className='filters__container_group_items--item_name'
+                              data-name={color.hex}
+                              style={{
+                                color: filters.tags.color[color.hex] ? 'white' : 'black'
+                              }}
+                            >
+                              {color.valueUA}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div
+                      className='filters__container_group'
+                    >
+                      <p
+                        id='winter'
+                        className='filters__container_group_name'
+                        onClick={toggleFilterOptions}
+                      >
+                        Зимовий одяг &nbsp;{displayFilterOptions.winter ? <span>&#8793;</span> : <span>&#8794;</span>}
+                      </p>
+
+                      <div
+                        className='filters__container_group_items'
+                        style={{
+                          display: displayFilterOptions.winter ? 'grid' : 'none'
+                        }}
+                      >
+                        <div
+                          className='filters__container_group_items--item'
+                          data-name='winter'
+                          onClick={(event) => {handleFilterChange(event, 'keywords')}}
+                        >
+                          <p
+                            className='filters__container_group_items--item_name'
+                            data-name='winter'
+                            style={{
+                              color: filters.tags.keywords.winter ? 'white' : 'black'
+                            }}
+                          >
+                            Зима
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className='filters__buttons'>
+                    <button
+                      className='filters__buttons_button'
+                      onClick={goToFilter}
+                    >
+                      Фільтр ({filteredProducts.length})
+                    </button>
+
+                    <button
+                      className='filters__buttons_button'
+                      onClick={resetFilters}
+                    >
+                      Скинути
+                    </button>
+                  </div>
+                </div>
+              </div>
+              {productGroups.map(category => (
+                <li
+                  className='header__nav_categories_item'
+                  key={category.name}
+                  onClick={() => setCategoryName(category.name)}
+                  onMouseEnter={() => {
+                    setCategoryName(category.name)
+                    setAreTypesVisible(true)
+                  }}
+                >
+                  <NavLink
+                    className="header__nav_categories_item--navLink"
+                    to={`/vasilkova_shop_client/${category.name.toLowerCase()}`}
+                    onClick={() => setAreTypesVisible(false)}
+                  >
+                    {category.nameUA.split('_').join(' ').toUpperCase()}
+                  </NavLink>
+
+                  <span
+                    className='header__nav_categories_item--underline'
+                    style={{
+                      width: category.name === categoryName && areTypesVisible ? '100%' : '0',
+                      transition: 'width 0.3s ease-in-out'
+                    }}
+                  />
+
+                  <ul
+                    className='header__nav_categories_item_types'
+                    style={{
+                      transform: category.name === categoryName && areTypesVisible ? 'scaleY(1)' : 'scaleY(0)',
+                      transformOrigin: 'top',
+                      transition: 'transform 0.3s ease-in-out'
+                    }}
+                    onMouseLeave={() => {
+                      setCategoryName('')
+                      setAreTypesVisible(false)
+                    }}
+                  >
+                    {category.types.length > 0 && category.types.map((type: ProductType) => (
+                      <li
+                        className='header__nav_categories_item_types_type'
+                        key={type.name}
+                        onClick={() => setCategoryName('')}
+                      >
+                        <Link
+                          className="header__nav_categories_item_types_type--link"
+                          to={`/vasilkova_shop_client/${categoryName.toLowerCase()}/${type.name.toLowerCase()}`}
+                          onClick={() => setAreTypesVisible(false)}
+                        >
+                          {type.nameUA.split('_').join(' ').toUpperCase()}
+                        </Link>
+                    </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+
+            <div
+              className='header__nav_miniCart'
+            >
+              <span
+                className='header__nav_miniCart--count'
+              >
+                {productCount}
+              </span>
+              
+              <div
+                className='header__nav_miniCart_cart'
+                onClick={toggleMiniCart}
+              >
+                <img
+                  className='header__nav_miniCart_cart--icon'
+                  src={productCount === 0 ? cartIcon : cartIconFull}
+                  alt="/"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   )
 }

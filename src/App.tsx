@@ -403,8 +403,8 @@ export const App: React.FC = () => {
 
       <div
         className={classNames({
-          'app__overlay-visible': showMiniCart || showImageView,
-          'app__overlay-hidden': !showMiniCart || !showImageView,
+          'app__overlay-visible': showMiniCart || showImageView || showMenu,
+          'app__overlay-hidden': !showMiniCart || !showImageView || !showMenu,
         })}
       >
       </div>
@@ -465,9 +465,9 @@ export const App: React.FC = () => {
           dynamicQuery={dynamicQuery}
           setDynamicQuery={setDynamicQuery}
           productCount={productCount}
-          displayFilters={showFilters}
+          showFilters={showFilters}
           setShowFilters={setShowFilters}
-          displayMenu={showMenu}
+          showMenu={showMenu}
           toggleFilters={toggleFilters}
           toggleMenu={toggleMenu}
           toggleMiniCart={toggleMiniCart}

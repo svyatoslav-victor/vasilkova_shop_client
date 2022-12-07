@@ -237,16 +237,27 @@
           font-size: 1.5em;
           font-weight: bold;
           padding: 0.5em;
-          background-color: rgba(255, 255, 0, 0.675);
+          background-color: $button-color-fuchsia;
+          border: none;
+          outline: 1px solid black;
+          border-radius: 10px;
           cursor: pointer;
-        }
+          transition: background-color 0.3s ease-in-out;
 
-        &:hover {
-          background-color: yellow;
-        }
+          &:disabled {
+            background-color: gray;
+            transition: background-color 0.3s ease-in-out;
+          }
 
-        &:active {
-          background-color: blue;
+          &:hover {
+            background-color: $background-2;
+            transition: background-color 0.3s ease-in-out;
+          }
+  
+          &:active {
+            background-color: $background;
+            transition: background-color 0.3s ease-in-out;
+          }
         }
       }
     }

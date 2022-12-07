@@ -78,19 +78,24 @@
               }
 
               &_confirmAddress {
-                border: 1px dotted black;
-                background-color: transparent;
+                border: none;
+                outline: 1px dotted black;
+                background-color: $button-color-fuchsia;
+                border-radius: 10px;
                 padding: 0.5em;
                 font-size: 0.8em;
                 font-weight: 700;
                 cursor: pointer;
+                transition: background-color 0.3s ease-in-out;
 
                 &:hover {
-                  background-color: rgba(127, 255, 212, 0.244);
+                  background-color: $background-2;
+                  transition: background-color 0.3s ease-in-out;
                 }
 
                 &:active {
-                  background-color: aquamarine;
+                  background-color: $background;
+                  transition: background-color 0.3s ease-in-out;
                 }
               }
             }
@@ -118,15 +123,21 @@
                 text-align: center;
                 font-size: 0.8em;
                 font-weight: 700;
-                border: 1px dotted black;
+                border: none;
+                outline: 1px solid black;
+                background-color: $button-color-fuchsia;
+                border-radius: 10px;
                 cursor: pointer;
+                transition: background-color 0.3s ease-in-out;
 
                 &:hover {
-                  background-color: rgba(127, 255, 212, 0.244);
+                  background-color: $background-2;
+                  transition: background-color 0.3s ease-in-out;
                 }
 
                 &:active {
-                  background-color: aquamarine;
+                  background-color: $background;
+                  transition: background-color 0.3s ease-in-out;
                 }
               }
             }
@@ -147,11 +158,26 @@
             padding: 0.5em;
             font-size: 1em;
             font-weight: 700;
-            background-color: yellow;
+            background-color: $button-color-fuchsia;
+            border: none;
+            outline: 1px solid black;
+            border-radius: 10px;
             cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+
+            &:disabled {
+              background-color: gray;
+              transition: background-color 0.3s ease-in-out;
+            }
+
+            &:hover {
+              background-color: $background-2;
+              transition: background-color 0.3s ease-in-out;
+            }
 
             &:active {
-              background-color: blue;
+              background-color: $background;
+              transition: background-color 0.3s ease-in-out;
             }
           }
         }

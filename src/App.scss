@@ -1,20 +1,22 @@
 @import './variables';
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(150, 150, 150);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(80, 80, 80);
+}
+
 body {
   font-family: Montserrat, Arial, sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-
-  // &::after {
-  //   content: "";
-  //   position: absolute;
-  //   top: 8.6em;
-  //   left: 0;
-  //   width: 100vw;
-  //   height: 0.5em;
-  //   background-color: aqua;
-  // }
 
   a, a:visited {
     color: black;
@@ -41,10 +43,16 @@ body {
 
 .app {
   height: 100vh;
+  // max-width: 1400px;
   display: grid;
   grid-template-columns: minmax(320px, 1400px);
   justify-content: center;
   overflow: overlay;
+  // background-color: white;
+  background: linear-gradient(
+    rgb(45, 185, 192) 8.6em,
+    white 8.5em 80%
+  );
 
   &__overlay-hidden {
     visibility: hidden;
@@ -56,7 +64,7 @@ body {
     z-index: 20;
     opacity: 0;
     overflow: hidden;
-    background-color: rgba(43, 42, 42, 0.486);
+    background-color: rgba(118, 189, 193, 0.326);
   }
   
   &__overlay-visible {
@@ -69,7 +77,19 @@ body {
     z-index: 20;
     opacity: 0.99;
     overflow: hidden;
-    background-color: rgba(43, 42, 42, 0.486);
+    background: rgba(118, 189, 193, 0.326);
+    backdrop-filter: blur(2px);
+    animation: opacity 0.3s ease-in-out;
+
+    @keyframes opacity {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 0.99;
+      }
+    }
   }
 
   .main {
@@ -103,14 +123,13 @@ body {
       width: 1.5em;
       height: 1.5em;
       font-size: 2em;
-      // text-align: center;
       display: flex;
       justify-content: center;
       align-items: center;
       border: none;
       border-radius: 20%;
       color: rgba(0, 0, 0, 0.678);
-      background-color: rgba(128, 128, 128, 0.438);
+      background-color: $button-color-fuchsia;
       cursor: pointer;
       opacity: 0.1;
       transition: opacity 1s ease-in-out,
@@ -118,7 +137,7 @@ body {
         background-color 1s ease-in-out;
 
       &:hover {
-        background-color: rgba(128, 128, 128, 0.645);
+        background-color: $background-2;
         color: black;
         transition: opacity 0.5s ease-in-out,
           color 0.5s ease-in-out,
@@ -126,7 +145,7 @@ body {
       }
 
       &:active {
-        background-color: yellow;
+        background-color: $background;
         color: black;
         transition: opacity 0.5s ease-in-out,
           color 0.5s ease-in-out,
@@ -138,6 +157,11 @@ body {
 
 @media screen and (max-width: 1024px) {
   .app {
+    background: linear-gradient(
+      rgb(45, 185, 192) 4em,
+      white 4em 80%
+    );
+
     .scrollToTop {
       top: 50vh;
       right: 5vw;
