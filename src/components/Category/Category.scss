@@ -30,19 +30,11 @@
     box-shadow: none;
     text-align: center;
     border-radius: 20px;
-    transition: color 0.5s ease-in-out,
-      box-shadow 0.5s ease-in-out;
+    transition: box-shadow 0.5s ease-in-out;
 
     &:hover {
-      color: lightblue;
-      transition: color 0.5s ease-in-out,
-        box-shadow 0.5s ease-in-out;
-        box-shadow: 0px 4px 35px rgb(41, 170, 177);
-    }
-
-    &:active {
-      color: darkblue;
-      transition: color 0.5s ease-in-out;
+      box-shadow: 0px 4px 35px rgb(41, 170, 177);
+      transition: box-shadow 0.5s ease-in-out;
     }
 
     &_wrapper {
@@ -58,6 +50,8 @@
 
       &--type {
         padding: 0.5em 0 1em;
+        color: rgb(0, 139, 146);
+        font-weight: 500;
       }
     }
   }

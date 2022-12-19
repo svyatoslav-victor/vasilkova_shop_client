@@ -187,8 +187,8 @@
       font-size: 1.2em;
       font-weight: bold;
       background-color: rgb(252, 48, 89);
-      border: none;
-      outline: 1px solid black;
+      border: 1px solid black;
+      outline: none;
       border-radius: 10px;
       cursor: pointer;
       transition: background-color 0.3s ease-in-out;
@@ -253,9 +253,10 @@
         padding: 0.5em;
         font-size: $font-mobile;
         font-weight: bold;
-        border: none;
-        outline: 1px solid black;
+        border: 1px solid black;
+        outline: none;
         background-color: $button-color-fuchsia;
+        border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.3s ease-in-out;
   

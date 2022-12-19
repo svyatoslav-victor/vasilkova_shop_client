@@ -28,10 +28,13 @@ export const Category: React.FC<Props> = ({ productTypes, productGroups, setProd
         >
           Додому
         </Link>
-        &nbsp; &#62; &nbsp;
+        &nbsp; / &nbsp;
         <Link
           className="links__navLink"
           to={`/vasilkova_shop_client/${categoryName!.toLowerCase()}`}
+          style={{
+            color: 'rgb(0, 139, 146)'
+          }}
         >
           {productGroups.find((group: ProductGroup) => (
             group.name === categoryName ? group.nameUA : ''

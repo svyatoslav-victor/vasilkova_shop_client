@@ -439,8 +439,9 @@
             font-size: 1.5em;
             font-weight: bold;
             padding: 0.5em;
-            background-color: rgba(255, 255, 0, 0.675);
+            background-color: $button-color-fuchsia;
             cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
           }
   
           &:hover {
@@ -448,7 +449,8 @@
           }
   
           &:active {
-            background-color: blue;
+            background-color: $background;
+            transition: background-color 0.3s ease-in-out;
           }
         }
       }

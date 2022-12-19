@@ -251,26 +251,27 @@ export const MiniCart: React.FC<Props> = ({
           opacity: productCount === 0 ? '0' : '1'
         }}
       >
-        <Link
-          to={'vasilkova_shop_client/cart'}
+        <button
+          className="minicart__buttons_button"
+          onClick={toggleMiniCart}
         >
-          <button
-            className="minicart__buttons_button"
-            onClick={toggleMiniCart}
+          <Link
+            to={'vasilkova_shop_client/cart'}
           >
             ПЕРЕЙТИ ДО КОШИКУ
-          </button>
-        </Link>
-        <Link
-          to={'vasilkova_shop_client/checkout'}
+          </Link>
+        </button>
+
+        <button
+          className="minicart__buttons_button"
+          onClick={toggleMiniCart}
         >
-          <button
-            className="minicart__buttons_button"
-            onClick={toggleMiniCart}
+          <Link
+            to={'vasilkova_shop_client/checkout'}
           >
             ОФОРМИТИ ЗАМОВЛЕННЯ
-          </button>
-        </Link>
+          </Link>
+        </button>
       </div>
     </div>
   )

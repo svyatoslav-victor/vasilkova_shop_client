@@ -60,7 +60,7 @@ export const Search: React.FC<Props> = ({
     }
     
     setProductsToDisplay(newProducts);
-  }, [products, perPage, page])
+  }, [products, perPage, page, currentPage])
 
   useEffect(() => {
     localStorage.setItem('perPage', paginationParams.perPage.toString())
@@ -114,7 +114,7 @@ export const Search: React.FC<Props> = ({
               <Link
                 className="goodsList__item"
                 key={product.productId}
-                to={`/vasilkova_shop_client/${product.category.toLocaleLowerCase()}/${product.productType.toLocaleLowerCase()}/${product.productId}`}
+                to={`/vasilkova_shop_client/${product.category.toLocaleLowerCase()}/${product.productType.toLocaleLowerCase().split(' ').join('_')}/${product.productId}`}
                 onClick={() => {
                   setProduct(products.find((good: ProductInfo) => (
                     good.productId === product.productId

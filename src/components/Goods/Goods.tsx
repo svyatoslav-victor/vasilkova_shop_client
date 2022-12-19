@@ -27,7 +27,7 @@ export const Goods: React.FC<Props> = ({
         >
           Додому
         </Link>
-        &nbsp; &#62; &nbsp;
+        &nbsp; / &nbsp;
         <Link
           className="links__navLink"
           to={`/vasilkova_shop_client/${categoryName.toLowerCase()}`}
@@ -36,10 +36,13 @@ export const Goods: React.FC<Props> = ({
             group.name === categoryName ? group.nameUA : ''
           ))!.nameUA}
         </Link>
-        &nbsp; &#62; &nbsp;
+        &nbsp; / &nbsp;
         <Link
           className="links__navLink"
           to={`/vasilkova_shop_client/${categoryName.toLowerCase()}/${type}`}
+          style={{
+            color: 'rgb(0, 139, 146)'
+          }}
         >
           {productGroups.find((group: ProductGroup) => (
             group.name === categoryName && group.nameUA
@@ -53,7 +56,7 @@ export const Goods: React.FC<Props> = ({
         ? (
           <div className="goodsList">
             {goodsList.map((product: ProductInfo) => (
-              product.productType.split(' ').join('_').toLowerCase() === type &&
+              product.productType.split(' ').join('_').toLowerCase() === type && // check categories & types in database!!!
                 <Link
                   key={product.productId}
                   className="goodsList__item"

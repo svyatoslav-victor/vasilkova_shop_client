@@ -141,7 +141,7 @@ export const Header: React.FC<Props> = ({
   toggleMenu,
   toggleMiniCart,
   isMobile,
-  paginationParams
+  paginationParams,
 }) => {
   const [hasLoaded, setHasLoaded] = useState<boolean>(false);
   const [filters, setFilters] = useState<Filter>(initialFilters);
@@ -320,38 +320,38 @@ export const Header: React.FC<Props> = ({
           showFilters && toggleFilters()
         }}
       >
-        <div className='menu__mobile_nav'>
+        <div
+          className='menu__mobile_heading'
+        >
           <div
-            className='menu__mobile_nav_heading'
+            className='menu__mobile_heading_logo'
           >
-            <div
-              className='menu__mobile_nav_heading_logo'
+            <Link
+              to={'/vasilkova_shop_client'}
+              onClick={()=> {
+                setQuery('')
+                toggleMenu()
+              }}
             >
-              <Link
-                to={'/vasilkova_shop_client'}
-                onClick={()=> {
-                  setQuery('')
-                  toggleMenu()
-                }}
-              >
-                <img src={logo} alt="/" />
-              </Link>
-            </div>
-
-            <div className='menu__mobile_nav_heading_menu'
-              onClick={toggleMenu}
-            >
-              <img
-                className='menu__mobile_nav_heading_menu--icon'
-                src={menuOpen}
-                alt="/"
-                style={{
-                  width: '1.5em',
-                }}
-              />
-            </div>
+              <img src={logo} alt="/" />
+            </Link>
           </div>
 
+          <div className='menu__mobile_heading_menu'
+            onClick={toggleMenu}
+          >
+            <img
+              className='menu__mobile_heading_menu--icon'
+              src={menuOpen}
+              alt="/"
+              style={{
+                width: '1.5em',
+              }}
+            />
+          </div>
+        </div>
+
+        <div className='menu__mobile_nav'>
           <div className='menu__mobile_nav_filters'
             onClick={toggleFilters}
           >
@@ -388,7 +388,7 @@ export const Header: React.FC<Props> = ({
                         className='mobile__filters_container_group_items--item_name'
                         data-sortorder='lowToHigh'
                         style={{
-                          fontWeight: filters.tags.price.lowToHigh ? '500' : '200',
+                          color: filters.tags.price.lowToHigh ? 'white' : 'black',
                         }}
                       >
                         За зростанням
@@ -404,7 +404,7 @@ export const Header: React.FC<Props> = ({
                         className='mobile__filters_container_group_items--item_name'
                         data-sortorder='highToLow'
                         style={{
-                          fontWeight: filters.tags.price.highToLow ? '500' : '200',
+                          color: filters.tags.price.highToLow ? 'white' : 'black'
                         }}
                       >
                         За спаданням
@@ -444,7 +444,7 @@ export const Header: React.FC<Props> = ({
                           className='mobile__filters_container_group_items--item_name'
                           data-name={brand.value}
                           style={{
-                            fontWeight: filters.tags.brand[brand.value] ? '500' : '200'
+                            color: filters.tags.brand[brand.value] ? 'white' : 'black'
                           }}
                         >
                           {brand.value}
@@ -485,7 +485,7 @@ export const Header: React.FC<Props> = ({
                               className='mobile__filters_container_group_items--item_name'
                               data-name={productType.name}
                               style={{
-                                fontWeight: filters.tags.productType[productType.name] ? '500' : '200'
+                                color: filters.tags.productType[productType.name] ? 'white' : 'black'
                               }}
                             >
                               {productType.nameUA.charAt(0).toUpperCase() + productType.nameUA.slice(1)}
@@ -530,7 +530,7 @@ export const Header: React.FC<Props> = ({
                           className='mobile__filters_container_group_items--item_name'
                           data-name={color.hex}
                           style={{
-                            fontWeight: filters.tags.color[color.hex] ? '500' : '200'
+                            color: filters.tags.color[color.hex] ? 'white' : 'black'
                           }}
                         >
                           {color.valueUA}
@@ -565,6 +565,9 @@ export const Header: React.FC<Props> = ({
                       <p
                         className='mobile__filters_container_group_items--item_name'
                         data-name='winter'
+                        style={{
+                          color: filters.tags.keywords.winter ? 'white' : 'black'
+                        }}
                       >
                         Зима
                       </p>
