@@ -39,6 +39,7 @@ export const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [products, setProducts] = useState<ProductInfo[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<ProductInfo[]>([]);
+  const [popularProducts, setPopularProducts] = useState<ProductInfo[]>([]);
   const [previewSearch, setPreviewSearch] = useState<ProductInfo[]>([]);
   const [productName, setProductName] = useState<string>('');
   const [categories, setCategories] = useState<string[]>([]);
@@ -297,6 +298,7 @@ export const App: React.FC = () => {
     const fetchProducts = async () => {
       const productList = await getAllProducts();
       setProducts(productList);
+      setPopularProducts(productList.filter((product: ProductInfo) => product.isPopular));
       setFilteredProducts(searchQuery
         ? productList.filter((product: ProductInfo) => {
             return product.productId.includes(searchQuery)
@@ -478,12 +480,16 @@ export const App: React.FC = () => {
         <Routes>
           <Route
             path='/'
-            element={<Home />}
+            element={loading ? <Loader /> : <Home
+              products={popularProducts}
+            />}
           />
 
           <Route
             path='/vasilkova_shop_client'
-            element={<Home />}
+            element={loading ? <Loader /> : <Home
+              products={popularProducts}
+            />}
           />
 
           <Route

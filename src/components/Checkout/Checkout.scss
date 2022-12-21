@@ -166,7 +166,7 @@
             transition: background-color 0.3s ease-in-out;
 
             &:disabled {
-              background-color: gray;
+              background-color: rgba(128, 128, 128, 0.350);
               transition: background-color 0.3s ease-in-out;
             }
 

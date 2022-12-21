@@ -223,7 +223,7 @@ export const Cart: React.FC<Props> = ({
                               </button>
 
                               <button
-                                className="item_specs_edit_buttons--button"
+                                className="cart__contents_item_contents_customerSpecs_specs_details_edit_buttons--button"
                                 onClick={resetEditSpecs}
                               >
                                 &#10008;

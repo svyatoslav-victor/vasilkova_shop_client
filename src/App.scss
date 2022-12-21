@@ -9,6 +9,10 @@
   -webkit-focus-ring-color: transparent;
 }
 
+* {
+  @include no-touch-select;
+}
+
 ::-webkit-scrollbar {
   width: 5px;
 }

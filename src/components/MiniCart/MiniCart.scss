@@ -31,13 +31,16 @@
     &--clearCart {
       cursor: pointer;
       scale: 1;
+      transition: scale 0.3s ease-in-out;
 
       &:hover {
         scale: 1.15;
+        transition: scale 0.3s ease-in-out;
       }
 
       &:active {
         scale: 1.3;
+        transition: scale 0.3s ease-in-out;
       }
     }
   }
@@ -65,14 +68,17 @@
       scale: 1;
       padding: 0 0.5em;
       cursor: pointer;
+      transition: scale 0.3s ease-in-out;
 
       &:hover {
-        scale: 1.1;
+        scale: 1.3;
+        transition: scale 0.3s ease-in-out;
       }
 
       &:active {
-        scale: 1.1;
+        scale: 1.5;
         font-weight: bold;
+        transition: scale 0.3s ease-in-out;
       }
     }
 
@@ -98,13 +104,16 @@
         display: inline-block;
         cursor: pointer;
         scale: 1;
+        transition: scale 0.3s ease-in-out;
   
         &:hover {
-          scale: 1.2;
+          scale: 1.3;
+          transition: scale 0.3s ease-in-out;
         }
   
         &:active {
-          scale: 1.3;
+          scale: 1.5;
+          transition: scale 0.3s ease-in-out;
         }
       }
 
@@ -115,11 +124,28 @@
         display: grid;
         grid-auto-flow: row;
         background-color: white;
+        z-index: 200;
         box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.425);
 
         &_buttons {
           display: grid;
           grid-auto-flow: column;
+          column-gap: 0.1em;
+
+          &--button {
+            border: 1px dotted black;
+            cursor: pointer;
+            background-color: $button-color-fuchsia;
+            transition: background-color 0.3s ease-in-out;
+
+            &:hover {
+              background-color: $background-2;
+            }
+
+            &:active {
+              background-color: $background;
+            }
+          }
         }
       }
     }
@@ -137,19 +163,22 @@
 
       &--add, &--subtract {
         padding: 0.5em;
-        background-color: white;
+        background-color: transparent;
         border: none;
         color: black;
-        outline: 3px double transparent;
+        outline: none;
         cursor: pointer;
+        scale: 1;
+        transition: scale 0.3s ease-in-out;
 
         &:hover {
-          outline: 3px double yellow;
-          background-color: lightgray;
+          scale: 1.5;
+          transition: scale 0.3s ease-in-out;
         }
 
         &:active {
-          outline: 3px double blue;
+          scale: 2;
+          transition: scale 0.3s ease-in-out;
         }
       }
     }
@@ -186,7 +215,7 @@
       padding: 0.5em;
       font-size: 1.2em;
       font-weight: bold;
-      background-color: rgb(252, 48, 89);
+      background-color: $button-color-fuchsia;
       border: 1px solid black;
       outline: none;
       border-radius: 10px;
@@ -240,6 +269,20 @@
 
       .item_quantity {
         grid-auto-flow: column;
+
+        &--add, &--subtract {
+          scale: 1;
+          transition: scale 0.3s ease-in-out;
+  
+          &:hover {
+            scale: 1;
+          }
+  
+          &:active {
+            scale: 2;
+            transition: scale 0.3s ease-in-out;
+          }
+        }
       }
 
       .item_price {

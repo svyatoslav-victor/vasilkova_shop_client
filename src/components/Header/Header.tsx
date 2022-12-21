@@ -9,7 +9,7 @@ import cartIcon from '../../shop_icons/cart-svgrepo-com.svg';
 import cartIconFull from '../../shop_icons/cart-full-svgrepo-com.svg';
 import searchIcon from '../../shop_icons/magnifying-glass-svgrepo-com.svg';
 import phone from '../../shop_icons/smartphone-svgrepo-com.svg';
-import filter from '../../shop_icons/filter-svgrepo-com.svg';
+import filter from '../../shop_icons/filter-alt-svgrepo-com.svg';
 import menuClosed from '../../shop_icons/menu-closed-svgrepo-com.svg';
 import menuOpen from '../../shop_icons/menu-open-svgrepo-com.svg';
 import location from '../../shop_icons/location.svg';
@@ -175,6 +175,7 @@ export const Header: React.FC<Props> = ({
 
   const resetFilters = () => {
     setFilters(initialFilters)
+    setDisplayFilterOptions(initialOptions)
   }
 
   const handleSort = (event: React.MouseEvent<HTMLElement>) => {
@@ -352,19 +353,26 @@ export const Header: React.FC<Props> = ({
         </div>
 
         <div className='menu__mobile_nav'>
-          <div className='menu__mobile_nav_filters'
+          <div
+            className='menu__mobile_nav_filters'
             onClick={toggleFilters}
           >
             <img
               className='menu__mobile_nav_filters--icon'
               src={filter}
               alt="/"
+              style={{
+                transform: showFilters ? 'rotate(-90deg)' : 'rotate(0)',
+                transition: 'transform 0.2s ease-in-out'
+              }}
             />
 
             <div
               className='menu__mobile_nav_filters_list'
               style={{
-                visibility: showFilters ? 'visible' : 'collapse'
+                transform: showFilters ? 'scaleY(1)' : 'scaleY(0)',
+                transformOrigin: 'top',
+                transition: 'transform 0.3s ease-in-out'
               }}
               onClick={(event) => event.stopPropagation()}
             >
@@ -389,6 +397,7 @@ export const Header: React.FC<Props> = ({
                         data-sortorder='lowToHigh'
                         style={{
                           color: filters.tags.price.lowToHigh ? 'white' : 'black',
+                          transition: 'color 0.2s ease-in-out'
                         }}
                       >
                         За зростанням
@@ -404,7 +413,8 @@ export const Header: React.FC<Props> = ({
                         className='mobile__filters_container_group_items--item_name'
                         data-sortorder='highToLow'
                         style={{
-                          color: filters.tags.price.highToLow ? 'white' : 'black'
+                          color: filters.tags.price.highToLow ? 'white' : 'black',
+                          transition: 'color 0.2s ease-in-out'
                         }}
                       >
                         За спаданням
@@ -417,14 +427,24 @@ export const Header: React.FC<Props> = ({
                   className='mobile__filters_container_group'
                 >
                   <p
-                    id='brands'
                     className='mobile__filters_container_group_name'
-                    onClick={toggleFilterOptions}
+                    style={{
+                      color: displayFilterOptions.brands ? 'white' : 'black',
+                      transition: 'color 0.2s ease-in-out'
+                    }}
                   >
-                    Бренд &nbsp;{displayFilterOptions.brands
-                      ? <span>&#8793;</span>
-                      : <span>&#8794;</span>
-                    }
+                    Бренд
+                    <span
+                      id='brands'
+                      style={{
+                        transform: displayFilterOptions.brands ? 'rotate(0deg)' : 'rotate(180deg)',
+                        color: displayFilterOptions.brands ? 'white' : 'black',
+                        transition: 'transform 0.2s ease-in-out, color 0.2s ease-in-out'
+                      }}
+                      onClick={toggleFilterOptions}
+                    >
+                      ^
+                    </span>
                   </p>
 
                   <div
@@ -444,7 +464,8 @@ export const Header: React.FC<Props> = ({
                           className='mobile__filters_container_group_items--item_name'
                           data-name={brand.value}
                           style={{
-                            color: filters.tags.brand[brand.value] ? 'white' : 'black'
+                            color: filters.tags.brand[brand.value] ? 'white' : 'black',
+                            transition: 'color 0.2s ease-in-out'
                           }}
                         >
                           {brand.value}
@@ -461,13 +482,26 @@ export const Header: React.FC<Props> = ({
                       key={group.name}
                     >
                       <p
-                        id={group.name}
                         className='mobile__filters_container_group_name'
-                        onClick={toggleFilterOptions}
+                        style={{
+                          color: displayFilterOptions[group.name] ? 'white' : 'black',
+                          transition: 'color 0.2s ease-in-out'
+                        }}
                       >
                         {group.nameUA.charAt(0).toUpperCase() + group.nameUA.slice(1)} &nbsp;
-                        {displayFilterOptions[group.name] ? <span>&#8793;</span> : <span>&#8794;</span>}
+                        <span
+                          id={group.name}
+                          style={{
+                            transform: displayFilterOptions[group.name] ? 'rotate(0deg)' : 'rotate(180deg)',
+                            color: displayFilterOptions[group.name] ? 'white' : 'black',
+                            transition: 'transform 0.2s ease-in-out, color 0.2s ease-in-out'
+                          }}
+                          onClick={toggleFilterOptions}
+                        >
+                          ^
+                        </span>
                       </p>
+
                       <div
                         className='mobile__filters_container_group_items'
                         style={{
@@ -485,7 +519,8 @@ export const Header: React.FC<Props> = ({
                               className='mobile__filters_container_group_items--item_name'
                               data-name={productType.name}
                               style={{
-                                color: filters.tags.productType[productType.name] ? 'white' : 'black'
+                                color: filters.tags.productType[productType.name] ? 'white' : 'black',
+                                transition: 'color 0.2s ease-in-out'
                               }}
                             >
                               {productType.nameUA.charAt(0).toUpperCase() + productType.nameUA.slice(1)}
@@ -499,11 +534,24 @@ export const Header: React.FC<Props> = ({
 
                 <div className='mobile__filters_container_group'>
                   <p
-                    id='colors'
                     className='mobile__filters_container_group_name'
-                    onClick={toggleFilterOptions}
+                    style={{
+                      color: displayFilterOptions.colors ? 'white' : 'black',
+                      transition: 'color 0.2s ease-in-out'
+                    }}
                   >
-                    Колір &nbsp;{displayFilterOptions.colors ? <span>&#8793;</span> : <span>&#8794;</span>}
+                    Колір
+                    <span
+                      id='colors'
+                      style={{
+                        transform: displayFilterOptions.colors ? 'rotate(0deg)' : 'rotate(180deg)',
+                        color: displayFilterOptions.colors ? 'white' : 'black',
+                        transition: 'transform 0.2s ease-in-out, color 0.2s ease-in-out'
+                      }}
+                      onClick={toggleFilterOptions}
+                    >
+                      ^
+                    </span>
                   </p>
 
                   <div
@@ -530,7 +578,8 @@ export const Header: React.FC<Props> = ({
                           className='mobile__filters_container_group_items--item_name'
                           data-name={color.hex}
                           style={{
-                            color: filters.tags.color[color.hex] ? 'white' : 'black'
+                            color: filters.tags.color[color.hex] ? 'white' : 'black',
+                            transition: 'color 0.2s ease-in-out'
                           }}
                         >
                           {color.valueUA}
@@ -544,11 +593,24 @@ export const Header: React.FC<Props> = ({
                   className='mobile__filters_container_group'
                 >
                   <p
-                    id='winter'
                     className='mobile__filters_container_group_name'
-                    onClick={toggleFilterOptions}
+                    style={{
+                      color: displayFilterOptions.winter ? 'white' : 'black',
+                      transition: 'color 0.2s ease-in-out'
+                    }}
                   >
-                    Зимовий одяг &nbsp;{displayFilterOptions.winter ? <span>&#8793;</span> : <span>&#8794;</span>}
+                    Зимовий одяг
+                    <span
+                      id='winter'
+                      style={{
+                        transform: displayFilterOptions.winter ? 'rotate(0deg)' : 'rotate(180deg)',
+                        color: displayFilterOptions.winter ? 'white' : 'black',
+                        transition: 'transform 0.2s ease-in-out, color 0.2s ease-in-out'
+                      }}
+                      onClick={toggleFilterOptions}
+                    >
+                      ^
+                    </span>
                   </p>
 
                   <div
@@ -566,7 +628,8 @@ export const Header: React.FC<Props> = ({
                         className='mobile__filters_container_group_items--item_name'
                         data-name='winter'
                         style={{
-                          color: filters.tags.keywords.winter ? 'white' : 'black'
+                          color: filters.tags.keywords.winter ? 'white' : 'black',
+                          transition: 'color 0.2s ease-in-out'
                         }}
                       >
                         Зима
@@ -634,18 +697,15 @@ export const Header: React.FC<Props> = ({
                           setAreTypesVisible(categoryName === category.name ? false : true)
                         }}
                       >
-                        {areTypesVisible && categoryName === category.name
-                          ? <span
-                              className='showTypes'
-                            >
-                              &#8793;
-                            </span>
-                          : <span
-                              className='hideTypes'
-                            >
-                              &#8794;
-                            </span>
-                        }
+                        <span
+                          className='manageTypes'
+                          style={{
+                            transform: areTypesVisible && categoryName === category.name ? 'rotate(0deg)' : 'rotate(180deg)',
+                            transition: 'transform 0.2s ease-in-out'
+                          }}
+                        >
+                          ^
+                        </span>
                       </div>
                     )
                   }
@@ -923,6 +983,10 @@ export const Header: React.FC<Props> = ({
                   className='header__nav_categories_filter--image'
                   src={filter}
                   alt="/"
+                  style={{
+                    transform: showFilters ? 'rotate(-90deg)' : 'rotate(0)',
+                    transition: 'transform 0.2s ease-in-out'
+                  }}
                 />
 
                 <div
@@ -955,6 +1019,7 @@ export const Header: React.FC<Props> = ({
                             data-sortorder='lowToHigh'
                             style={{
                               color: filters.tags.price.lowToHigh ? 'white' : 'black',
+                              transition: 'color 0.2s ease-in-out'
                             }}
                           >
                             За зростанням
@@ -971,6 +1036,7 @@ export const Header: React.FC<Props> = ({
                             data-sortorder='highToLow'
                             style={{
                               color: filters.tags.price.highToLow ? 'white' : 'black',
+                              transition: 'color 0.2s ease-in-out'
                             }}
                           >
                             За спаданням
@@ -983,14 +1049,24 @@ export const Header: React.FC<Props> = ({
                       className='filters__container_group'
                     >
                       <p
-                        id='brands'
                         className='filters__container_group_name'
-                        onClick={toggleFilterOptions}
+                        style={{
+                          color: displayFilterOptions.brands ? 'white' : 'black',
+                          transition: 'color 0.2s ease-in-out'
+                        }}
                       >
-                        Бренд &nbsp;{displayFilterOptions.brands
-                          ? <span>&#8793;</span>
-                          : <span>&#8794;</span>
-                        }
+                        Бренд
+                        <span
+                          id='brands'
+                          style={{
+                            transform: displayFilterOptions.brands ? 'rotate(0deg)' : 'rotate(180deg)',
+                            color: displayFilterOptions.brands ? 'white' : 'black',
+                            transition: 'transform 0.2s ease-in-out, color 0.2s ease-in-out'
+                          }}
+                          onClick={toggleFilterOptions}
+                        >
+                          ^
+                        </span>
                       </p>
 
                       <div
@@ -1010,7 +1086,8 @@ export const Header: React.FC<Props> = ({
                               className='filters__container_group_items--item_name'
                               data-name={brand.value}
                               style={{
-                                color: filters.tags.brand[brand.value] ? 'white' : 'black'
+                                color: filters.tags.brand[brand.value] ? 'white' : 'black',
+                                transition: 'color 0.2s ease-in-out'
                               }}
                             >
                               {brand.value}
@@ -1027,12 +1104,24 @@ export const Header: React.FC<Props> = ({
                           key={group.name}
                         >
                           <p
-                            id={group.name}
                             className='filters__container_group_name'
-                            onClick={toggleFilterOptions}
+                            style={{
+                              color: displayFilterOptions[group.name] ? 'white' : 'black',
+                              transition: 'color 0.2s ease-in-out'
+                            }}
                           >
                             {group.nameUA.charAt(0).toUpperCase() + group.nameUA.slice(1)} &nbsp;
-                            {displayFilterOptions[group.name] ? <span>&#8793;</span> : <span>&#8794;</span>}
+                            <span
+                              id={group.name}
+                              style={{
+                                transform: displayFilterOptions[group.name] ? 'rotate(0deg)' : 'rotate(180deg)',
+                                color: displayFilterOptions[group.name] ? 'white' : 'black',
+                                transition: 'transform 0.2s ease-in-out, color 0.2s ease-in-out'
+                              }}
+                              onClick={toggleFilterOptions}
+                            >
+                              ^
+                            </span>
                           </p>
 
                           <div
@@ -1052,7 +1141,8 @@ export const Header: React.FC<Props> = ({
                                   className='filters__container_group_items--item_name'
                                   data-name={productType.name}
                                   style={{
-                                    color: filters.tags.productType[productType.name] ? 'white' : 'black'
+                                    color: filters.tags.productType[productType.name] ? 'white' : 'black',
+                                    transition: 'color 0.2s ease-in-out'
                                   }}
                                 >
                                   {productType.nameUA.charAt(0).toUpperCase() + productType.nameUA.slice(1)}
@@ -1066,11 +1156,24 @@ export const Header: React.FC<Props> = ({
 
                     <div className='filters__container_group'>
                       <p
-                        id='colors'
                         className='filters__container_group_name'
-                        onClick={toggleFilterOptions}
+                        style={{
+                          color: displayFilterOptions.colors ? 'white' : 'black',
+                          transition: 'color 0.2s ease-in-out'
+                        }}
                       >
-                        Колір &nbsp;{displayFilterOptions.colors ? <span>&#8793;</span> : <span>&#8794;</span>}
+                        Колір
+                        <span
+                          id='colors'
+                          style={{
+                            transform: displayFilterOptions.colors ? 'rotate(0deg)' : 'rotate(180deg)',
+                            color: displayFilterOptions.colors ? 'white' : 'black',
+                            transition: 'transform 0.2s ease-in-out, color 0.2s ease-in-out'
+                          }}
+                          onClick={toggleFilterOptions}
+                        >
+                          ^
+                        </span>
                       </p>
 
                       <div
@@ -1097,7 +1200,8 @@ export const Header: React.FC<Props> = ({
                               className='filters__container_group_items--item_name'
                               data-name={color.hex}
                               style={{
-                                color: filters.tags.color[color.hex] ? 'white' : 'black'
+                                color: filters.tags.color[color.hex] ? 'white' : 'black',
+                                transition: 'color 0.2s ease-in-out'
                               }}
                             >
                               {color.valueUA}
@@ -1111,11 +1215,24 @@ export const Header: React.FC<Props> = ({
                       className='filters__container_group'
                     >
                       <p
-                        id='winter'
                         className='filters__container_group_name'
-                        onClick={toggleFilterOptions}
+                        style={{
+                          color: displayFilterOptions.winter ? 'white' : 'black',
+                          transition: 'color 0.2s ease-in-out'
+                        }}
                       >
-                        Зимовий одяг &nbsp;{displayFilterOptions.winter ? <span>&#8793;</span> : <span>&#8794;</span>}
+                        Зимовий одяг
+                        <span
+                          id='winter'
+                          style={{
+                            transform: displayFilterOptions.winter ? 'rotate(0deg)' : 'rotate(180deg)',
+                            color: displayFilterOptions.winter ? 'white' : 'black',
+                            transition: 'transform 0.2s ease-in-out, color 0.2s ease-in-out'
+                          }}
+                          onClick={toggleFilterOptions}
+                        >
+                          ^
+                        </span>
                       </p>
 
                       <div
@@ -1133,7 +1250,8 @@ export const Header: React.FC<Props> = ({
                             className='filters__container_group_items--item_name'
                             data-name='winter'
                             style={{
-                              color: filters.tags.keywords.winter ? 'white' : 'black'
+                              color: filters.tags.keywords.winter ? 'white' : 'black',
+                              transition: 'color 0.2s ease-in-out'
                             }}
                           >
                             Зима

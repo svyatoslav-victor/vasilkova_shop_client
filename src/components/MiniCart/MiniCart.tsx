@@ -49,7 +49,7 @@ export const MiniCart: React.FC<Props> = ({
     <div
       className="minicart"
       style={{
-        visibility: showMiniCart ? 'visible' : 'hidden',
+        visibility: showMiniCart ? 'visible' : 'hidden'
       }}
       onClick={(event) => {
         event.stopPropagation();

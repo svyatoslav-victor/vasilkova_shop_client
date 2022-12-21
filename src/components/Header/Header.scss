@@ -107,6 +107,7 @@
                 &_color {
                   width: 1em;
                   height: 1em;
+                  border-radius: 3px;
                 }
 
                 &_name {
@@ -178,7 +179,8 @@
             }
           }
 
-          .showTypes, .hideTypes {
+          .manageTypes {
+            display: block;
             font-size: 1.5em;
 
             &:active {
@@ -232,9 +234,8 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  padding: 1em 0;
   padding: 1em 2em;
-  background: rgb(45, 185, 192);
+  background: $background;
 
   &__main {
     display: flex;
@@ -284,13 +285,16 @@
         cursor: pointer;
         background-color: transparent;
         scale: 1;
+        transition: scale 0.3s ease-in-out;
 
         &:hover {
           scale: 1.3;
+          transition: scale 0.3s ease-in-out;
         }
 
         &:active {
           scale: 1.5;
+          transition: scale 0.3s ease-in-out;
         }
 
         &--icon {
@@ -357,14 +361,18 @@
         &--number {
           scale: 1;
           cursor: pointer;
+          color: black;
+          transition: scale 0.3s ease-in-out, color 0.3s ease-in-out;
   
           &:hover {
             scale: 1.1;
             color: white;
+            transition: scale 0.3s ease-in-out, color 0.3s ease-in-out;
           }
 
           &:active {
             scale: 1.2;
+            transition: scale 0.3s ease-in-out;
           }
         }
       }
@@ -378,9 +386,11 @@
 
     &_phone {
       scale: 1;
+      transition: scale 0.3s ease-in-out;
 
       &:active {
         scale: 1.3;
+        transition: scale 0.3s ease-in-out;
       }
     }
   }
@@ -396,7 +406,7 @@
     align-items: center;
     position: relative;
     z-index: 0;
-  
+
     &_categories {
       display: flex;
       justify-content: center;
@@ -497,13 +507,16 @@
           vertical-align: middle;
           cursor: pointer;
           scale: 1;
+          transition: scale 0.3s ease-in-out;
 
           &:hover {
             scale: 1.3;
+            transition: scale 0.3s ease-in-out;
           }
 
           &:active {
             scale: 1.5;
+            transition: scale 0.3s ease-in-out;
           }
         }
 
@@ -558,6 +571,7 @@
                   &_color {
                     width: 1em;
                     height: 1em;
+                    border-radius: 3px;
                   }
 
                   &_name {
@@ -597,7 +611,7 @@
               }
             }
           }
-  
+
           p {
             margin: 0;
             font-weight: bold;
@@ -628,22 +642,21 @@
         border-radius: 10%;
         color: white;
         background-color: black;
-        scale: 1;
       }
 
       &_cart {
         position: relative;
+        scale: 1;
+        transition: scale 0.3s ease-in-out;
 
-        &--icon {
-          scale: 1;
-  
-          &:hover {
-            scale: 1.2;
-          }
-    
-          &:active {
-            scale: 1.3;
-          }
+        &:hover {
+          scale: 1.2;
+          transition: scale 0.3s ease-in-out;
+        }
+
+        &:active {
+          scale: 1.3;
+          transition: scale 0.3s ease-in-out;
         }
       }
     }
