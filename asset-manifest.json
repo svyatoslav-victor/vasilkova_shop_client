@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/vasilkova_shop_client/static/css/main.9bcba1ee.css",
-    "main.js": "/vasilkova_shop_client/static/js/main.19ae912c.js",
+    "main.css": "/vasilkova_shop_client/static/css/main.75703fde.css",
+    "main.js": "/vasilkova_shop_client/static/js/main.4617f25e.js",
     "static/js/787.f91daa34.chunk.js": "/vasilkova_shop_client/static/js/787.f91daa34.chunk.js",
     "static/media/respiratory_protection.png": "/vasilkova_shop_client/static/media/respiratory_protection.881ece66db88b9663260.png",
     "static/media/jackets.png": "/vasilkova_shop_client/static/media/jackets.6598f204208be6fb0e84.png",
@@ -18,6 +18,7 @@
     "static/media/head_protection.png": "/vasilkova_shop_client/static/media/head_protection.d29362d92efa39e49411.png",
     "static/media/high_visibility.png": "/vasilkova_shop_client/static/media/high_visibility.33130c099c1c3d87ad8d.png",
     "static/media/low_shoes.png": "/vasilkova_shop_client/static/media/low_shoes.6ce0a4082f0aa10cbbce.png",
+    "static/media/snowflake-svgrepo-com.svg": "/vasilkova_shop_client/static/media/snowflake-svgrepo-com.cccf76982e3544d8d3a9.svg",
     "static/media/construction-worker-svgrepo-com.svg": "/vasilkova_shop_client/static/media/construction-worker-svgrepo-com.ba14f85b14c2d0934814b18081505237.svg",
     "static/media/worker-pushing-a-cart-svgrepo-com.svg": "/vasilkova_shop_client/static/media/worker-pushing-a-cart-svgrepo-com.2046f39f29a0adf15b271d7cfe9741c0.svg",
     "static/media/engineer-worker-svgrepo-com.svg": "/vasilkova_shop_client/static/media/engineer-worker-svgrepo-com.d7c82c19512163723a9104d3a1e5f1e3.svg",
@@ -29,17 +30,17 @@
     "static/media/email.svg": "/vasilkova_shop_client/static/media/email.4c6092f9ad79c01666c39cf0f701cbea.svg",
     "static/media/menu-open-svgrepo-com.svg": "/vasilkova_shop_client/static/media/menu-open-svgrepo-com.78529502c50429f1c97d635bfc1bf5ee.svg",
     "static/media/menu-closed-svgrepo-com.svg": "/vasilkova_shop_client/static/media/menu-closed-svgrepo-com.2a7fc5467ee6018f65da6b83463c414c.svg",
-    "static/media/filter-svgrepo-com.svg": "/vasilkova_shop_client/static/media/filter-svgrepo-com.9d4950532299ac5d2e036efd2d856d87.svg",
     "index.html": "/vasilkova_shop_client/index.html",
     "static/media/standing-desk-work-do-programmer-svgrepo-com.svg": "/vasilkova_shop_client/static/media/standing-desk-work-do-programmer-svgrepo-com.ad4362eb6656d3ebb1583fce5a3cb95d.svg",
     "static/media/magnifying-glass-svgrepo-com.svg": "/vasilkova_shop_client/static/media/magnifying-glass-svgrepo-com.5b57cf7320df244bcfb45a279107101a.svg",
+    "static/media/filter-alt-svgrepo-com.svg": "/vasilkova_shop_client/static/media/filter-alt-svgrepo-com.12ed8e09d2e8180b067bdcf702b4c433.svg",
     "static/media/bin-svgrepo-com.svg": "/vasilkova_shop_client/static/media/bin-svgrepo-com.a187a4e16ebfc9340fe285c66b088b10.svg",
-    "main.9bcba1ee.css.map": "/vasilkova_shop_client/static/css/main.9bcba1ee.css.map",
-    "main.19ae912c.js.map": "/vasilkova_shop_client/static/js/main.19ae912c.js.map",
+    "main.75703fde.css.map": "/vasilkova_shop_client/static/css/main.75703fde.css.map",
+    "main.4617f25e.js.map": "/vasilkova_shop_client/static/js/main.4617f25e.js.map",
     "787.f91daa34.chunk.js.map": "/vasilkova_shop_client/static/js/787.f91daa34.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9bcba1ee.css",
-    "static/js/main.19ae912c.js"
+    "static/css/main.75703fde.css",
+    "static/js/main.4617f25e.js"
   ]
 }
