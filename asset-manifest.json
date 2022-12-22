@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/vasilkova_shop_client/static/css/main.75703fde.css",
+    "main.css": "/vasilkova_shop_client/static/css/main.7ce00f9e.css",
     "main.js": "/vasilkova_shop_client/static/js/main.4617f25e.js",
     "static/js/787.f91daa34.chunk.js": "/vasilkova_shop_client/static/js/787.f91daa34.chunk.js",
     "static/media/respiratory_protection.png": "/vasilkova_shop_client/static/media/respiratory_protection.881ece66db88b9663260.png",
@@ -35,12 +35,12 @@
     "static/media/magnifying-glass-svgrepo-com.svg": "/vasilkova_shop_client/static/media/magnifying-glass-svgrepo-com.5b57cf7320df244bcfb45a279107101a.svg",
     "static/media/filter-alt-svgrepo-com.svg": "/vasilkova_shop_client/static/media/filter-alt-svgrepo-com.12ed8e09d2e8180b067bdcf702b4c433.svg",
     "static/media/bin-svgrepo-com.svg": "/vasilkova_shop_client/static/media/bin-svgrepo-com.a187a4e16ebfc9340fe285c66b088b10.svg",
-    "main.75703fde.css.map": "/vasilkova_shop_client/static/css/main.75703fde.css.map",
+    "main.7ce00f9e.css.map": "/vasilkova_shop_client/static/css/main.7ce00f9e.css.map",
     "main.4617f25e.js.map": "/vasilkova_shop_client/static/js/main.4617f25e.js.map",
     "787.f91daa34.chunk.js.map": "/vasilkova_shop_client/static/js/787.f91daa34.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.75703fde.css",
+    "static/css/main.7ce00f9e.css",
     "static/js/main.4617f25e.js"
   ]
 }
