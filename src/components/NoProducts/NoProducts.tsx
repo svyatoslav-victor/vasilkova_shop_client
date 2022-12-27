@@ -8,10 +8,10 @@ export const NoProducts: React.FC = () => {
   return (
     <div className="noProducts">
       <p className="noProducts__message">
-        Unfortunately, there are currently no products in this category :(
+        На жаль, поки що в цій категорії продуктів нема :(
       </p>
       <p className="noProducts__message">
-        But we are constantly expanding our stock, so please keep visiting our store!
+        Але ми постійно розширюємо ассортимент, тож приходьте ще!
       </p>
       <img
         className="noProducts__image"

@@ -8,10 +8,16 @@ import './Category.scss';
 type Props = {
   productTypes: ProductType[],
   productGroups: ProductGroup[],
-  setProductTypes: Dispatch<SetStateAction<ProductType[]>>
+  setProductTypes: Dispatch<SetStateAction<ProductType[]>>,
+  isMobile: number
 }
 
-export const Category: React.FC<Props> = ({ productTypes, productGroups, setProductTypes }) => {
+export const Category: React.FC<Props> = ({
+  productTypes,
+  productGroups,
+  setProductTypes,
+  isMobile
+}) => {
   const { categoryName } = useParams();
 
   useEffect(() => {
@@ -36,9 +42,18 @@ export const Category: React.FC<Props> = ({ productTypes, productGroups, setProd
             color: 'rgb(0, 139, 146)'
           }}
         >
-          {productGroups.find((group: ProductGroup) => (
-            group.name === categoryName ? group.nameUA : ''
-          ))!.nameUA}
+          {isMobile >= 600
+            ? productGroups.find((group: ProductGroup) => (
+                group.name === categoryName ? group.nameUA : ''
+              ))!.nameUA
+            : categoryName === 'засоби індивідуального захисту'
+                ? productGroups.find((group: ProductGroup) => (
+                    group.name === categoryName ? group.nameUA : ''
+                  ))!.nameUA.split(' ').map((word: string) => word[0]).join('')
+                : productGroups.find((group: ProductGroup) => (
+                  group.name === categoryName ? group.nameUA : ''
+                ))!.nameUA
+          }
         </Link>
       </p>
 

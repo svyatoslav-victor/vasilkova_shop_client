@@ -81,16 +81,25 @@ export const Product: React.FC<Props> = ({
         >
           Додому
         </Link>
-        &nbsp; &#62; &nbsp;
+        &nbsp; / &nbsp;
         <Link
           className="links__navLink"
           to={`/vasilkova_shop_client/${categoryName.toLowerCase()}`}
         >
-          {productGroups.find((group: ProductGroup) => (
-            group.name === categoryName ? group.nameUA : ''
-          ))!.nameUA}
+          {isMobile >= 600
+            ? productGroups.find((group: ProductGroup) => (
+                group.name === categoryName ? group.nameUA : ''
+              ))!.nameUA
+            : categoryName === 'засоби індивідуального захисту'
+                ? productGroups.find((group: ProductGroup) => (
+                    group.name === categoryName ? group.nameUA : ''
+                  ))!.nameUA.split(' ').map((word: string) => word[0]).join('')
+                : productGroups.find((group: ProductGroup) => (
+                  group.name === categoryName ? group.nameUA : ''
+                ))!.nameUA
+          }
         </Link>
-        &nbsp; &#62; &nbsp;
+        &nbsp; / &nbsp;
         <Link
           className="links__navLink"
           to={`/vasilkova_shop_client/${categoryName.toLowerCase()}/${type}`}

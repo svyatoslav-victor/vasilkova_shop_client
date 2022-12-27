@@ -28,10 +28,41 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Vasilkova Shop &#8482;</title>
+    <style>
+      .svgLoader {
+        display: flex;
+        justify-self: center;
+        justify-content: center;
+        align-items: center;
+        height: 90vh;
+      }
+
+      .svgLoader__icon {
+          width: 30vh;
+          animation: spin infinite 5s linear;
+        }
+
+        @keyframes spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root">
+      <div class="svgLoader">
+        <img
+          class="svgLoader__icon"
+          src="%PUBLIC_URL%/cogwheel-svgrepo-com.svg"
+          alt="/"
+        >
+      </div>
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

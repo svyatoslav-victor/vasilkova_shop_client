@@ -396,7 +396,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div
+    loading ? <Loader /> : <div
       className='app'
       ref={appRef}
       onClick={closeModals}
@@ -426,7 +426,7 @@ export const App: React.FC = () => {
             })
           }}
         >
-          &#8793;
+          &#10097;
         </button>
       </div>
 
@@ -480,14 +480,14 @@ export const App: React.FC = () => {
         <Routes>
           <Route
             path='/'
-            element={loading ? <Loader /> : <Home
+            element={<Home
               products={popularProducts}
             />}
           />
 
           <Route
             path='/vasilkova_shop_client'
-            element={loading ? <Loader /> : <Home
+            element={<Home
               products={popularProducts}
             />}
           />
@@ -552,6 +552,7 @@ export const App: React.FC = () => {
               }
               setProductTypes={setProductTypes}
               productGroups={productGroups}
+              isMobile={isMobile}
             />}
           />
 
@@ -561,6 +562,7 @@ export const App: React.FC = () => {
               ? <Goods
                   goodsList={setGoods()}
                   setProduct={setProductName}
+                  isMobile={isMobile}
                 />
               : <Loader />}
           />

@@ -9,12 +9,14 @@ import { NoProducts } from "../NoProducts/NoProducts";
 
 type Props = {
   goodsList: ProductInfo[],
-  setProduct: Dispatch<SetStateAction<string>>
+  setProduct: Dispatch<SetStateAction<string>>,
+  isMobile: number
 }
 
 export const Goods: React.FC<Props> = ({
     goodsList,
-    setProduct
+    setProduct,
+    isMobile
   }) => {
   const { categoryName, type } = useParams();
 
@@ -32,9 +34,18 @@ export const Goods: React.FC<Props> = ({
           className="links__navLink"
           to={`/vasilkova_shop_client/${categoryName.toLowerCase()}`}
         >
-          {productGroups.find((group: ProductGroup) => (
-            group.name === categoryName ? group.nameUA : ''
-          ))!.nameUA}
+          {isMobile >= 600
+            ? productGroups.find((group: ProductGroup) => (
+                group.name === categoryName ? group.nameUA : ''
+              ))!.nameUA
+            : categoryName === 'засоби індивідуального захисту'
+                ? productGroups.find((group: ProductGroup) => (
+                    group.name === categoryName ? group.nameUA : ''
+                  ))!.nameUA.split(' ').map((word: string) => word[0]).join('')
+                : productGroups.find((group: ProductGroup) => (
+                  group.name === categoryName ? group.nameUA : ''
+                ))!.nameUA
+          }
         </Link>
         &nbsp; / &nbsp;
         <Link

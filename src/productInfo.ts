@@ -211,6 +211,11 @@ export const productColors: Color[] = [
     valueUA: 'Хакі'
   },
   {
+    hex: '#faf202',
+    value: 'Yellow',
+    valueUA: 'Жовтий'
+  },
+  {
     hex: '#7bff00',
     value: 'Neon Green',
     valueUA: 'Яскраво-зелений'

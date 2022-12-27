@@ -436,14 +436,15 @@ export const Header: React.FC<Props> = ({
                     Бренд
                     <span
                       id='brands'
+                      className='filterArrow'
                       style={{
-                        transform: displayFilterOptions.brands ? 'rotate(0deg)' : 'rotate(180deg)',
+                        transform: displayFilterOptions.brands ? 'rotate(270deg)' : 'rotate(90deg)',
                         color: displayFilterOptions.brands ? 'white' : 'black',
                         transition: 'transform 0.2s ease-in-out, color 0.2s ease-in-out'
                       }}
                       onClick={toggleFilterOptions}
                     >
-                      ^
+                      &#10097;
                     </span>
                   </p>
 
@@ -491,14 +492,15 @@ export const Header: React.FC<Props> = ({
                         {group.nameUA.charAt(0).toUpperCase() + group.nameUA.slice(1)} &nbsp;
                         <span
                           id={group.name}
+                          className='filterArrow'
                           style={{
-                            transform: displayFilterOptions[group.name] ? 'rotate(0deg)' : 'rotate(180deg)',
+                            transform: displayFilterOptions[group.name] ? 'rotate(270deg)' : 'rotate(90deg)',
                             color: displayFilterOptions[group.name] ? 'white' : 'black',
                             transition: 'transform 0.2s ease-in-out, color 0.2s ease-in-out'
                           }}
                           onClick={toggleFilterOptions}
                         >
-                          ^
+                          &#10097;
                         </span>
                       </p>
 
@@ -543,14 +545,15 @@ export const Header: React.FC<Props> = ({
                     Колір
                     <span
                       id='colors'
+                      className='filterArrow'
                       style={{
-                        transform: displayFilterOptions.colors ? 'rotate(0deg)' : 'rotate(180deg)',
+                        transform: displayFilterOptions.colors ? 'rotate(270deg)' : 'rotate(90deg)',
                         color: displayFilterOptions.colors ? 'white' : 'black',
                         transition: 'transform 0.2s ease-in-out, color 0.2s ease-in-out'
                       }}
                       onClick={toggleFilterOptions}
                     >
-                      ^
+                      &#10097;
                     </span>
                   </p>
 
@@ -602,14 +605,15 @@ export const Header: React.FC<Props> = ({
                     Зимовий одяг
                     <span
                       id='winter'
+                      className='filterArrow'
                       style={{
-                        transform: displayFilterOptions.winter ? 'rotate(0deg)' : 'rotate(180deg)',
+                        transform: displayFilterOptions.winter ? 'rotate(270deg)' : 'rotate(90deg)',
                         color: displayFilterOptions.winter ? 'white' : 'black',
                         transition: 'transform 0.2s ease-in-out, color 0.2s ease-in-out'
                       }}
                       onClick={toggleFilterOptions}
                     >
-                      ^
+                      &#10097;
                     </span>
                   </p>
 
@@ -700,11 +704,11 @@ export const Header: React.FC<Props> = ({
                         <span
                           className='manageTypes'
                           style={{
-                            transform: areTypesVisible && categoryName === category.name ? 'rotate(0deg)' : 'rotate(180deg)',
+                            transform: areTypesVisible && categoryName === category.name ? 'rotate(270deg)' : 'rotate(90deg)',
                             transition: 'transform 0.2s ease-in-out'
                           }}
                         >
-                          ^
+                          &#10097;
                         </span>
                       </div>
                     )
@@ -1058,14 +1062,15 @@ export const Header: React.FC<Props> = ({
                         Бренд
                         <span
                           id='brands'
+                          className='filterArrow'
                           style={{
-                            transform: displayFilterOptions.brands ? 'rotate(0deg)' : 'rotate(180deg)',
+                            transform: displayFilterOptions.brands ? 'rotate(270deg)' : 'rotate(90deg)',
                             color: displayFilterOptions.brands ? 'white' : 'black',
                             transition: 'transform 0.2s ease-in-out, color 0.2s ease-in-out'
                           }}
                           onClick={toggleFilterOptions}
                         >
-                          ^
+                          &#10097;
                         </span>
                       </p>
 
@@ -1113,14 +1118,15 @@ export const Header: React.FC<Props> = ({
                             {group.nameUA.charAt(0).toUpperCase() + group.nameUA.slice(1)} &nbsp;
                             <span
                               id={group.name}
+                              className='filterArrow'
                               style={{
-                                transform: displayFilterOptions[group.name] ? 'rotate(0deg)' : 'rotate(180deg)',
+                                transform: displayFilterOptions[group.name] ? 'rotate(270deg)' : 'rotate(90deg)',
                                 color: displayFilterOptions[group.name] ? 'white' : 'black',
                                 transition: 'transform 0.2s ease-in-out, color 0.2s ease-in-out'
                               }}
                               onClick={toggleFilterOptions}
                             >
-                              ^
+                              &#10097;
                             </span>
                           </p>
 
@@ -1165,14 +1171,15 @@ export const Header: React.FC<Props> = ({
                         Колір
                         <span
                           id='colors'
+                          className='filterArrow'
                           style={{
-                            transform: displayFilterOptions.colors ? 'rotate(0deg)' : 'rotate(180deg)',
+                            transform: displayFilterOptions.colors ? 'rotate(270deg)' : 'rotate(90deg)',
                             color: displayFilterOptions.colors ? 'white' : 'black',
                             transition: 'transform 0.2s ease-in-out, color 0.2s ease-in-out'
                           }}
                           onClick={toggleFilterOptions}
                         >
-                          ^
+                          &#10097;
                         </span>
                       </p>
 
@@ -1224,14 +1231,15 @@ export const Header: React.FC<Props> = ({
                         Зимовий одяг
                         <span
                           id='winter'
+                          className='filterArrow'
                           style={{
-                            transform: displayFilterOptions.winter ? 'rotate(0deg)' : 'rotate(180deg)',
+                            transform: displayFilterOptions.winter ? 'rotate(270deg)' : 'rotate(90deg)',
                             color: displayFilterOptions.winter ? 'white' : 'black',
                             transition: 'transform 0.2s ease-in-out, color 0.2s ease-in-out'
                           }}
                           onClick={toggleFilterOptions}
                         >
-                          ^
+                          &#10097;
                         </span>
                       </p>
 

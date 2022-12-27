@@ -86,7 +86,16 @@
               display: grid;
               grid-auto-flow: column;
               justify-content: space-between;
+              align-items: center;
               font-weight: bold;
+
+              .filterArrow {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 1em;
+                height: 1em;
+              }
             }
 
             &_items {
@@ -181,7 +190,7 @@
 
           .manageTypes {
             display: block;
-            font-size: 1.5em;
+            font-size: 1em;
 
             &:active {
               font-weight: bold;
@@ -549,13 +558,24 @@
                 display: grid;
                 grid-auto-flow: column;
                 justify-content: space-between;
-                font-weight: 500;
+                align-items: center;
+                font-size: 0.9em;
+                font-weight: 600;
+
+                .filterArrow {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  width: 1em;
+                  height: 1em;
+                }
               }
 
               &_items {
                 display: grid;
                 grid-auto-flow: row;
                 justify-content: left;
+                font-size: 0.9em;
                 row-gap: 1em;
                 column-gap: 1em;
 

@@ -8,7 +8,7 @@ export const NoSection: React.FC = () => {
   return (
     <div className="emptySection">
       <p className="emptySection__message">
-        Section under development...
+        Розділ у розробці...
       </p>
 
       <img
