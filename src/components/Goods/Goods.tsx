@@ -34,11 +34,11 @@ export const Goods: React.FC<Props> = ({
           className="links__navLink"
           to={`/vasilkova_shop_client/${categoryName.toLowerCase()}`}
         >
-          {isMobile >= 600
+          {isMobile > 600
             ? productGroups.find((group: ProductGroup) => (
                 group.name === categoryName ? group.nameUA : ''
               ))!.nameUA
-            : categoryName === 'засоби індивідуального захисту'
+            : categoryName === 'ppe'
                 ? productGroups.find((group: ProductGroup) => (
                     group.name === categoryName ? group.nameUA : ''
                   ))!.nameUA.split(' ').map((word: string) => word[0]).join('')
