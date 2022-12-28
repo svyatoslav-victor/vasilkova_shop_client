@@ -194,3 +194,12 @@ body {
     }
   }
 }
+
+@media screen and (min-width: 340px) and (max-width: 360px) {
+  .app {
+    .main {
+      padding: 0 0.5em;
+      row-gap: 0.5em;
+    }
+  }
+}

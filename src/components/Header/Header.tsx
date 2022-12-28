@@ -312,7 +312,7 @@ export const Header: React.FC<Props> = ({
       <div
         className='menu__mobile'
         style={{
-          width: isMobile <= 1024 && isMobile > 760 ? "50vw" : "90vw",
+          width: isMobile < 1024 && isMobile > 760 ? "50vw" : isMobile <= 360 ? "100vw" : '90vw',
           left: showMenu ? "0" : "-100vw",
           opacity: showMenu ? "1" : "0"
         }}
@@ -814,7 +814,7 @@ export const Header: React.FC<Props> = ({
               </Link>
             </div>
 
-            {isMobile <= 1024 &&
+            {isMobile < 1024 &&
               (
                 <div className='header__main_nav_menu'
                   onClick={() => {
@@ -861,7 +861,7 @@ export const Header: React.FC<Props> = ({
             </button>
 
             <div
-              className={isMobile >= 1024? 'header__main_search--preview' : 'header__main_search_mobile--preview'}
+              className={isMobile > 1024 ? 'header__main_search--preview' : 'header__main_search_mobile--preview'}
             >
               {dynamicQuery.length === 0
                 ? null
@@ -944,7 +944,7 @@ export const Header: React.FC<Props> = ({
               )
           }
 
-          {isMobile <= 1024 && <div
+          {isMobile < 1024 && <div
             className='header__nav_miniCart'
           >
             <span

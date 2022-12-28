@@ -356,3 +356,38 @@
     }
   }
 }
+
+@media screen and (min-width: 340px) and (max-width: 360px) {
+  .home {
+    padding: 0.5em;
+
+    &__heading {
+      margin: 0;
+      padding: 0;
+      font-weight: 500;
+      font-size: 1em;
+      position: relative;
+  
+      &::after {
+        top: 1.8em;
+      }
+    }
+
+    &__content {
+      &_products {
+        &_item {
+          &_image {
+            height: 250px;
+            width: calc(250px - 1em);
+          }
+  
+          &_details {
+            &_name {
+              font-size: 1em;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -101,3 +101,11 @@
     justify-content: center;
   }
 }
+
+@media screen and (min-width: 340px) and (max-width: 360px) {
+  .goodsList {
+    grid-template-rows: repeat(auto-fill, 400px);
+    grid-template-columns: repeat(auto-fill, 320px);
+    row-gap: 1.2em;
+  }
+}

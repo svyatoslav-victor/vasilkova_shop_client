@@ -683,7 +683,7 @@
   }
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 1024px) {
   .menu__mobile, .header {
     font-size: $font-mobile;
   }
@@ -694,5 +694,9 @@
     &_nav {
       padding: 1em;
     }
+  }
+
+  .header {
+    padding: 1em;
   }
 }

@@ -29,15 +29,26 @@
     -->
     <title>Vasilkova Shop &#8482;</title>
     <style>
+      body {
+        margin: 0;
+        height: 100vh !important;
+      }
+
+      #root {
+        height: 100%;
+      }
+
       .svgLoader {
         display: flex;
         justify-self: center;
         justify-content: center;
         align-items: center;
-        height: 90vh;
+        height: 100%;
       }
 
       .svgLoader__icon {
+          justify-self: center;
+          align-self: center;
           width: 30vh;
           animation: spin infinite 5s linear;
         }

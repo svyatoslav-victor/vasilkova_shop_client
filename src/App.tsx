@@ -98,6 +98,8 @@ export const App: React.FC = () => {
   }, [cart, productCount])
 
   const toggleMiniCart = () => {
+    navigator.vibrate(50);
+
     if (!showMiniCart) {
       if (appRef.current !== null) {
         appRef.current.style.overflow = 'hidden'
@@ -112,6 +114,8 @@ export const App: React.FC = () => {
   }
 
   const toggleImageView = () => {
+    navigator.vibrate(50);
+
     if (!showImageView) {
       if (appRef.current !== null) {
         appRef.current.style.overflow = 'hidden'
@@ -126,6 +130,8 @@ export const App: React.FC = () => {
   }
 
   const toggleFilters = () => {
+    navigator.vibrate(50);
+
     if (!showFilters) {
       if (appRef.current !== null) {
         appRef.current.style.overflow = 'hidden'
@@ -142,6 +148,8 @@ export const App: React.FC = () => {
   }
 
   const toggleMenu = () => {
+    navigator.vibrate(50);
+
     if (!showMenu) {
       if (appRef.current !== null) {
         appRef.current.style.overflow = 'hidden'
@@ -158,6 +166,8 @@ export const App: React.FC = () => {
   }
 
   const closeModals = () => {
+    navigator.vibrate(50);
+
     if (showMiniCart) {
       if (appRef.current !== null) {
         appRef.current.style.overflow = 'overlay'
@@ -423,7 +433,8 @@ export const App: React.FC = () => {
             appRef.current?.scrollTo({
               top: 0,
               behavior: 'smooth',
-            })
+            });
+            navigator.vibrate(50);
           }}
         >
           &#10097;
