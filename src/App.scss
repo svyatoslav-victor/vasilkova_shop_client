@@ -182,6 +182,21 @@ body {
     .scrollToTop {
       top: 50vh;
       right: 5vw;
+
+      &__button {
+        background-color: $button-color-fuchsia;
+        transition: opacity 0.5s ease-in-out,
+            color 0.5s ease-in-out,
+            background-color 0.5s ease-in-out;
+  
+        &:hover {
+          background-color: $button-color-fuchsia;
+        }
+  
+        &:active {
+          background-color: $background;
+        }
+      }
     }
 
     .main {

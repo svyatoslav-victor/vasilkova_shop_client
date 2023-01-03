@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 .pagination {
   position: relative;
   display: grid;
@@ -11,16 +13,55 @@
     grid-auto-flow: row;
     justify-items: center;
     align-items: center;
-    row-gap: 0.5em;
+    row-gap: 1em;
     position: absolute;
-    top: 2em;
+    bottom: 2.5em;
     left: 0;
     padding: 0.5em 0;
     background-color: white;
-    outline: 1px dotted black;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: $background;
 
     &--input {
-      width: 50%;
+      width: 70%;
+      border: none;
+      font-size: 1.1em;
+      border-bottom: 1px dotted black;
+      color: white;
+      background-color: $background;
+
+      &:focus-within, &:focus-visible {
+        border-bottom: 1px solid black;
+        outline: none;
+      }
+    }
+
+    &--button {
+      background-color: $button-color-fuchsia;
+      border: 1px solid black;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 1.5em;
+      font-size: 1.1em;
+      line-height: 1.1em;
+      font-weight: 500;
+
+      &:hover {
+        background-color: $background-2;
+      }
+
+      &:active {
+        background-color: $background;
+      }
+
+      &:disabled {
+        background-color: rgba(128, 128, 128, 0.350);;
+      }
     }
   }
 
@@ -29,5 +70,106 @@
     padding: 0;
     display: grid;
     grid-auto-flow: column;
+    column-gap: 0.1em;
+
+    &_page {
+      &--link {
+      width: 1.3em;
+      height: 1.3em;
+      font-size: 1.3em;
+      line-height: 1.3em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $background;
+      border: 1px solid black;
+      border-radius: 5px;
+      scale: 1;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out,
+        scale 0.1s ease-in-out;
+
+        &:hover {
+          background-color: $background-2;
+          scale: 1;
+        }
+
+        &:active {
+          background-color: $background-2;
+          scale: 1.1;
+        }
+
+        &:disabled {
+          background-color: rgba(128, 128, 128, 0.350);
+          scale: 1;
+        }
+      }
+    }
+  }
+}
+
+.current {
+  background-color: $button-color-fuchsia;
+  font-weight: 600;
+  transition: background-color 0s ease-in-out;
+}
+
+.selector {
+  background-color: $background-2;
+  font-weight: 600;
+  transition: background-color 0s ease-in-out;
+}
+
+@media screen and (max-width: 1024px) {
+  .pagination {
+    &__selectPage {
+      &--button {
+      background-color: $button-color-fuchsia;
+      
+        &:hover {
+          background-color: $button-color-fuchsia;
+        }
+
+        &:active {
+          background-color: $background;
+        }
+  
+        &:disabled {
+          background-color: rgba(128, 128, 128, 0.350);;
+        }
+      }
+    }
+
+    &__list {
+      &_page {
+        &--link {
+          width: 1.3em;
+          height: 1.3em;
+          font-size: 1.3em;
+          line-height: 1.3em;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: $background;
+
+          &:hover {
+            background-color: $background;
+          }
+
+          &:active {
+            background-color: $background-2;
+            scale: 1.1;
+          }
+        }
+      }
+    }
+  }
+
+  .current {
+    background-color: $button-color-fuchsia !important;
+  }
+
+  .selector {
+    background-color: $background-2 !important;
   }
 }

@@ -52,7 +52,9 @@ export const Pagination: React.FC<Props> = ({
       <div
         className="pagination__selectPage"
         style={{
-          display: selectPage ? 'grid' : 'none'
+          transform: selectPage ? 'scaleY(1)' : 'scaleY(0)',
+          transformOrigin: 'bottom',
+          transition: 'transform 0.3s ease-in-out'
         }}
         onClick={(event) => event.stopPropagation()}
       >
@@ -70,6 +72,7 @@ export const Pagination: React.FC<Props> = ({
         <button
           className="pagination__selectPage--button"
           onClick={confirmPageSelection}
+          disabled={chosenPage === 0}
         >
           ПЕРЕЙТИ
         </button>
@@ -139,7 +142,9 @@ export const Pagination: React.FC<Props> = ({
           hidden={page < 4}
         >
           <button
-            className="pagination__list_page--link hidden--previous"
+            className={classNames('pagination__list_page--link hidden--previous', {
+              selector: selectPage
+            })}
             type="button"
             onClick={() => setSelectPage(prevState => !prevState)}
           >
@@ -176,7 +181,9 @@ export const Pagination: React.FC<Props> = ({
           hidden={page >= pagesToDisplay - 2}
         >
           <button
-            className="pagination__list_page--link hidden--next"
+            className={classNames('pagination__list_page--link hidden--next', {
+              selector: selectPage
+            })}
             type="button"
             onClick={() => setSelectPage(prevState => !prevState)}
           >

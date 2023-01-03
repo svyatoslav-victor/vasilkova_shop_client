@@ -72,3 +72,11 @@
     font-size: 0.8em;
   }
 }
+
+@media screen and (min-width: 340px) and (max-width: 360px) {
+  .goodsList__search {
+    .goodsList__item {
+      padding: 0;
+    }
+  }
+}
