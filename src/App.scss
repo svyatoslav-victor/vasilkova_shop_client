@@ -120,11 +120,71 @@ body {
     grid-template-rows: auto 1fr auto;
 
     &_footer {
-      height: 5em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1em 0;
+      position: relative;
+      height: max-content;
+      display: grid;
+      row-gap: 2em;
+      padding: 3em 2em 1em;
+
+      &::before {
+        position: absolute;
+        top: 2.5em;
+        left: 2em;
+        content: "";
+        width: calc(100% - 4em);
+        height: 0.1em;
+        background-color: $background;
+      }
+
+      &::after {
+        position: absolute;
+        top: 6em;
+        left: 2em;
+        content: "";
+        width: calc(100% - 4em);
+        height: 0.1em;
+        background-color: $background;
+      }
+
+      &_heading {
+        margin: 0;
+        padding: 0.5em 0;
+      }
+
+      &_contact {
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-columns: repeat(4, 1fr);
+        justify-content: space-evenly;
+        align-items: center;
+        column-gap: 1em;
+        row-gap: 1em;
+  
+        &_wrapper {
+          position: relative;
+          display: grid;
+          grid-auto-flow: row;
+          justify-items: center;
+          row-gap: 1em;
+          cursor: pointer;
+  
+          &--image {
+            width: 2em;
+            height: 2em;
+          }
+
+          &--info {
+            position: absolute;
+            top: 3em;
+          }
+        }
+      }
+
+      &_copywrite {
+        justify-self: center;
+        font-weight: bold;
+        padding: 0.5em 0 1em;
+      }
     }
   }
 
@@ -132,7 +192,7 @@ body {
     position: fixed;
     z-index: 100;
     top: 85vh;
-    right: 10vh;
+    right: 5vh;
     transform: rotate(-90deg);
 
     &__button {
@@ -179,6 +239,40 @@ body {
       white 4em 80%
     );
 
+    &__content {
+      &_footer {
+        font-size: $font-mobile;
+
+        &_contact {
+          display: grid;
+          grid-auto-flow: row;
+          grid-template-columns: 1fr;
+          justify-items: start;
+          row-gap: 1em;
+    
+          &_wrapper {
+            position: relative;
+            display: grid;
+            grid-auto-flow: column;
+            justify-items: center;
+            align-items: center;
+            column-gap: 2em;
+            cursor: pointer;
+    
+            &--image {
+              width: 2em;
+              height: 2em;
+            }
+  
+            &--info {
+              position: absolute;
+              top: 3em;
+            }
+          }
+        }
+      }
+    }
+
     .scrollToTop {
       top: 50vh;
       right: 5vw;
@@ -210,11 +304,67 @@ body {
   }
 }
 
+@media screen and (min-width: 361px) and (max-width: 600px) {
+  .app {
+    &__content {
+      &_footer {
+        padding: 3em 1em 1em;
+
+        &::before {
+          position: absolute;
+          top: 2.5em;
+          left: 1em;
+          content: "";
+          width: calc(100% - 2em);
+          height: 0.1em;
+          background-color: $background;
+        }
+  
+        &::after {
+          position: absolute;
+          top: 6em;
+          left: 1em;
+          content: "";
+          width: calc(100% - 2em);
+          height: 0.1em;
+          background-color: $background;
+        }
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 340px) and (max-width: 360px) {
   .app {
     .main {
       padding: 0 0.5em;
       row-gap: 0.5em;
+    }
+
+    &__content {
+      &_footer {
+        padding: 3em 0.5em 1em;
+
+        &::before {
+          position: absolute;
+          top: 2.5em;
+          left: 0.51em;
+          content: "";
+          width: calc(100% - 1em);
+          height: 0.1em;
+          background-color: $background;
+        }
+  
+        &::after {
+          position: absolute;
+          top: 6em;
+          left: 0.5em;
+          content: "";
+          width: calc(100% - 1em);
+          height: 0.1em;
+          background-color: $background;
+        }
+      }
     }
   }
 }

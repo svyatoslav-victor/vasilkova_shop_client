@@ -32,6 +32,11 @@ import { Product } from './components/Product/Product';
 import { Loader } from './components/Loader/Loader';
 import classNames from 'classnames';
 
+import mapIcon from './shop_icons/location.svg';
+import phone from './shop_icons/smartphone-svgrepo-com.svg';
+import email from './shop_icons/email.svg';
+import web from './shop_icons/web-svgrepo-com.svg';
+
 import './App.scss';
 
 export const App: React.FC = () => {
@@ -51,6 +56,7 @@ export const App: React.FC = () => {
   const [showMiniCart, setShowMiniCart] = useState<boolean>(false);
   const [showFilters, setShowFilters] = useState<boolean>(false);
   const [showMenu, setShowMenu] = useState<boolean>(false);
+  const [showContact, setShowContact] = useState<string>('');
 
   const [cart, setCart] = useState<CartItem[]>(JSON.parse(localStorage.cartContents || "[]"));
   const [productCount, setProductCount] = useState<number>(+localStorage.totalCount || 0);
@@ -583,7 +589,132 @@ export const App: React.FC = () => {
         <div
           className='app__content_footer'
         >
-          &#169; 2022
+
+          <h3
+            className='app__content_footer_heading'
+          >
+            Контакти
+          </h3>
+
+          <div
+            className='app__content_footer_contact'
+          >
+            <a
+              href="https://www.google.com/maps/place/%D1%83%D0%BB.+%D0%9F%D1%80%D0%B8%D0%BC%D0%BE%D1%80%D1%81%D0%BA%D0%B0%D1%8F,+18,+%D0%9E%D0%B4%D0%B5%D1%81%D1%81%D0%B0,+%D0%9E%D0%B4%D0%B5%D1%81%D1%81%D0%BA%D0%B0%D1%8F+%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C,+65000/@46.4915117,30.734219,17z/data=!4m13!1m7!3m6!1s0x40c631b949c8ebd1:0x200c597a9e1e2b08!2z0YPQuy4g0J_RgNC40LzQvtGA0YHQutCw0Y8sIDE4LCDQntC00LXRgdGB0LAsINCe0LTQtdGB0YHQutCw0Y8g0L7QsdC70LDRgdGC0YwsIDY1MDAw!3b1!8m2!3d46.4915117!4d30.7364077!3m4!1s0x40c631b949c8ebd1:0x200c597a9e1e2b08!8m2!3d46.4915117!4d30.7364077"
+              target="_blank"
+              className='app__content_footer_contact_wrapper'
+              id='address'
+              onMouseOver={(event) => setShowContact(event.currentTarget.id)}
+              onMouseOut={(event) => setShowContact('')}
+            >
+              <img
+                className='app__content_footer_contact_wrapper--image'
+                src={mapIcon}
+                alt="/"
+              />
+                {isMobile > 1024
+                  ? <span
+                      className='app__content_footer_contact_wrapper--info'
+                      style={{
+                        transform: showContact === 'address' ? 'scaleY(1)' : 'scaleY(0)',
+                        transformOrigin: 'top',
+                        transition: "transform 0.2s ease-in-out"
+                      }}
+                    >
+                      Одеса, вул. Приморська, 18
+                    </span>
+                  : <span>Одеса, вул. Приморська, 18</span>
+                }
+            </a>
+
+            <a
+              href="tel:+380504932903"
+              className='app__content_footer_contact_wrapper'
+              id='phone'
+              onMouseOver={(event) => setShowContact(event.currentTarget.id)}
+              onMouseOut={(event) => setShowContact('')}
+            >
+              <img
+                className='app__content_footer_contact_wrapper--image'
+                src={phone}
+                alt="/"
+              />
+                {isMobile > 1024
+                  ? <span
+                      className='app__content_footer_contact_wrapper--info'
+                      style={{
+                        transform: showContact === 'phone' ? 'scaleY(1)' : 'scaleY(0)',
+                        transformOrigin: 'top',
+                        transition: "transform 0.2s ease-in-out"
+                      }}
+                    >
+                      +38 050 493 29 03
+                    </span>
+                  : <span>+38 050 493 29 03</span>
+                }
+            </a>
+
+            <a
+              href="mailto:spetsuha.odessa@gmail.com"
+              target="_blank"
+              className='app__content_footer_contact_wrapper'
+              id='email'
+              onMouseOver={(event) => setShowContact(event.currentTarget.id)}
+              onMouseOut={(event) => setShowContact('')}
+            >
+              <img
+                className='app__content_footer_contact_wrapper--image'
+                src={email}
+                alt="/"
+              />
+                {isMobile > 1024
+                  ? <span
+                      className='app__content_footer_contact_wrapper--info'
+                      style={{
+                        transform: showContact === 'email' ? 'scaleY(1)' : 'scaleY(0)',
+                        transformOrigin: 'top',
+                        transition: "transform 0.2s ease-in-out"
+                      }}
+                    >
+                      spetsuha.odessa@gmail.com
+                    </span>
+                  : <span>spetsuha.odessa@gmail.com</span>
+                }
+            </a>
+
+            <a
+              href="https://svyatoslav-victor.github.io/vasilkova_shop_client/"
+              className='app__content_footer_contact_wrapper'
+              id='site'
+              onMouseOver={(event) => setShowContact(event.currentTarget.id)}
+              onMouseOut={(event) => setShowContact('')}
+            >
+              <img
+                className='app__content_footer_contact_wrapper--image'
+                src={web}
+                alt="/"
+              />
+                {isMobile > 1024
+                  ? <span
+                      className='app__content_footer_contact_wrapper--info'
+                      style={{
+                        transform: showContact === 'site' ? 'scaleY(1)' : 'scaleY(0)',
+                        transformOrigin: 'top',
+                        transition: "transform 0.2s ease-in-out"
+                      }}
+                    >
+                      Спецуха Одеса
+                    </span>
+                  : <span>Спецуха Одеса</span>
+                }
+            </a>
+          </div>
+
+          <p
+            className='app__content_footer_copywrite'
+          >
+            &#169; 2023
+          </p>
         </div>
       </div>
     </div>

@@ -764,7 +764,12 @@ export const Header: React.FC<Props> = ({
                 src={location}
                 alt="/"
               />
-              <p>Одеса, вул. Приморська, 18</p>
+              <a
+                href="https://www.google.com/maps/place/%D1%83%D0%BB.+%D0%9F%D1%80%D0%B8%D0%BC%D0%BE%D1%80%D1%81%D0%BA%D0%B0%D1%8F,+18,+%D0%9E%D0%B4%D0%B5%D1%81%D1%81%D0%B0,+%D0%9E%D0%B4%D0%B5%D1%81%D1%81%D0%BA%D0%B0%D1%8F+%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C,+65000/@46.4915117,30.734219,17z/data=!4m13!1m7!3m6!1s0x40c631b949c8ebd1:0x200c597a9e1e2b08!2z0YPQuy4g0J_RgNC40LzQvtGA0YHQutCw0Y8sIDE4LCDQntC00LXRgdGB0LAsINCe0LTQtdGB0YHQutCw0Y8g0L7QsdC70LDRgdGC0YwsIDY1MDAw!3b1!8m2!3d46.4915117!4d30.7364077!3m4!1s0x40c631b949c8ebd1:0x200c597a9e1e2b08!8m2!3d46.4915117!4d30.7364077"
+                target="_blank"
+              >
+                Одеса, вул. Приморська, 18
+              </a>
             </div>
 
             <div className='menu__mobile_nav_contact_wrapper'>
@@ -988,8 +993,9 @@ export const Header: React.FC<Props> = ({
                   src={filter}
                   alt="/"
                   style={{
+                    scale: 1,
                     transform: showFilters ? 'rotate(-90deg)' : 'rotate(0)',
-                    transition: 'transform 0.2s ease-in-out'
+                    transition: 'all 0.2s ease-in-out'
                   }}
                 />
 
