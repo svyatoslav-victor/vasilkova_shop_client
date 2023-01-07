@@ -64,6 +64,7 @@ export const Pagination: React.FC<Props> = ({
           value={chosenPage || ''}
           min='1'
           max={pages.length + 2}
+          placeholder="номер сторінки"
           onChange={handlePageSelection}
           onKeyDown={(event) => {
             event.key === 'Enter' && confirmPageSelection()

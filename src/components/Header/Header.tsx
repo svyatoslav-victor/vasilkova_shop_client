@@ -911,14 +911,12 @@ export const Header: React.FC<Props> = ({
           {isMobile > 600
             ? (
                 <div className='header__main_phones'>
-                  <div className='header__main_phones_numbers'>
-                    <a
-                      href="tel:+380504932903"
-                      className='header__main_phones_numbers--number'
-                    >
-                      +38 050 493 29 03
-                    </a>
-                  </div>
+                  <a
+                    href="tel:+380504932903"
+                    className='header__main_phones_number'
+                  >
+                    +38 050 493 29 03
+                  </a>
 
                   <div
                     className='header__main_phones_icon'

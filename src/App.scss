@@ -53,8 +53,15 @@ body {
     padding: 0;
   }
 
-  button, input, textarea, input::placeholder {
+  input, textarea, input::placeholder {
     font-family: Montserrat, Arial, sans-serif;
+  }
+
+  button {
+    font-family: Montserrat, Arial, sans-serif;
+    color: black;
+    border: 1px solid black;
+    border-radius: 10px;
   }
 }
 
