@@ -145,6 +145,7 @@ export const Header: React.FC<Props> = ({
 }) => {
   const [hasLoaded, setHasLoaded] = useState<boolean>(false);
   const [filters, setFilters] = useState<Filter>(initialFilters);
+  const [isNumberVisible, setIsNumberVisible] = useState<boolean>(false);
   const [displayFilterOptions, setDisplayFilterOptions] = useState<Record<string, boolean>>(initialOptions);
   const { page } = paginationParams;
 
@@ -908,65 +909,127 @@ export const Header: React.FC<Props> = ({
             </div>
           </div>
 
-          {isMobile > 600
+          {isMobile > 800 && isMobile < 1024
             ? (
-                <div className='header__main_phones'>
-                  <a
-                    href="tel:+380504932903"
-                    className='header__main_phones_number'
-                  >
-                    +38 050 493 29 03
-                  </a>
+                <div className='header__main_controls'>
+                  <div className='header__main_phones'>
+                    <a
+                      href="tel:+380504932903"
+                      className='header__main_phones_number'
+                    >
+                      +38 050 493 29 03
+                    </a>
+
+                    <div
+                      className='header__main_phones_icon'
+                      style={{
+                        backgroundImage: `url(${phone})`
+                      }}
+                    >
+                    </div>
+                  </div>
 
                   <div
-                    className='header__main_phones_icon'
-                    style={{
-                      backgroundImage: `url(${phone})`
-                    }}
+                    className='header__nav_miniCart'
                   >
+                    <span
+                      className='header__nav_miniCart--count'
+                    >
+                      {productCount}
+                    </span>
+                    
+                    <div
+                      className='header__nav_miniCart_cart'
+                      onClick={toggleMiniCart}
+                    >
+                      <img
+                        className='header__nav_miniCart_cart--icon'
+                        src={productCount === 0 ? cartIcon : cartIconFull}
+                        alt="/"
+                      />
+                    </div>
                   </div>
                 </div>
               )
-            : (
-                <div
-                  className='header__main_phone'
-                  style={{
-                    backgroundImage: `url(${phone})`,
-                  }}
-                >
-                  <a
-                    href="tel:+380504932903"
-                    className='header__main_phones_numbers--number'
-                    style={{
-                      display: "block",
-                      width: "1.5em",
-                      height: "1.5em"
-                    }}
-                  />
-                </div>
-              )
-          }
+            : isMobile <= 800
+              ? (
+                  <div className='header__main_controls'>
+                    <div
+                      className='header__main_controls_phone'
+                      style={{
+                        backgroundImage: `url(${phone})`,
+                      }}
+                    >
+                      <a
+                        href="tel:+380504932903"
+                        className='header__main_controls_phones_numbers--number'
+                        style={{
+                          display: "block",
+                          width: "1.5em",
+                          height: "1.5em"
+                        }}
+                      />
+                    </div>
 
-          {isMobile < 1024 && <div
-            className='header__nav_miniCart'
-          >
-            <span
-              className='header__nav_miniCart--count'
-            >
-              {productCount}
-            </span>
-            
-            <div
-              className='header__nav_miniCart_cart'
-              onClick={toggleMiniCart}
-            >
-              <img
-                className='header__nav_miniCart_cart--icon'
-                src={productCount === 0 ? cartIcon : cartIconFull}
-                alt="/"
-              />
-            </div>
-          </div>}
+                    <div
+                      className='header__nav_miniCart'
+                      >
+                      <span
+                        className='header__nav_miniCart--count'
+                      >
+                        {productCount}
+                      </span>
+
+                      <div
+                        className='header__nav_miniCart_cart'
+                        onClick={toggleMiniCart}
+                      >
+                        <img
+                          className='header__nav_miniCart_cart--icon'
+                          src={productCount === 0 ? cartIcon : cartIconFull}
+                          alt="/"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )
+              : (
+                  <div
+                    className='header__main_phones'
+                    onMouseOver={() => setIsNumberVisible(true)}
+                    onMouseOut={() => setIsNumberVisible(false)}
+                  >
+                    <span
+                      className='header__main_phones_number'
+                      style={{
+                        transform: isNumberVisible ? 'scaleX(1)' : 'scaleX(0)',
+                        transformOrigin: 'right',
+                        transition: 'transform 0.2s ease-in-out'
+                      }}
+                    >
+                      +38 050 493 29 03
+                    </span>
+
+                    <div
+                      className='header__main_phones_icon'
+                      style={{
+                        backgroundImage: `url(${phone})`
+                      }}
+                    >
+
+                    <a
+                      href="tel:+380504932903"
+                      className='header__main_phones_icon_link'
+                      style={{
+                        display: "block",
+                        width: "1.5em",
+                        height: "1.5em"
+                      }}
+                    />
+                    </div>
+                  </div>
+                )
+          }
         </div>
 
         {isMobile >= 1024 && <div className='header__space' />}
