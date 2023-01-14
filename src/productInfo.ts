@@ -136,6 +136,18 @@ export const productBrands: Brand[] = [
   },
   {
     value: 'Uvex'
+  },
+  {
+    value: 'ArtMas'
+  },
+  {
+    value: '3M'
+  },
+  {
+    value: 'Portwest'
+  },
+  {
+    value: 'GVS'
   }
 ];
 

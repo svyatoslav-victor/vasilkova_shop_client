@@ -687,7 +687,7 @@ export const App: React.FC = () => {
               className='app__content_footer_contact_wrapper'
               id='site'
               onMouseOver={(event) => setShowContact(event.currentTarget.id)}
-              onMouseOut={(event) => setShowContact('')}
+              onMouseOut={() => setShowContact('')}
             >
               <img
                 className='app__content_footer_contact_wrapper--image'

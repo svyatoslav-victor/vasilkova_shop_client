@@ -1,5 +1,11 @@
 import { Order } from "./types";
 
+import logo from './shop_icons/engineer-worker-svgrepo-com.svg';
+import mapIcon from './shop_icons/location.svg';
+import phone from './shop_icons/smartphone-svgrepo-com.svg';
+import email from './shop_icons/email.svg';
+import web from './shop_icons/web-svgrepo-com.svg';
+
 export const emailTemplate = (data: Order) => {
   let orderList: string = '';
   let field: string;
