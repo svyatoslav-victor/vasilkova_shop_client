@@ -15,7 +15,7 @@ export const emailTemplate = (data: Order) => {
       <div>
         <p>Product ID: ${data.productsDetails[field].productId}</p>
         <p>Name: ${data.productsDetails[field].name}</p>
-        <p>Color:</p>
+        <p>Colors:</p>
         <div style="height: 20px; width: 20px; background-color: ${data.productsDetails[field].color}"></div>
         <p>Price: &#8372; ${data.productsDetails[field].price.toFixed(2)}</p>
         <p>Quantity: ${data.productsDetails[field].quantity}</p>
