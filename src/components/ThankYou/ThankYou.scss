@@ -1,13 +1,16 @@
+@import '../../variables.scss';
+
 .thankYou {
   display: grid;
   row-gap: 2em;
   justify-items: center;
   align-content: flex-start;
-  padding: 2em 0;
+  padding: 2em;
 
   &__heading, &__message {
     margin: 0;
     padding: 0;
+    text-align: center;
   }
 
   &__message {
@@ -18,5 +21,17 @@
   &__image {
     width: 10em;
     height: 10em;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .thankYou {
+    font-size: $font-mobile;
+    padding: 2em 1em;
+    row-gap: 3em;
+
+    &__heading {
+      font-size: 1.5em;
+    }
   }
 }

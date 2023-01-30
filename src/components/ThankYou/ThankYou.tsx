@@ -8,10 +8,10 @@ export const ThankYou: React.FC = () => {
   return (
     <div className='thankYou'>
       <h1 className='thankYou__heading'>
-        Thank you for your order!
+        Дякуємо за замовлення!
       </h1>
       <p className='thankYou__message'>
-        A sales representative will contact you soon
+        Представник відділу продажів скоро з Вами зв'яжеться
       </p>
       <img
         className='thankYou__image'
