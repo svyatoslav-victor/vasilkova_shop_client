@@ -96,11 +96,12 @@ export const emailTemplate = (data: Order) => {
           <table style="width: 300px">
             <tr>
               <td style="padding: 0.5em 0">
-                <div style="background-image: 'cid:location'; background-repeat: no-repeat; height: 2em; display: flex; align-items: center;">
+                <div style="height: 2em; display: flex; align-items: center;">
+                  <img src="cid:location" alt="/" style="height: 2em; width: 2em">
                   <a
                     href="https://www.google.com/maps/place/%D1%83%D0%BB.+%D0%9F%D1%80%D0%B8%D0%BC%D0%BE%D1%80%D1%81%D0%BA%D0%B0%D1%8F,+18,+%D0%9E%D0%B4%D0%B5%D1%81%D1%81%D0%B0,+%D0%9E%D0%B4%D0%B5%D1%81%D1%81%D0%BA%D0%B0%D1%8F+%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C,+65000/@46.4915117,30.734219,17z/data=!4m13!1m7!3m6!1s0x40c631b949c8ebd1:0x200c597a9e1e2b08!2z0YPQuy4g0J_RgNC40LzQvtGA0YHQutCw0Y8sIDE4LCDQntC00LXRgdGB0LAsINCe0LTQtdGB0YHQutCw0Y8g0L7QsdC70LDRgdGC0YwsIDY1MDAw!3b1!8m2!3d46.4915117!4d30.7364077!3m4!1s0x40c631b949c8ebd1:0x200c597a9e1e2b08!8m2!3d46.4915117!4d30.7364077"
                     target="_blank"
-                    style="padding-left: 3em; text-decoration: none; color: black;"
+                    style="padding-left: 1em; text-decoration: none; color: black;"
                   >
                     м. Одеса, вул. Приморська, 18
                   </a>
@@ -109,11 +110,12 @@ export const emailTemplate = (data: Order) => {
             </tr>
             <tr>
               <td style="padding: 0.5em 0">
-                <div style="background-image: 'cid:phone'; background-repeat: no-repeat; height: 2em; display: flex; align-items: center;">
+                <div style="height: 2em; display: flex; align-items: center;">
+                  <img src="cid:phone" alt="/" style="height: 2em; width: 2em">
                   <a
                     href="tel:+380504932903"
                     target="_blank"
-                    style="padding-left: 3em; text-decoration: none; color: black;"
+                    style="padding-left: 1em; text-decoration: none; color: black;"
                   >
                     +38 050 493 29 03
                   </a>
@@ -122,11 +124,12 @@ export const emailTemplate = (data: Order) => {
             </tr>
             <tr>
               <td style="padding: 0.5em 0">
-                <div style="background-image: 'cid:email'; background-repeat: no-repeat; height: 2em; display: flex; align-items: center;">
+                <div style="height: 2em; display: flex; align-items: center;">
+                  <img src="cid:email" alt="/" style="height: 2em; width: 2em">
                   <a
                     href="mailto:spetsuha.odessa@gmail.com"
                     target="_blank"
-                    style="padding-left: 3em; text-decoration: none; color: black;"
+                    style="padding-left: 1em; text-decoration: none; color: black;"
                   >
                     spetsuha.odessa@gmail.com
                   </a>
@@ -135,11 +138,12 @@ export const emailTemplate = (data: Order) => {
             </tr>
             <tr>
               <td style="padding: 0.5em 0">
-                <div style="background-image: 'cid:web'; background-repeat: no-repeat; height: 2em; display: flex; align-items: center;">
+                <div style="height: 2em; display: flex; align-items: center;">
+                  <img src="cid:web" alt="/" style="height: 2em; width: 2em">
                   <a
                     href="https://svyatoslav-victor.github.io/vasilkova_shop_client/"
                     target="_blank"
-                    style="padding-left: 3em; text-decoration: none; color: black;"
+                    style="padding-left: 1em; text-decoration: none; color: black;"
                   >
                     Спецуха Одесса
                   </a>
@@ -157,7 +161,7 @@ export const emailTemplate = (data: Order) => {
         cid: "location"
       },
       {
-        filename: "smartphone-svgrepo-com.svg.svg",
+        filename: "smartphone-svgrepo-com.svg",
         filePath: __dirname + '/shop_icons/smartphone-svgrepo-com.svg',
         cid: "phone"
       },
