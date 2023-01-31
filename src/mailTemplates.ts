@@ -153,22 +153,22 @@ export const emailTemplate = (data: Order) => {
     attachments: [
       {
         filename: "location.svg",
-        filePath: "https://svyatoslav-victor.github.io/vasilkova_shop_client/static/media/location.f22bcedfc14958a505a9a98e86176c7e.svg",
+        filePath: __dirname + '/shop_icons/location.svg',
         cid: "location"
       },
       {
         filename: "smartphone-svgrepo-com.svg.svg",
-        filePath: "https://svyatoslav-victor.github.io/vasilkova_shop_client/static/media/smartphone-svgrepo-com.5f9c25aa778066eef28da9c183aff687.svg",
+        filePath: __dirname + '/shop_icons/smartphone-svgrepo-com.svg',
         cid: "phone"
       },
       {
         filename: "email.svg",
-        filePath: "https://svyatoslav-victor.github.io/vasilkova_shop_client/static/media/email.4c6092f9ad79c01666c39cf0f701cbea.svg",
+        filePath: __dirname + '/shop_icons/email.svg',
         cid: "email"
       },
       {
         filename: "web-svgrepo-com.svg",
-        filePath: "https://svyatoslav-victor.github.io/vasilkova_shop_client/static/media/web-svgrepo-com.227ebcb0cfdcf30eaacceb029f6d99c3.svg",
+        filePath: __dirname + '/shop_icons/web-svgrepo-com.svg',
         cid: "web"
       }
     ]
