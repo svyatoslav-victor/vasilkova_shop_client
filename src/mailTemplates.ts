@@ -157,22 +157,22 @@ export const emailTemplate = (data: Order) => {
     attachments: [
       {
         filename: "location.svg",
-        filePath: __dirname + '/shop_icons/location.svg',
+        path: `${__dirname}/shop_icons/location.svg`,
         cid: "location"
       },
       {
         filename: "smartphone-svgrepo-com.svg",
-        filePath: __dirname + '/shop_icons/smartphone-svgrepo-com.svg',
+        path: `${__dirname}/shop_icons/smartphone-svgrepo-com.svg`,
         cid: "phone"
       },
       {
         filename: "email.svg",
-        filePath: __dirname + '/shop_icons/email.svg',
+        path: `${__dirname}/shop_icons/email.svg`,
         cid: "email"
       },
       {
         filename: "web-svgrepo-com.svg",
-        filePath: __dirname + '/shop_icons/web-svgrepo-com.svg',
+        path: `${__dirname}/shop_icons/web-svgrepo-com.svg`,
         cid: "web"
       }
     ]
