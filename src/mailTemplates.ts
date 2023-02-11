@@ -74,13 +74,13 @@ export const emailTemplate = (data: Order) => {
             ${data.customerInfo.email &&
               `<tr>
                 <th style="padding: 0.5em 0; text-align: left;">Email:</th>
-                <td style="padding: 0.5em 0">email</td>
+                <td style="padding: 0.5em 0">${data.customerInfo.email}</td>
               </tr>`
             }
             ${data.customerInfo.company &&
               `<tr>
                 <th style="padding: 0.5em 0; text-align: left;">Компанія:</th>
-                <td style="padding: 0.5em 0">company</td>
+                <td style="padding: 0.5em 0">${data.customerInfo.company}</td>
               </tr>`
             }
             <tr>
@@ -156,23 +156,23 @@ export const emailTemplate = (data: Order) => {
     `,
     attachments: [
       {
-        filename: "location.svg",
-        path: `${__dirname}/shop_icons/location.svg`,
+        filename: "location.png",
+        path: 'C:/projects-test/vasilkova_shop/vasilkova_shop_client/src/shop_icons/location.png',
         cid: "location"
       },
       {
-        filename: "smartphone-svgrepo-com.svg",
-        path: `${__dirname}/shop_icons/smartphone-svgrepo-com.svg`,
+        filename: "smartphone.png",
+        path: 'C:/projects-test/vasilkova_shop/vasilkova_shop_client/src/shop_icons/smartphone.png',
         cid: "phone"
       },
       {
-        filename: "email.svg",
-        path: `${__dirname}/shop_icons/email.svg`,
+        filename: "email.png",
+        path: 'C:/projects-test/vasilkova_shop/vasilkova_shop_client/src/shop_icons/email.png',
         cid: "email"
       },
       {
-        filename: "web-svgrepo-com.svg",
-        path: `${__dirname}/shop_icons/web-svgrepo-com.svg`,
+        filename: "web.png",
+        path: 'C:/projects-test/vasilkova_shop/vasilkova_shop_client/src/shop_icons/web.png',
         cid: "web"
       }
     ]
