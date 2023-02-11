@@ -37,11 +37,6 @@ import phone from './shop_icons/smartphone-svgrepo-com.svg';
 import email from './shop_icons/email.svg';
 import web from './shop_icons/web-svgrepo-com.svg';
 
-import loc from './shop_icons/location.png';
-import ph from './shop_icons/smartphone.png';
-import em from './shop_icons/email.png';
-import wb from './shop_icons/web.png';
-
 import './App.scss';
 
 export const App: React.FC = () => {
@@ -720,10 +715,6 @@ export const App: React.FC = () => {
           >
             &#169; 2023
           </p>
-          <img src={loc} alt="" style={{ width: '1em', height: '1em' }} />
-          <img src={ph} alt="" style={{ width: '1em', height: '1em' }} />
-          <img src={em} alt="" style={{ width: '1em', height: '1em' }} />
-          <img src={wb} alt="" style={{ width: '1em', height: '1em' }} />
         </div>
       </div>
     </div>
